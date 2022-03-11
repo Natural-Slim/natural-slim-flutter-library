@@ -9,16 +9,22 @@ import 'package:natural_slim_flutter_library/models/authentication/response/logi
 class AuthenticationController{
 
   Future<LoginResponse> postLogin(LoginRequest request) async {
-
+    
     try{
-       Uri url = Uri.parse('${ApiConstants.url}/api/auth/login');
+      Uri url = Uri.parse('${ApiConstants.url}/api/auth/login');
+
       http.Response response = await http.post(
         url, 
-        body: request
+        headers: {
+          'Content-Type':'application/json',
+        },
+        body: jsonEncode(request)
       );
+
       LoginResponse parsedResponse = LoginResponse.fromJson(jsonDecode(response.body));
 
       return parsedResponse;
+        
     } on Exception catch (_, e){
       throw e;
     }

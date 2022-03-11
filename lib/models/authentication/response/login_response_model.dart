@@ -14,7 +14,7 @@ class LoginResponse {
       required this.roles,
       required this.token,
       required this.memberId,
-      required this.memberGuid,
+      this.memberGuid,
     });
 
     String username;
