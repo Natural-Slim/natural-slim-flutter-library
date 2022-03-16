@@ -5,11 +5,12 @@ import 'package:natural_slim_flutter_library/constants/api_constants.dart';
 
 import 'package:natural_slim_flutter_library/models/authentication/request/login_request_model.dart';
 import 'package:natural_slim_flutter_library/models/authentication/response/login_response_model.dart';
+import 'package:natural_slim_flutter_library/utils/exceptions_helper.dart';
 
 class AuthenticationController{
 
+  /// Method to consult the API if the username and password is correct to be able to enter the app
   Future<LoginResponse> postLogin(LoginRequest request) async {
-    
     try{
       Uri url = Uri.parse('${ApiConstants.url}/api/auth/login');
 
@@ -21,12 +22,15 @@ class AuthenticationController{
         body: jsonEncode(request)
       );
 
-      LoginResponse parsedResponse = LoginResponse.fromJson(jsonDecode(response.body));
+      if(response.statusCode != 200){
+        ExceptionsHelper.validateApiException(response);
+      }
 
+      LoginResponse parsedResponse = LoginResponse.fromJson(jsonDecode(response.body));
       return parsedResponse;
         
-    } on Exception catch (_, e){
-      throw e;
+    } catch (e){
+      rethrow;
     }
   }
 
