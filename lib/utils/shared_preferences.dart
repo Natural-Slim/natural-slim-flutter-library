@@ -25,4 +25,15 @@ class UserSharedPreferences {
     }
   }
 
+  // Method to remove saved token
+  Future<bool> removeSavedToken() async {
+    try{
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      bool removalStatus = await prefs.remove(ApiConstants.preferencesKeyToken);
+      return removalStatus;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
 }
