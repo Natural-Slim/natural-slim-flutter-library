@@ -3,4 +3,6 @@ class ApiConstants{
   static String apiKey = '';
   
   static String preferencesKeyToken = 'token';
+
+  static String keyEncryptDecrypt = 'NSA@NaturalSl¡m';
 }
