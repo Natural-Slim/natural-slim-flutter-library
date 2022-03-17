@@ -1,7 +1,7 @@
 import 'package:natural_slim_flutter_library/constants/api_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class UserSharedPreferences {
+class UserTokenSharedPreferences {
 
   /// Methos to save token
   Future<bool> saveValueToken(String token) async {
