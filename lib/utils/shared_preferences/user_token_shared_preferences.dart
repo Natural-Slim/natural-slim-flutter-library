@@ -7,7 +7,7 @@ class UserTokenSharedPreferences {
   Future<bool> saveValueToken(String token) async {
     try{
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      var saveStatus = await prefs.setString('token', token);
+      bool saveStatus = await prefs.setString('token', token);
       return saveStatus;
     } catch (e) {
       rethrow;
@@ -18,7 +18,7 @@ class UserTokenSharedPreferences {
   Future<String?> returnSavedToken() async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString(ApiConstants.preferencesKeyToken);
+      String? token = prefs.getString(ApiConstants.preferencesKeyToken);
       return token;
     } catch (e){
       rethrow;
