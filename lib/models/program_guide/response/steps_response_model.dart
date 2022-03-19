@@ -61,21 +61,21 @@ class ProgramStep {
       required this.id,
       required this.stepName,
       required this.stepDescription,
-      required this.url,
+      // required this.url,
       required this.isCompleted,
     });
 
     int id;
     String stepName;
     String stepDescription;
-    String url;
+    // String url;
     bool isCompleted;
 
     factory ProgramStep.fromJson(Map<String, dynamic> json) => ProgramStep(
       id: json["id"],
       stepName: json["stepName"],
       stepDescription: json["stepDescription"],
-      url: json["url"],
+      // url: json["url"],
       isCompleted: json["isCompleted"],
     );
 
@@ -83,7 +83,7 @@ class ProgramStep {
       "id": id,
       "stepName": stepName,
       "stepDescription": stepDescription,
-      "url": url,
+      // "url": url,
       "isCompleted": isCompleted,
     };
 }

@@ -19,6 +19,7 @@ class AuthenticationController{
         url, 
         headers: {
           'Content-Type':'application/json',
+          'x-Time-Zone': "0"
         },
         body: jsonEncode(request)
       );

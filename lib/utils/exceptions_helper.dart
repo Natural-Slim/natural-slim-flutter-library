@@ -19,7 +19,6 @@ class ExceptionsHelper{
         throw ApiException('An error has occured. Please try again later or contact support.');
     }
   }
-
 }
 
 class ApiException implements Exception {
@@ -30,8 +29,9 @@ class ApiException implements Exception {
 
   ApiException([this._message, this._title, this._code]);
 
+  @override
   String toString() {
-    return "$_code: $_title $_message";
+    return "$_code: $_title ${_message ?? ""}";
   }
 
   int get code => _code!;
