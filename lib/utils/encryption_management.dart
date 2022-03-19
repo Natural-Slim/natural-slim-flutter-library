@@ -3,7 +3,7 @@ import 'package:natural_slim_flutter_library/constants/api_constants.dart';
 
 class EncryptionManagement {
 
-  Encrypted encrypt(String dataToEncrypt) {
+  static Encrypted encrypt(String dataToEncrypt) {
     try{
       String plainText = dataToEncrypt;
       Key key = Key.fromUtf8(ApiConstants.keyEncryptDecrypt);
@@ -19,7 +19,7 @@ class EncryptionManagement {
     }
   }
 
-  String decrypt(String dataToDecrypt){
+  static String decrypt(String dataToDecrypt){
     try{
       Key key = Key.fromUtf8(ApiConstants.keyEncryptDecrypt);
       IV iv = IV.fromLength(16);
