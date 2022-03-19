@@ -6,6 +6,7 @@ import 'package:natural_slim_flutter_library/constants/api_constants.dart';
 import 'package:natural_slim_flutter_library/models/authentication/request/login_request_model.dart';
 import 'package:natural_slim_flutter_library/models/authentication/response/login_response_model.dart';
 import 'package:natural_slim_flutter_library/utils/helpers/exceptions_helper.dart';
+import 'package:natural_slim_flutter_library/utils/helpers/http_header_options.dart';
 import 'package:natural_slim_flutter_library/utils/shared_preferences/user_login_shared_preferences.dart';
 
 class AuthenticationController{
@@ -14,12 +15,13 @@ class AuthenticationController{
   Future<LoginResponse> postLogin(LoginRequest request) async {
     try{
       Uri url = Uri.parse('${ApiConstants.url}/api/auth/login');
+      String timeZone = HttpHeaderOptions.getTimeZoneOffset();
 
       http.Response response = await http.post(
         url, 
         headers: {
           'Content-Type':'application/json',
-          'x-Time-Zone': "0"
+          'x-Time-Zone': timeZone
         },
         body: jsonEncode(request)
       );

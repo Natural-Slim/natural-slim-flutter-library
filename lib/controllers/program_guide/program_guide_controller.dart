@@ -17,12 +17,13 @@ class ProgramGuideController {
     try{
       Uri url = Uri.parse('${ApiConstants.url}/api/program-guide/status');
       String? token = await UserTokenSharedPreferences().returnSavedToken();
+      String timeZone = HttpHeaderOptions.getTimeZoneOffset();
 
       http.Response response = await http.get(
         url, 
         headers: {
           'Content-Type':'application/json',
-          'x-Time-Zone': "0",
+          'x-Time-Zone': timeZone,
           'Authorization' : 'Bearer $token'
         }
       );
@@ -43,12 +44,13 @@ class ProgramGuideController {
     try{
       Uri url = Uri.parse('${ApiConstants.url}/api/program-guide/steps?PerPage=$perPage&PageNumber=$pageNumber');
       String? token = await UserTokenSharedPreferences().returnSavedToken();
+      String timeZone = HttpHeaderOptions.getTimeZoneOffset();
 
       http.Response response = await http.get(
         url, 
         headers: {
           'Content-Type':'application/json',
-          'x-Time-Zone': "0",
+          'x-Time-Zone': timeZone,
           'Authorization' : 'Bearer $token'
         }
       );
@@ -72,8 +74,8 @@ class ProgramGuideController {
         headers: {
           'Content-Type':'application/json',
           'accept':'text/plain',
-          'x-Time-Zone': HttHeaderOptions.getTimeZone(),
-          'Authorization':'Bearer ${await HttHeaderOptions.getToken()}'
+          'x-Time-Zone': HttpHeaderOptions.getTimeZoneOffset(),
+          'Authorization':'Bearer ${await HttpHeaderOptions.getToken()}'
         }
       );
 
