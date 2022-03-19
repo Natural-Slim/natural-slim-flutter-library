@@ -3,11 +3,23 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class UserTokenSharedPreferences {
 
-  /// Methos to save token
+  /// Method to save token
   Future<bool> saveValueToken(String token) async {
     try{
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      bool saveStatus = await prefs.setString('token', token);
+      bool saveStatus = await prefs.setString(ApiConstants.preferencesKeyToken, token);
+
+      return saveStatus;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<bool> saveValueTokenExpiration(String tokenExpiration) async{
+    try{
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      bool saveStatus = await prefs.setString(ApiConstants.preferencesTokenExpiration, tokenExpiration);
+
       return saveStatus;
     } catch (e) {
       rethrow;
@@ -19,8 +31,20 @@ class UserTokenSharedPreferences {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString(ApiConstants.preferencesKeyToken);
+
       return token;
     } catch (e){
+      rethrow;
+    }
+  }
+
+  Future<String?> getSavedTokenExpiration() async {
+    try{
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? tokenExpiration = prefs.getString(ApiConstants.preferencesTokenExpiration);
+
+      return tokenExpiration;
+    } catch (e) {
       rethrow;
     }
   }
@@ -30,6 +54,7 @@ class UserTokenSharedPreferences {
     try{
       SharedPreferences prefs = await SharedPreferences.getInstance();
       bool removalStatus = await prefs.remove(ApiConstants.preferencesKeyToken);
+
       return removalStatus;
     } catch (e) {
       rethrow;
