@@ -8,7 +8,6 @@ import 'package:natural_slim_flutter_library/models/program_guide/response/user_
 import 'package:natural_slim_flutter_library/utils/helpers/exceptions_helper.dart';
 import 'package:natural_slim_flutter_library/utils/helpers/http_header_options.dart';
 import 'package:natural_slim_flutter_library/utils/http_requests/http_requests.dart';
-import 'package:natural_slim_flutter_library/utils/shared_preferences/user_token_shared_preferences.dart';
 
 class ProgramGuideController {
   HttpRequests httpRequests = HttpRequests();
@@ -16,7 +15,7 @@ class ProgramGuideController {
   Future<StatusResponse> getStatus() async{
     try{
       Uri url = Uri.parse('${ApiConstants.url}/api/program-guide/status');
-      String? token = await UserTokenSharedPreferences().returnSavedToken();
+      String? token = await HttpHeaderOptions().getValidatedToken();
       String timeZone = HttpHeaderOptions.getTimeZoneOffset();
 
       http.Response response = await http.get(
@@ -43,7 +42,7 @@ class ProgramGuideController {
   Future<ProgramStepsResponse> getSteps(int perPage, int pageNumber) async {
     try{
       Uri url = Uri.parse('${ApiConstants.url}/api/program-guide/steps?PerPage=$perPage&PageNumber=$pageNumber');
-      String? token = await UserTokenSharedPreferences().returnSavedToken();
+      String? token = await HttpHeaderOptions().getValidatedToken();
       String timeZone = HttpHeaderOptions.getTimeZoneOffset();
 
       http.Response response = await http.get(

@@ -8,6 +8,7 @@ import 'package:natural_slim_flutter_library/models/authentication/response/logi
 import 'package:natural_slim_flutter_library/utils/helpers/exceptions_helper.dart';
 import 'package:natural_slim_flutter_library/utils/helpers/http_header_options.dart';
 import 'package:natural_slim_flutter_library/utils/shared_preferences/user_login_shared_preferences.dart';
+import 'package:natural_slim_flutter_library/utils/shared_preferences/user_token_shared_preferences.dart';
 
 class AuthenticationController{
 
@@ -30,11 +31,15 @@ class AuthenticationController{
         ExceptionsHelper.validateApiException(response);
       }
 
-      if(!await UserLoginSharedPreferences().saveLoginCredentials(request)){
+      if(!await UserLoginSharedPreferences().saveLoginCredentials(request)) throw Exception();
+
+      LoginResponse parsedResponse = LoginResponse.fromJson(jsonDecode(response.body));
+
+      if(!await UserTokenSharedPreferences().saveValueToken(parsedResponse.token) ||
+         !await UserTokenSharedPreferences().saveValueTokenExpiration(parsedResponse.tokenExpiration.toString())) {
         throw Exception();
       }
 
-      LoginResponse parsedResponse = LoginResponse.fromJson(jsonDecode(response.body));
       return parsedResponse;
         
     } catch (e){
