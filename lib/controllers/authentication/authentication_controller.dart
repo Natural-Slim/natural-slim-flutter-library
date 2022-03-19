@@ -5,7 +5,7 @@ import 'package:natural_slim_flutter_library/constants/api_constants.dart';
 
 import 'package:natural_slim_flutter_library/models/authentication/request/login_request_model.dart';
 import 'package:natural_slim_flutter_library/models/authentication/response/login_response_model.dart';
-import 'package:natural_slim_flutter_library/utils/exceptions_helper.dart';
+import 'package:natural_slim_flutter_library/utils/helpers/exceptions_helper.dart';
 import 'package:natural_slim_flutter_library/utils/shared_preferences/user_login_shared_preferences.dart';
 
 class AuthenticationController{
