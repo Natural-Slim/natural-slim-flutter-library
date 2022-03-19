@@ -11,7 +11,7 @@ String statusResponseToJson(StatusResponse data) => json.encode(data.toJson());
 class StatusResponse {
     StatusResponse({
       required this.totalSteps,
-      required this.currentStep,
+      required this.currentStepId,
       required this.completedSteps,
       required this.remainingSteps,
       required this.programStart,
@@ -19,7 +19,7 @@ class StatusResponse {
     });
 
     int totalSteps;
-    int currentStep;
+    int currentStepId;
     int completedSteps;
     int remainingSteps;
     DateTime programStart;
@@ -27,7 +27,7 @@ class StatusResponse {
 
     factory StatusResponse.fromJson(Map<String, dynamic> json) => StatusResponse(
         totalSteps: json["totalSteps"],
-        currentStep: json["currentStep"],
+        currentStepId: json["currentStepId"],
         completedSteps: json["completedSteps"],
         remainingSteps: json["remainingSteps"],
         programStart: DateTime.parse(json["programStart"]),
@@ -36,7 +36,7 @@ class StatusResponse {
 
     Map<String, dynamic> toJson() => {
         "totalSteps": totalSteps,
-        "currentStep": currentStep,
+        "currentStepId": currentStepId,
         "completedSteps": completedSteps,
         "remainingSteps": remainingSteps,
         "programStart": programStart.toIso8601String(),

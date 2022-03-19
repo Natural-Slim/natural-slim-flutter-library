@@ -42,7 +42,6 @@ class HttpHeaderOptions{
   Future<bool> _isTokenValid() async {
 
     String? tokenExpiration = await UserTokenSharedPreferences().getSavedTokenExpiration();
-    print(tokenExpiration);
 
     if(tokenExpiration == null || tokenExpiration == '') return false;
 
