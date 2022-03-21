@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 
 class ApiConstants{
-  static String url = 'https://backend-lyndi7d3wa-uc.a.run.app';
+  // static String url = 'https://backend-lyndi7d3wa-uc.a.run.app'; // Developt url for deployed api
+  static String url = 'https://naturalslim-api-idlpryysla-uc.a.run.app/swagger/index.html';
+  
   // Add the remote url of the localhost of the computer that is running the backen project
   static String developmentUrl = "https://192.168.0.6:45455";
   static bool useLocalhost = false;
