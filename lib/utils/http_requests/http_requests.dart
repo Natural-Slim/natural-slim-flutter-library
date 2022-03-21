@@ -29,4 +29,56 @@ class HttpRequests{
       rethrow;
     }
   }
+
+  Future<http.Response> post({required String url, required Map<String, String> headers, Object? body}) async {
+    try{
+      Uri _url = Uri.parse(url);
+      
+      HttpClient client = HttpClient();
+
+      // only when necessary
+      if(kDebugMode || kReleaseMode){
+        // This allows make queries an api running on localhost
+        client.badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
+      }
+
+      IOClient ioClient = IOClient(client);
+
+      http.Response response = await ioClient.post(
+        _url, 
+        headers: headers,
+        body: body
+      );
+
+      return response;
+    }catch(e){
+      rethrow;
+    }
+  }
+  
+  Future<http.Response> put({required String url, required Map<String, String> headers, Object? body}) async {
+    try{
+      Uri _url = Uri.parse(url);
+      
+      HttpClient client = HttpClient();
+
+      // only when necessary
+      if(kDebugMode || kReleaseMode){
+        // This allows make queries an api running on localhost
+        client.badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
+      }
+
+      IOClient ioClient = IOClient(client);
+
+      http.Response response = await ioClient.put(
+        _url, 
+        headers: headers,
+        body: body
+      );
+
+      return response;
+    }catch(e){
+      rethrow;
+    }
+  }
 }

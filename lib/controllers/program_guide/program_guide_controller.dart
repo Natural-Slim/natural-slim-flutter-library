@@ -73,7 +73,7 @@ class ProgramGuideController {
       String timeZone = HttpHeaderOptions.getTimeZoneOffset();
 
       http.Response response = await httpRequests.get(
-        url: '${ApiConstants.url}/api/program-guide/user-program-step?ProgramStepId=$programStepId',
+        url: '${ApiConstants.baseUrl}/api/program-guide/user-program-step?ProgramStepId=$programStepId',
         headers: {
           'Content-Type':'application/json',
           'accept':'text/plain',
@@ -87,22 +87,20 @@ class ProgramGuideController {
       }
 
       UserProgramStepResponse parsedResponse = UserProgramStepResponse.fromJson(jsonDecode(response.body));
-      var id = parsedResponse.programStep.jsonTemplate;
       return parsedResponse;
     } catch (e) {
       rethrow;
     }
   }
 
-  /// Method to consult the API if the username and password is correct to be able to enter the app
+  /// Method to save the answers of a certain step
   Future<void> postAnswers(AnswerRequest request) async {
     try{
-      Uri url = Uri.parse('${ApiConstants.url}/api/program-guide/steps/answers');
       String timeZone = HttpHeaderOptions.getTimeZoneOffset();
       String? token = await HttpHeaderOptions().getValidatedToken();
 
-      http.Response response = await http.post(
-        url, 
+      http.Response response = await httpRequests.post(
+        url: '${ApiConstants.baseUrl}/api/program-guide/steps/answers', 
         headers: {
           'Content-Type':'application/json',
           'x-Time-Zone': timeZone,
@@ -119,4 +117,34 @@ class ProgramGuideController {
     }
   }
 
+  /// Method that updates the state of a step and sets it to isCompleted = true
+  Future<UserProgramStepResponse> putUserProgramStep(int programStepId) async{
+    try{
+      String? token = await HttpHeaderOptions().getValidatedToken();
+      String timeZone = HttpHeaderOptions.getTimeZoneOffset();
+      UserProgramStepResponse userProgramStepResponse = await getUserProgramStep(programStepId);
+
+      http.Response response = await httpRequests.put(
+        url: '${ApiConstants.baseUrl}/api/program-guide/user-program-step?ProgramStepId=$programStepId',
+        headers: {
+          'Content-Type':'application/json',
+          'accept':'text/plain',
+          'x-Time-Zone': timeZone,
+          'Authorization':'Bearer $token'
+        },
+        body: jsonEncode(userProgramStepResponse)
+      );
+
+      if(response.statusCode != 201) {
+        ExceptionsHelper.validateApiException(response);
+      }
+
+      var res = response;
+
+      UserProgramStepResponse parsedResponse = UserProgramStepResponse.fromJson(jsonDecode(response.body));
+      return parsedResponse;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
