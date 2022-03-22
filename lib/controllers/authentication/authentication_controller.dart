@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:natural_slim_flutter_library/constants/api_constants.dart';
 
+import 'package:natural_slim_flutter_library/constants/api_constants.dart';
 import 'package:natural_slim_flutter_library/models/authentication/request/login_request_model.dart';
 import 'package:natural_slim_flutter_library/models/authentication/response/login_response_model.dart';
 import 'package:natural_slim_flutter_library/utils/helpers/exceptions_helper.dart';
-import 'package:natural_slim_flutter_library/utils/helpers/http_header_options.dart';
+import 'package:natural_slim_flutter_library/utils/helpers/http_header_options_helper.dart';
 import 'package:natural_slim_flutter_library/utils/shared_preferences/user_login_shared_preferences.dart';
 import 'package:natural_slim_flutter_library/utils/shared_preferences/user_token_shared_preferences.dart';
 
@@ -16,7 +16,7 @@ class AuthenticationController{
   Future<LoginResponse> postLogin(LoginRequest request) async {
     try{
       Uri url = Uri.parse('${ApiConstants.url}/api/auth/login');
-      String timeZone = HttpHeaderOptions.getTimeZoneOffset();
+      String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
       http.Response response = await http.post(
         url, 

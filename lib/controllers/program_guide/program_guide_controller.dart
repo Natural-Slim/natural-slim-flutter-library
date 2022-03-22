@@ -7,7 +7,7 @@ import 'package:natural_slim_flutter_library/models/program_guide/response/statu
 import 'package:natural_slim_flutter_library/models/program_guide/response/steps_response_model.dart';
 import 'package:natural_slim_flutter_library/models/program_guide/response/user_program_step_response/user_program_step_response_model.dart';
 import 'package:natural_slim_flutter_library/utils/helpers/exceptions_helper.dart';
-import 'package:natural_slim_flutter_library/utils/helpers/http_header_options.dart';
+import 'package:natural_slim_flutter_library/utils/helpers/http_header_options_helper.dart';
 import 'package:natural_slim_flutter_library/utils/http_requests/http_requests.dart';
 
 class ProgramGuideController {
@@ -16,8 +16,8 @@ class ProgramGuideController {
   Future<StatusResponse> getStatus() async{
     try{
       Uri url = Uri.parse('${ApiConstants.url}/api/program-guide/status');
-      String? token = await HttpHeaderOptions().getValidatedToken();
-      String timeZone = HttpHeaderOptions.getTimeZoneOffset();
+      String? token = await HttpHeaderOptionsHelper.getValidatedToken();
+      String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
       http.Response response = await http.get(
         url, 
@@ -43,8 +43,8 @@ class ProgramGuideController {
   Future<ProgramStepsResponse> getSteps(int perPage, int pageNumber) async {
     try{
       Uri url = Uri.parse('${ApiConstants.url}/api/program-guide/steps?PerPage=$perPage&PageNumber=$pageNumber');
-      String? token = await HttpHeaderOptions().getValidatedToken();
-      String timeZone = HttpHeaderOptions.getTimeZoneOffset();
+      String? token = await HttpHeaderOptionsHelper.getValidatedToken();
+      String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
       http.Response response = await http.get(
         url, 
@@ -69,8 +69,8 @@ class ProgramGuideController {
 
   Future<UserProgramStepResponse> getUserProgramStep(int programStepId) async{
     try{
-      String? token = await HttpHeaderOptions().getValidatedToken();
-      String timeZone = HttpHeaderOptions.getTimeZoneOffset();
+      String? token = await HttpHeaderOptionsHelper.getValidatedToken();
+      String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
       http.Response response = await httpRequests.get(
         url: '${ApiConstants.baseUrl}/api/program-guide/user-program-step?ProgramStepId=$programStepId',
@@ -96,8 +96,8 @@ class ProgramGuideController {
   /// Method to save the answers of a certain step
   Future<void> postAnswers(AnswerRequest request) async {
     try{
-      String timeZone = HttpHeaderOptions.getTimeZoneOffset();
-      String? token = await HttpHeaderOptions().getValidatedToken();
+      String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
+      String? token = await HttpHeaderOptionsHelper.getValidatedToken();
 
       http.Response response = await httpRequests.post(
         url: '${ApiConstants.baseUrl}/api/program-guide/steps/answers', 
@@ -120,8 +120,8 @@ class ProgramGuideController {
   /// Method that updates the state of a step and sets it to isCompleted = true
   Future<UserProgramStepResponse> putUserProgramStep(int programStepId) async{
     try{
-      String? token = await HttpHeaderOptions().getValidatedToken();
-      String timeZone = HttpHeaderOptions.getTimeZoneOffset();
+      String? token = await HttpHeaderOptionsHelper.getValidatedToken();
+      String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
       UserProgramStepResponse userProgramStepResponse = await getUserProgramStep(programStepId);
 
       http.Response response = await httpRequests.put(
