@@ -31,7 +31,7 @@ class AuthenticationController{
         ExceptionsHelper.validateApiException(response);
       }
 
-      if(!await UserLoginSharedPreferences().saveLoginCredentials(request)) throw Exception();
+      if(!await UserLoginSharedPreferences.saveLoginCredentials(request)) throw Exception();
 
       LoginResponse parsedResponse = LoginResponse.fromJson(jsonDecode(response.body));
 
