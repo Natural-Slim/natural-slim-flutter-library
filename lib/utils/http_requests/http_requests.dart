@@ -6,6 +6,8 @@ import 'package:http/io_client.dart';
 import 'package:natural_slim_flutter_library/constants/api_constants.dart';
 
 class HttpRequests{
+
+  /// Method to consume an endpoint GET in the production API or on localhost
   Future<http.Response> get({required String url, required Map<String, String> headers}) async {
     try{
       Uri _url = Uri.parse(url);
@@ -33,6 +35,7 @@ class HttpRequests{
     }
   }
 
+  // Method to consume an endpoint POST in the production API or on localhost
   Future<http.Response> post({required String url, required Map<String, String> headers, Object? body}) async {
     try{
       Uri _url = Uri.parse(url);
@@ -61,6 +64,7 @@ class HttpRequests{
     }
   }
   
+  // Method to consume an endpoint PUT in the production API or on localhost
   Future<http.Response> put({required String url, required Map<String, String> headers, Object? body}) async {
     try{
       Uri _url = Uri.parse(url);
