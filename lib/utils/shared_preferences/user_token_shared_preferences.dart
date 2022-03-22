@@ -1,61 +1,79 @@
 import 'package:natural_slim_flutter_library/constants/api_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// Class to handle login token in app preferences
 class UserTokenSharedPreferences {
 
+  /* =============================================================== */
+  /* ============================= SET ============================= */
+
   /// Method to save token
-  Future<bool> saveValueToken(String token) async {
+  static Future<bool> saveValueToken(String token) async {
     try{
+      // An object is created to access the app's preferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      bool saveStatus = await prefs.setString(ApiConstants.preferencesKeyToken, token);
-
-      return saveStatus;
+      return await prefs.setString(ApiConstants.preferencesKeyToken, token);
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<bool> saveValueTokenExpiration(String tokenExpiration) async{
+  /// Method to save token expiration date and time
+  static Future<bool> saveValueTokenExpiration(String tokenExpiration) async{
     try{
+      // An object is created to access the app's preferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      bool saveStatus = await prefs.setString(ApiConstants.preferencesTokenExpiration, tokenExpiration);
-
-      return saveStatus;
+      return await prefs.setString(ApiConstants.preferencesTokenExpiration, tokenExpiration);
     } catch (e) {
       rethrow;
     }
   }
 
-  // Method to return saved token
-  Future<String?> returnSavedToken() async {
+  /* =============================================================== */
+  /* ============================= GET ============================= */
+
+  /// Method to return saved token
+  static Future<String?> getSavedToken() async {
     try {
+      // An object is created to access the app's preferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      String? token = prefs.getString(ApiConstants.preferencesKeyToken);
-
-      return token;
+      return prefs.getString(ApiConstants.preferencesKeyToken);
     } catch (e){
       rethrow;
     }
   }
 
-  Future<String?> getSavedTokenExpiration() async {
+  /// Method to get token expiration date and time
+  static Future<String?> getSavedTokenExpiration() async {
     try{
+      // An object is created to access the app's preferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      String? tokenExpiration = prefs.getString(ApiConstants.preferencesTokenExpiration);
-
-      return tokenExpiration;
+      return prefs.getString(ApiConstants.preferencesTokenExpiration);
     } catch (e) {
       rethrow;
     }
   }
 
-  // Method to remove saved token
-  Future<bool> removeSavedToken() async {
-    try{
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      bool removalStatus = await prefs.remove(ApiConstants.preferencesKeyToken);
+  /* ================================================================== */
+  /* ============================= DELETE ============================= */
 
-      return removalStatus;
+  /// Method to remove saved token
+  static Future<bool> deleteSavedToken() async {
+    try{
+      // An object is created to access the app's preferences
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return await prefs.remove(ApiConstants.preferencesKeyToken);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  /// Method to remove saved token
+  static Future<bool> deleteSavedTokenExpiration() async {
+    try{
+      // An object is created to access the app's preferences
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return await prefs.remove(ApiConstants.preferencesKeyToken);
     } catch (e) {
       rethrow;
     }

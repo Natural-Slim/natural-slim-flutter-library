@@ -35,8 +35,8 @@ class AuthenticationController{
 
       LoginResponse parsedResponse = LoginResponse.fromJson(jsonDecode(response.body));
 
-      if(!await UserTokenSharedPreferences().saveValueToken(parsedResponse.token) ||
-         !await UserTokenSharedPreferences().saveValueTokenExpiration(parsedResponse.tokenExpiration.toString())) {
+      if(!await UserTokenSharedPreferences.saveValueToken(parsedResponse.token) ||
+         !await UserTokenSharedPreferences.saveValueTokenExpiration(parsedResponse.tokenExpiration.toString())) {
         throw Exception();
       }
 

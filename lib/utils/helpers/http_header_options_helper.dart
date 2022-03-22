@@ -16,7 +16,7 @@ class HttpHeaderOptionsHelper{
 
     // In case the token is still valid, only the same token is returned
     if(isTokenValid){
-      return await UserTokenSharedPreferences().returnSavedToken();
+      return await UserTokenSharedPreferences.getSavedToken();
     }
 
     // The credentials saved in the app preferences are obtained
@@ -44,7 +44,7 @@ class HttpHeaderOptionsHelper{
   static Future<bool> _isTokenValid() async {
 
     // The expiration date of the token saved in the preferences is obtained
-    String? tokenExpiration = await UserTokenSharedPreferences().getSavedTokenExpiration();
+    String? tokenExpiration = await UserTokenSharedPreferences.getSavedTokenExpiration();
 
     if(tokenExpiration == null || tokenExpiration == '') return false;
 
