@@ -6,6 +6,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// Class to handle user credentials in app preferences
 class UserLoginSharedPreferences {
 
+  /* =============================================================== */
+  /* ============================= SET ============================= */
+
   /// Method to save login credentials in app preferences
   static Future<bool> saveLoginCredentials(LoginRequest loginCredentials) async{
     try{
@@ -33,6 +36,9 @@ class UserLoginSharedPreferences {
       rethrow;
     }
   }
+
+  /* =============================================================== */
+  /* ============================= GET ============================= */
 
   /// Method to get username from app preferences
   static Future<String> getUsername() async {
@@ -70,4 +76,28 @@ class UserLoginSharedPreferences {
     }
   }
 
+  /* ================================================================== */
+  /* ============================= DELETE ============================= */
+
+  /// Method to remove saved username
+  static Future<bool> deleteSavedUsername() async {
+    try{
+      // An object is created to access the app's preferences
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return await prefs.remove(ApiConstants.preferencesUsername);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  /// Method to remove saved password
+  static Future<bool> deleteSavedPassword() async {
+    try{
+      // An object is created to access the app's preferences
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return await prefs.remove(ApiConstants.preferencesPassword);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
