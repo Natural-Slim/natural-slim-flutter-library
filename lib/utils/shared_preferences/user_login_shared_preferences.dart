@@ -1,5 +1,5 @@
 import 'package:natural_slim_flutter_library/constants/api_constants.dart';
-import 'package:natural_slim_flutter_library/models/authentication/request/login_request_model.dart';
+import 'package:natural_slim_flutter_library/models/authentication/requests/login_request_model.dart';
 import 'package:natural_slim_flutter_library/utils/helpers/encryption_management_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
