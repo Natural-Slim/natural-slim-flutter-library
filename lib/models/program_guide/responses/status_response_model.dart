@@ -4,12 +4,12 @@
 
 import 'dart:convert';
 
-StatusResponse statusResponseFromJson(String str) => StatusResponse.fromJson(json.decode(str));
+StatusResponseModel statusResponseFromJson(String str) => StatusResponseModel.fromJson(json.decode(str));
 
-String statusResponseToJson(StatusResponse data) => json.encode(data.toJson());
+String statusResponseToJson(StatusResponseModel data) => json.encode(data.toJson());
 
-class StatusResponse {
-    StatusResponse({
+class StatusResponseModel {
+    StatusResponseModel({
       required this.totalSteps,
       required this.currentStepId,
       required this.completedSteps,
@@ -25,7 +25,7 @@ class StatusResponse {
     DateTime programStart;
     DateTime programEnd;
 
-    factory StatusResponse.fromJson(Map<String, dynamic> json) => StatusResponse(
+    factory StatusResponseModel.fromJson(Map<String, dynamic> json) => StatusResponseModel(
         totalSteps: json["totalSteps"],
         currentStepId: json["currentStepId"],
         completedSteps: json["completedSteps"],

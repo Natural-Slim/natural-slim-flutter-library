@@ -3,12 +3,12 @@
 //     final answerRequest = answerRequestFromJson(jsonString);
 import 'dart:convert';
 
-AnswerRequest answerRequestFromJson(String str) => AnswerRequest.fromJson(json.decode(str));
+AnswerRequestModel answerRequestFromJson(String str) => AnswerRequestModel.fromJson(json.decode(str));
 
-String answerRequestToJson(AnswerRequest data) => json.encode(data.toJson());
+String answerRequestToJson(AnswerRequestModel data) => json.encode(data.toJson());
 
-class AnswerRequest {
-  AnswerRequest({
+class AnswerRequestModel {
+  AnswerRequestModel({
     required this.stepId,
     required this.answers,
   });
@@ -16,7 +16,7 @@ class AnswerRequest {
   int stepId;
   Map<String, String> answers;
 
-  factory AnswerRequest.fromJson(Map<String, dynamic> json) => AnswerRequest(
+  factory AnswerRequestModel.fromJson(Map<String, dynamic> json) => AnswerRequestModel(
     stepId: json["stepId"],
     answers:  Map<String, String>.from(json['widget_data'] as Map),
   );

@@ -24,7 +24,7 @@ class HttpHeaderOptionsHelper{
     String password = await UserLoginSharedPreferences.getPassword();
 
     // A new login is created with the credentials from the preferences. And therefore, a new token.
-    LoginResponse updatedLogin = await AuthenticationController().postLogin(LoginRequest(username: username, password: password));
+    LoginResponseModel updatedLogin = await AuthenticationController().postLogin(LoginRequestModel(username: username, password: password));
 
     return updatedLogin.token;
   }

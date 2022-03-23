@@ -1,6 +1,6 @@
 
-class ProgramStep {
-  ProgramStep({
+class ProgramStepModel {
+  ProgramStepModel({
     required this.id,
     required this.stepName,
     required this.stepDescription,
@@ -12,7 +12,7 @@ class ProgramStep {
   String stepDescription;
   String jsonTemplate;
 
-  factory ProgramStep.fromJson(Map<String, dynamic> json) => ProgramStep(
+  factory ProgramStepModel.fromJson(Map<String, dynamic> json) => ProgramStepModel(
     id: json["id"],
     stepName: json["stepName"],
     stepDescription: json["stepDescription"],

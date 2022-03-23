@@ -13,7 +13,7 @@ import 'package:natural_slim_flutter_library/utils/shared_preferences/user_token
 class AuthenticationController{
 
   /// Method to consult the API if the username and password is correct to be able to enter the app
-  Future<LoginResponse> postLogin(LoginRequest request) async {
+  Future<LoginResponseModel> postLogin(LoginRequestModel request) async {
     try{
       Uri url = Uri.parse('${ApiConstants.url}/api/auth/login');
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
@@ -33,7 +33,7 @@ class AuthenticationController{
 
       if(!await UserLoginSharedPreferences.saveLoginCredentials(request)) throw Exception();
 
-      LoginResponse parsedResponse = LoginResponse.fromJson(jsonDecode(response.body));
+      LoginResponseModel parsedResponse = LoginResponseModel.fromJson(jsonDecode(response.body));
 
       if(!await UserTokenSharedPreferences.saveValueToken(parsedResponse.token) ||
          !await UserTokenSharedPreferences.saveValueTokenExpiration(parsedResponse.tokenExpiration.toString())) {

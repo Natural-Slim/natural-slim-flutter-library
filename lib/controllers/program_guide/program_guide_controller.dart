@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'package:natural_slim_flutter_library/constants/api_constants.dart';
-import 'package:natural_slim_flutter_library/models/program_guide/requests/answers_request.dart';
-import 'package:natural_slim_flutter_library/models/program_guide/response/status_response_model.dart';
-import 'package:natural_slim_flutter_library/models/program_guide/response/steps_response_model.dart';
-import 'package:natural_slim_flutter_library/models/program_guide/response/user_program_step_response/user_program_step_response_model.dart';
+import 'package:natural_slim_flutter_library/models/program_guide/requests/answers_request_model.dart';
+import 'package:natural_slim_flutter_library/models/program_guide/responses/status_response_model.dart';
+import 'package:natural_slim_flutter_library/models/program_guide/responses/steps_response_model.dart';
+import 'package:natural_slim_flutter_library/models/program_guide/responses/user_program_step_response/user_program_step_response_model.dart';
 import 'package:natural_slim_flutter_library/utils/helpers/exceptions_helper.dart';
 import 'package:natural_slim_flutter_library/utils/helpers/http_header_options_helper.dart';
 import 'package:natural_slim_flutter_library/utils/http_requests/http_requests.dart';
@@ -13,7 +13,7 @@ import 'package:natural_slim_flutter_library/utils/http_requests/http_requests.d
 class ProgramGuideController {
   HttpRequests httpRequests = HttpRequests();
 
-  Future<StatusResponse> getStatus() async{
+  Future<StatusResponseModel> getStatus() async{
     try{
       Uri url = Uri.parse('${ApiConstants.url}/api/program-guide/status');
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
@@ -32,7 +32,7 @@ class ProgramGuideController {
         ExceptionsHelper.validateApiException(response);
       }
 
-      StatusResponse parsedResponse = StatusResponse.fromJson(jsonDecode(response.body));
+      StatusResponseModel parsedResponse = StatusResponseModel.fromJson(jsonDecode(response.body));
       return parsedResponse;
 
     } catch (e) {
@@ -40,7 +40,7 @@ class ProgramGuideController {
     }
   }
 
-  Future<ProgramStepsResponse> getSteps(int perPage, int pageNumber) async {
+  Future<ProgramStepsResponseModel> getSteps(int perPage, int pageNumber) async {
     try{
       Uri url = Uri.parse('${ApiConstants.url}/api/program-guide/steps?PerPage=$perPage&PageNumber=$pageNumber');
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
@@ -59,7 +59,7 @@ class ProgramGuideController {
         ExceptionsHelper.validateApiException(response);
       }
       
-      ProgramStepsResponse parsedResponse = ProgramStepsResponse.fromJson(jsonDecode(response.body));
+      ProgramStepsResponseModel parsedResponse = ProgramStepsResponseModel.fromJson(jsonDecode(response.body));
       return parsedResponse;
 
     } catch (e) {
@@ -67,7 +67,7 @@ class ProgramGuideController {
     }
   }
 
-  Future<UserProgramStepResponse> getUserProgramStep(int programStepId) async{
+  Future<UserProgramStepResponseModel> getUserProgramStep(int programStepId) async{
     try{
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
@@ -86,7 +86,7 @@ class ProgramGuideController {
         ExceptionsHelper.validateApiException(response);
       }
 
-      UserProgramStepResponse parsedResponse = UserProgramStepResponse.fromJson(jsonDecode(response.body));
+      UserProgramStepResponseModel parsedResponse = UserProgramStepResponseModel.fromJson(jsonDecode(response.body));
       return parsedResponse;
     } catch (e) {
       rethrow;
@@ -94,7 +94,7 @@ class ProgramGuideController {
   }
 
   /// Method to save the answers of a certain step
-  Future<void> postAnswers(AnswerRequest request) async {
+  Future<void> postAnswers(AnswerRequestModel request) async {
     try{
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
@@ -118,11 +118,11 @@ class ProgramGuideController {
   }
 
   /// Method that updates the state of a step and sets it to isCompleted = true
-  Future<UserProgramStepResponse> putUserProgramStep(int programStepId) async{
+  Future<UserProgramStepResponseModel> putUserProgramStep(int programStepId) async{
     try{
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
-      UserProgramStepResponse userProgramStepResponse = await getUserProgramStep(programStepId);
+      UserProgramStepResponseModel userProgramStepResponse = await getUserProgramStep(programStepId);
 
       http.Response response = await httpRequests.put(
         url: '${ApiConstants.baseUrl}/api/program-guide/user-program-step?ProgramStepId=$programStepId',
@@ -141,7 +141,7 @@ class ProgramGuideController {
 
       var res = response;
 
-      UserProgramStepResponse parsedResponse = UserProgramStepResponse.fromJson(jsonDecode(response.body));
+      UserProgramStepResponseModel parsedResponse = UserProgramStepResponseModel.fromJson(jsonDecode(response.body));
       return parsedResponse;
     } catch (e) {
       rethrow;

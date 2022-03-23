@@ -10,7 +10,7 @@ class UserLoginSharedPreferences {
   /* ============================= SET ============================= */
 
   /// Method to save login credentials in app preferences
-  static Future<bool> saveLoginCredentials(LoginRequest loginCredentials) async{
+  static Future<bool> saveLoginCredentials(LoginRequestModel loginCredentials) async{
     try{
       // An object is created to access the app's preferences
       SharedPreferences prefs = await SharedPreferences.getInstance();

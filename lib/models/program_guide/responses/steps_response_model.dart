@@ -4,12 +4,12 @@
 
 import 'dart:convert';
 
-ProgramStepsResponse programStepsResponseFromJson(String str) => ProgramStepsResponse.fromJson(json.decode(str));
+ProgramStepsResponseModel programStepsResponseFromJson(String str) => ProgramStepsResponseModel.fromJson(json.decode(str));
 
-String programStepsResponseToJson(ProgramStepsResponse data) => json.encode(data.toJson());
+String programStepsResponseToJson(ProgramStepsResponseModel data) => json.encode(data.toJson());
 
-class ProgramStepsResponse {
-    ProgramStepsResponse({
+class ProgramStepsResponseModel {
+    ProgramStepsResponseModel({
       required this.records,
       required this.pagingInfo,
     });
@@ -17,7 +17,7 @@ class ProgramStepsResponse {
     List<ProgramStep> records;
     PagingInfo pagingInfo;
 
-    factory ProgramStepsResponse.fromJson(Map<String, dynamic> json) => ProgramStepsResponse(
+    factory ProgramStepsResponseModel.fromJson(Map<String, dynamic> json) => ProgramStepsResponseModel(
       records: List<ProgramStep>.from(json["records"].map((x) => ProgramStep.fromJson(x))),
       pagingInfo: PagingInfo.fromJson(json["pagingInfo"]),
     );

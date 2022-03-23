@@ -4,12 +4,12 @@
 
 import 'dart:convert';
 
-LoginResponse loginResponseFromJson(String str) => LoginResponse.fromJson(json.decode(str));
+LoginResponseModel loginResponseFromJson(String str) => LoginResponseModel.fromJson(json.decode(str));
 
-String loginResponseToJson(LoginResponse data) => json.encode(data.toJson());
+String loginResponseToJson(LoginResponseModel data) => json.encode(data.toJson());
 
-class LoginResponse {
-    LoginResponse({
+class LoginResponseModel {
+    LoginResponseModel({
       required this.username,
       required this.roles,
       required this.token,
@@ -25,7 +25,7 @@ class LoginResponse {
     String? memberGuid;
     DateTime tokenExpiration;
 
-    factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
+    factory LoginResponseModel.fromJson(Map<String, dynamic> json) => LoginResponseModel(
         username: json["username"],
         roles: List<String>.from(json["roles"].map((x) => x)),
         token: json["token"],
