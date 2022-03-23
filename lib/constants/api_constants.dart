@@ -3,8 +3,8 @@ class ApiConstants{
   static String url = 'https://naturalslim-api-idlpryysla-uc.a.run.app';
   
   // Add the remote url of the localhost of the computer that is running the backen project
-  static String developmentUrl = "https://192.168.0.2:45455";
-  static bool useLocalhost = true;
+  static String developmentUrl = "https://192.168.0.3:45456";
+  static bool useLocalhost = false;
   
   // Please use the base url that understands which url to use depending on the 
   //compilation mode, in case of debug and realse you can use the localhost url 
