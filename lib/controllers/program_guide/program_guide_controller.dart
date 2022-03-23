@@ -15,16 +15,15 @@ class ProgramGuideController {
 
   Future<StatusResponse> getStatus() async{
     try{
-      Uri url = Uri.parse('${ApiConstants.url}/api/program-guide/status');
       String? token = await HttpHeaderOptions().getValidatedToken();
       String timeZone = HttpHeaderOptions.getTimeZoneOffset();
 
-      http.Response response = await http.get(
-        url, 
+      http.Response response = await httpRequests.get(
+        url: '${ApiConstants.baseUrl}/api/program-guide/status',
         headers: {
           'Content-Type':'application/json',
           'x-Time-Zone': timeZone,
-          'Authorization' : 'Bearer $token'
+          'Authorization':'Bearer $token'
         }
       );
 
@@ -42,16 +41,15 @@ class ProgramGuideController {
 
   Future<ProgramStepsResponse> getSteps(int perPage, int pageNumber) async {
     try{
-      Uri url = Uri.parse('${ApiConstants.url}/api/program-guide/steps?PerPage=$perPage&PageNumber=$pageNumber');
       String? token = await HttpHeaderOptions().getValidatedToken();
       String timeZone = HttpHeaderOptions.getTimeZoneOffset();
 
-      http.Response response = await http.get(
-        url, 
+      http.Response response = await httpRequests.get(
+        url: '${ApiConstants.baseUrl}/api/program-guide/steps?PerPage=$perPage&PageNumber=$pageNumber',
         headers: {
           'Content-Type':'application/json',
           'x-Time-Zone': timeZone,
-          'Authorization' : 'Bearer $token'
+          'Authorization':'Bearer $token'
         }
       );
 
