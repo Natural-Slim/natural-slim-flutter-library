@@ -1,6 +1,6 @@
 import 'package:natural_slim_flutter_library/constants/api_constants.dart';
 import 'package:natural_slim_flutter_library/models/authentication/request/login_request_model.dart';
-import 'package:natural_slim_flutter_library/utils/encryption_management.dart';
+import 'package:natural_slim_flutter_library/utils/helpers/encryption_management_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Class to handle user credentials in app preferences
@@ -16,8 +16,8 @@ class UserLoginSharedPreferences {
       SharedPreferences prefs = await SharedPreferences.getInstance();
 
       // User credentials are encrypted for added security
-      String encryptedUsername = EncryptionManagement.encrypt(loginCredentials.username).base64;
-      String encryptedPassword = EncryptionManagement.encrypt(loginCredentials.password).base64;
+      String encryptedUsername = EncryptionManagementHelper.encrypt(loginCredentials.username).base64;
+      String encryptedPassword = EncryptionManagementHelper.encrypt(loginCredentials.password).base64;
 
       if(encryptedUsername == "" || encryptedPassword == ""){
         return false;
@@ -52,7 +52,7 @@ class UserLoginSharedPreferences {
       if(usernameEncrypted == null || usernameEncrypted == '') throw Exception();
 
       // The username is decrypted and returned already decrypted
-      return EncryptionManagement.decrypt(usernameEncrypted);
+      return EncryptionManagementHelper.decrypt(usernameEncrypted);
     } catch (e) {
       rethrow;
     }
@@ -70,7 +70,7 @@ class UserLoginSharedPreferences {
       if(passwordEncrypted == null || passwordEncrypted == '') throw Exception();
 
       // The password is decrypted and returned already decrypted
-      return EncryptionManagement.decrypt(passwordEncrypted);
+      return EncryptionManagementHelper.decrypt(passwordEncrypted);
     } catch (e) {
       rethrow;
     }
