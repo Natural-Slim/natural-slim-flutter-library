@@ -13,6 +13,7 @@ import 'package:natural_slim_flutter_library/utils/http_requests/http_requests.d
 class ProgramGuideController {
   HttpRequests httpRequests = HttpRequests();
 
+  /// Method to get the current status of the user program guide
   Future<StatusResponseModel> getStatus() async{
     try{
       Uri url = Uri.parse('${ApiConstants.url}/api/program-guide/status');
@@ -40,6 +41,7 @@ class ProgramGuideController {
     }
   }
 
+  /// Method to get the list of steps and the current status of each one
   Future<ProgramStepsResponseModel> getSteps(int perPage, int pageNumber) async {
     try{
       Uri url = Uri.parse('${ApiConstants.url}/api/program-guide/steps?PerPage=$perPage&PageNumber=$pageNumber');
@@ -67,6 +69,7 @@ class ProgramGuideController {
     }
   }
 
+  /// Method to obtain the information to draw each of the steps and the data of each one.
   Future<UserProgramStepResponseModel> getUserProgramStep(int programStepId) async{
     try{
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
@@ -138,8 +141,6 @@ class ProgramGuideController {
       if(response.statusCode != 201) {
         ExceptionsHelper.validateApiException(response);
       }
-
-      var res = response;
 
       UserProgramStepResponseModel parsedResponse = UserProgramStepResponseModel.fromJson(jsonDecode(response.body));
       return parsedResponse;
