@@ -16,7 +16,6 @@ class AuthenticationController{
   /// Method to consult the API if the username and password is correct to be able to enter the app
   Future<LoginResponseModel> postLogin(LoginRequestModel request) async {
     try{
-      Uri url = Uri.parse('${ApiConstants.url}/api/auth/login');
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
       http.Response response = await httpRequests.post(

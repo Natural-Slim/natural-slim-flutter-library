@@ -1,16 +1,16 @@
 class ApiConstants{
   // static String url = 'https://backend-lyndi7d3wa-uc.a.run.app'; // Developt url for deployed api
-  static String url = 'https://naturalslim-api-idlpryysla-uc.a.run.app';
+  static String productionUrl = 'https://naturalslim-api-idlpryysla-uc.a.run.app';
   
   // Add the remote url of the localhost of the computer that is running the backen project
-  static String developmentUrl = "https://192.168.0.3:45456";
+  static String developmentUrl = "https://192.168.0.3:45455";
   static bool useLocalhost = false;
   
   // Please use the base url that understands which url to use depending on the 
   //compilation mode, in case of debug and realse you can use the localhost url 
   //and in production use the url of a deployed api
   
-  static String baseUrl = !useLocalhost ? url : developmentUrl;
+  static String baseUrl = !useLocalhost ? productionUrl : developmentUrl;
   static String apiKey = '';
   
   static String preferencesKeyToken = 'token';

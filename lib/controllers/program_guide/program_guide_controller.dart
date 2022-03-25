@@ -16,7 +16,6 @@ class ProgramGuideController {
   /// Method to get the current status of the user program guide
   Future<StatusResponseModel> getStatus() async{
     try{
-      Uri url = Uri.parse('${ApiConstants.url}/api/program-guide/status');
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
@@ -44,7 +43,6 @@ class ProgramGuideController {
   /// Method to get the list of steps and the current status of each one
   Future<ProgramStepsResponseModel> getSteps(int perPage, int pageNumber) async {
     try{
-      Uri url = Uri.parse('${ApiConstants.url}/api/program-guide/steps?PerPage=$perPage&PageNumber=$pageNumber');
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
