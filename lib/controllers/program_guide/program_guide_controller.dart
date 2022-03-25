@@ -20,12 +20,12 @@ class ProgramGuideController {
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
-      http.Response response = await http.get(
-        url, 
+      http.Response response = await httpRequests.get(
+        url: '${ApiConstants.baseUrl}/api/program-guide/status',
         headers: {
           'Content-Type':'application/json',
           'x-Time-Zone': timeZone,
-          'Authorization' : 'Bearer $token'
+          'Authorization':'Bearer $token'
         }
       );
 
@@ -48,12 +48,12 @@ class ProgramGuideController {
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
-      http.Response response = await http.get(
-        url, 
+      http.Response response = await httpRequests.get(
+        url: '${ApiConstants.baseUrl}/api/program-guide/steps?PerPage=$perPage&PageNumber=$pageNumber',
         headers: {
           'Content-Type':'application/json',
           'x-Time-Zone': timeZone,
-          'Authorization' : 'Bearer $token'
+          'Authorization':'Bearer $token'
         }
       );
 
