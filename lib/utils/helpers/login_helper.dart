@@ -20,10 +20,12 @@ class LoginHelper {
   static Future<bool> isLoginValid() async {
 
     String? token = await UserTokenSharedPreferences.getSavedToken();
-    String username = await UserLoginSharedPreferences.getUsername();
-    String pass = await UserLoginSharedPreferences.getPassword();
+    // String username = await UserLoginSharedPreferences.getUsername();
+    // String pass = await UserLoginSharedPreferences.getPassword();
 
-    if(token == null || token == '' || username == '' || pass == '') return false;
+    if(token == null || token == '' 
+    // || username == '' || pass == ''
+    ) return false;
 
     return true;
   }
