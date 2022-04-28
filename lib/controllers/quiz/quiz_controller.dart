@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'package:natural_slim_flutter_library/constants/api_constants.dart';
+import 'package:natural_slim_flutter_library/models/quiz/requests/attribute_entry_request_model.dart';
 import 'package:natural_slim_flutter_library/models/quiz/responses/adsources_response_model.dart';
+import 'package:natural_slim_flutter_library/models/quiz/responses/attribute_entry_response_model.dart';
 import 'package:natural_slim_flutter_library/models/quiz/responses/attributes_response_model.dart';
 import 'package:natural_slim_flutter_library/utils/http_requests/http_requests.dart';
 import 'package:natural_slim_flutter_library/utils/helpers/exceptions_helper.dart';
@@ -56,4 +58,25 @@ class QuizController{
     }
   }
 
+  Future<AttributeEntryResponseModel> postAttributesEntries(AttributeEntryRequestModel attributeEntry) async {
+    try{
+      http.Response response = await http.post(
+        Uri.parse('${ApiConstants.baseUrl}/api/quiz/attribute-entries'),
+        headers: {
+          'Content-Type': 'application/json',
+          'ApiKey': ApiConstants.apiKey,
+        },
+        body: jsonEncode(attributeEntry),
+      );
+
+      if(response.statusCode != 201) {
+        ExceptionsHelper.validateApiException(response);
+      }
+
+      AttributeEntryResponseModel parsedResponse = AttributeEntryResponseModel.attributeEntryResponseModelFromJson(response.body);
+      return parsedResponse;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
