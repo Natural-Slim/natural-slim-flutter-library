@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:natural_slim_flutter_library/constants/api_constants.dart';
 import 'package:natural_slim_flutter_library/models/quiz/requests/attribute_entry_request_model.dart';
+import 'package:natural_slim_flutter_library/models/quiz/requests/entry_request_model.dart';
 import 'package:natural_slim_flutter_library/models/quiz/responses/adsources_response_model.dart';
 import 'package:natural_slim_flutter_library/models/quiz/responses/attribute_entry_response_model.dart';
 import 'package:natural_slim_flutter_library/models/quiz/responses/attributes_response_model.dart';
@@ -99,6 +100,28 @@ class QuizController{
 
       AttributeEntryResponseModel parsedResponse = AttributeEntryResponseModel.attributeEntryResponseModelFromJson(response.body);
       return parsedResponse;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  /// Method to send the data of attributes entries and the contact form
+  Future<String> postEntry(EntryRequestModel attributeEntry) async {
+    try{
+      http.Response response = await http.post(
+        Uri.parse('${ApiConstants.baseUrl}/api/quiz/entry'),
+        headers: {
+          'Content-Type': 'application/json',
+          'ApiKey': ApiConstants.apiKey,
+        },
+        body: jsonEncode(attributeEntry),
+      );
+
+      if(response.statusCode != 200) {
+        ExceptionsHelper.validateApiException(response);
+      }
+
+      return response.body;
     } catch (e) {
       rethrow;
     }
