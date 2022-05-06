@@ -105,8 +105,8 @@ class QuizController{
     }
   }
 
-  /// Method to send the data of attributes entries and the contact form
-  Future<String> postEntry(EntryRequestModel attributeEntry) async {
+  /// Method to send the form data to schedule an appointment
+  Future<String> postEntry(EntryRequestModel entry) async {
     try{
       http.Response response = await http.post(
         Uri.parse('${ApiConstants.baseUrl}/api/quiz/entry'),
@@ -114,7 +114,7 @@ class QuizController{
           'Content-Type': 'application/json',
           'ApiKey': ApiConstants.apiKey,
         },
-        body: jsonEncode(attributeEntry),
+        body: jsonEncode(entry),
       );
 
       if(response.statusCode != 200) {
