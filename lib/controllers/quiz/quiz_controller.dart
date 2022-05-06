@@ -106,9 +106,9 @@ class QuizController{
   }
 
   /// Method to send the form data to schedule an appointment
-  Future<String> postEntry(EntryRequestModel entry) async {
+  Future<String> putEntry(EntryRequestModel entry) async {
     try{
-      http.Response response = await http.post(
+      http.Response response = await http.put(
         Uri.parse('${ApiConstants.baseUrl}/api/quiz/entry'),
         headers: {
           'Content-Type': 'application/json',

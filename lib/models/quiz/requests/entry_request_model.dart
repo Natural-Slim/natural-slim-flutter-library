@@ -4,72 +4,70 @@
 
 import 'dart:convert';
 
-
-
 class EntryRequestModel {
   EntryRequestModel({
+    required this.entryId,
     required this.firstName,
     required this.lastName,
     required this.email,
     required this.phone,
-    this.callDecline,
-    required this.ipcountryname,
-    required this.iplocation,
-    required this.type,
-    required this.adSource,
+    required this.callDecline,
     required this.apptDate,
     required this.apptLocation,
     required this.apptNote,
-    required this.edate,
+    required this.ipcountryname,
+    required this.iplocation,
+    required this.ipclient,
+    required this.region,
   });
 
+  String entryId;
   String firstName;
   String lastName;
   String email;
   String phone;
-  String? callDecline;
-  String ipcountryname;
-  String iplocation;
-  String type;
-  int adSource;
+  String callDecline;
   String apptDate;
   String apptLocation;
   String apptNote;
-  DateTime edate;
+  String ipcountryname;
+  String iplocation;
+  String ipclient;
+  String region;
 
   static EntryRequestModel entryRequestModelFromJson(String str) => EntryRequestModel.fromJson(json.decode(str));
 
   static String entryRequestModelToJson(EntryRequestModel data) => json.encode(data.toJson());
 
   factory EntryRequestModel.fromJson(Map<String, dynamic> json) => EntryRequestModel(
+    entryId: json["entryId"],
     firstName: json["firstName"],
     lastName: json["lastName"],
     email: json["email"],
     phone: json["phone"],
     callDecline: json["callDecline"],
-    ipcountryname: json["ipcountryname"],
-    iplocation: json["iplocation"],
-    type: json["type"],
-    adSource: json["adSource"],
     apptDate: json["apptDate"],
     apptLocation: json["apptLocation"],
     apptNote: json["apptNote"],
-    edate: DateTime.parse(json["edate"]),
+    ipcountryname: json["ipcountryname"],
+    iplocation: json["iplocation"],
+    ipclient: json["ipclient"],
+    region: json["region"],
   );
 
   Map<String, dynamic> toJson() => {
+    "entryId": entryId,
     "firstName": firstName,
     "lastName": lastName,
     "email": email,
     "phone": phone,
     "callDecline": callDecline,
-    "ipcountryname": ipcountryname,
-    "iplocation": iplocation,
-    "type": type,
-    "adSource": adSource,
     "apptDate": apptDate,
     "apptLocation": apptLocation,
     "apptNote": apptNote,
-    "edate": edate.toIso8601String(),
+    "ipcountryname": ipcountryname,
+    "iplocation": iplocation,
+    "ipclient": ipclient,
+    "region": region,
   };
 }
