@@ -38,13 +38,14 @@ class QuizController{
   }
 
   /// Method to obtain all the attributes of the Quiz
-  Future<List<AttributesResponseModel>> getAttributes(int gid) async{
+  Future<List<AttributesResponseModel>> getAttributes(int gid, String language) async{
     try{
       http.Response response = await http.get(
         Uri.parse('${ApiConstants.baseUrl}/api/quiz/attributes?Gid=$gid'),
         headers: {
           'Content-Type':'application/json',
           'ApiKey': ApiConstants.apiKey,
+          'Language': language
         }
       );
 
