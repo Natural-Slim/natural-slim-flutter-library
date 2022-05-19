@@ -7,7 +7,6 @@ import 'package:natural_slim_flutter_library/models/quiz/requests/entry_request_
 import 'package:natural_slim_flutter_library/models/quiz/responses/adsources_response_model.dart';
 import 'package:natural_slim_flutter_library/models/quiz/responses/attribute_entry_response_model.dart';
 import 'package:natural_slim_flutter_library/models/quiz/responses/attributes_response_model.dart';
-import 'package:natural_slim_flutter_library/models/quiz/responses/country_response_model.dart';
 import 'package:natural_slim_flutter_library/utils/http_requests/http_requests.dart';
 import 'package:natural_slim_flutter_library/utils/helpers/exceptions_helper.dart';
 
@@ -56,28 +55,6 @@ class QuizController{
       List<AttributesResponseModel> parsedResponse = AttributesResponseModel.attributesResponseModelFromJson(response.body);
       return parsedResponse;
 
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  /// Method for obtaining data from countries, regions and localities
-  Future<List<CountryResponseModel>> getCountries() async {
-    try{
-      http.Response response = await httpRequests.get(
-         url: '${ApiConstants.baseUrl}/api/countries',
-        headers: {
-          'Content-Type': 'application/json',
-          'ApiKey': ApiConstants.apiKey,
-        }
-      );
-
-      if(response.statusCode != 200){
-        ExceptionsHelper.validateApiException(response);
-      }
-
-      List<CountryResponseModel> parsedResponse = CountryResponseModel.countryRegionsResponseModelFromJson(response.body);
-      return parsedResponse;
     } catch (e) {
       rethrow;
     }
