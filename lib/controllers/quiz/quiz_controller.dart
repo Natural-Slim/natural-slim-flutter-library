@@ -16,8 +16,8 @@ class QuizController{
   /// Method to get all adsources records
   Future<List<AdsourcesResponseModel>> getAdsources() async{
     try{
-      http.Response response = await httpRequests.get(
-        url: '${ApiConstants.baseUrl}/api/quiz/adsources',
+      http.Response response = await http.get(
+        Uri.parse('${ApiConstants.baseUrl}/api/quiz/adsources'),
         headers: {
           'Content-Type':'application/json',
           'ApiKey': ApiConstants.apiKey,
@@ -39,8 +39,8 @@ class QuizController{
   /// Method to obtain all the attributes of the Quiz
   Future<List<AttributesResponseModel>> getAttributes(int gid, String language) async{
     try{
-      http.Response response = await httpRequests.get(
-        url: '${ApiConstants.baseUrl}/api/quiz/attributes?Gid=$gid',
+      http.Response response = await http.get(
+        Uri.parse('${ApiConstants.baseUrl}/api/quiz/attributes?Gid=$gid'),
         headers: {
           'Content-Type':'application/json',
           'ApiKey': ApiConstants.apiKey,
@@ -63,8 +63,8 @@ class QuizController{
   /// Method to send the data of attributes entries and the contact form
   Future<AttributeEntryResponseModel> postAttributesEntries(AttributeEntryRequestModel attributeEntry) async {
     try{
-      http.Response response = await httpRequests.post(
-        url: '${ApiConstants.baseUrl}/api/quiz/attribute-entries',
+      http.Response response = await http.post(
+        Uri.parse('${ApiConstants.baseUrl}/api/quiz/attribute-entries'),
         headers: {
           'Content-Type': 'application/json',
           'ApiKey': ApiConstants.apiKey,
@@ -86,8 +86,8 @@ class QuizController{
   /// Method to send the form data to schedule an appointment
   Future<String> putEntry(EntryRequestModel entry) async {
     try{
-      http.Response response = await httpRequests.put(
-        url: '${ApiConstants.baseUrl}/api/quiz/entry',
+      http.Response response = await http.put(
+        Uri.parse('${ApiConstants.baseUrl}/api/quiz/entry'),
         headers: {
           'Content-Type': 'application/json',
           'ApiKey': ApiConstants.apiKey,

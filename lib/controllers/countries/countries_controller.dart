@@ -12,8 +12,8 @@ class CountriesController {
   /// Method for obtaining data from countries, regions and localities
   Future<List<CountryResponseModel>> getCountries() async {
     try{
-      http.Response response = await httpRequests.get(
-         url: '${ApiConstants.baseUrl}/api/countries',
+      http.Response response = await http.get(
+        Uri.parse('${ApiConstants.baseUrl}/api/countries'),
         headers: {
           'Content-Type': 'application/json',
           'ApiKey': ApiConstants.apiKey,
