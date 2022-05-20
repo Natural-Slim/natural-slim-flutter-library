@@ -14,13 +14,14 @@ class QuizController{
   HttpRequests httpRequests = HttpRequests();
 
   /// Method to get all adsources records
-  Future<List<AdsourcesResponseModel>> getAdsources() async{
+  Future<List<AdsourcesResponseModel>> getAdsources(String language) async{
     try{
       http.Response response = await http.get(
         Uri.parse('${ApiConstants.baseUrl}/api/quiz/adsources'),
         headers: {
           'Content-Type':'application/json',
           'ApiKey': ApiConstants.apiKey,
+          'Language': language
         }
       );
 
