@@ -11,7 +11,7 @@ class ApiConstants{
   //and in production use the url of a deployed api
   
   static String baseUrl = !useLocalhost ? productionUrl : developmentUrl;
-  static String apiKey = '';
+  static String apiKey = '1J8H-5HNPY-3VCTWE';
   
   static String preferencesKeyToken = 'token';
   static String preferencesUsername = 'username';
