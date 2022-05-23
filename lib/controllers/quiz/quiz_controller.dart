@@ -62,13 +62,14 @@ class QuizController{
   }
 
   /// Method to send the data of attributes entries and the contact form
-  Future<AttributeEntryResponseModel> postAttributesEntries(AttributeEntryRequestModel attributeEntry) async {
+  Future<AttributeEntryResponseModel> postAttributesEntries(AttributeEntryRequestModel attributeEntry, String language) async {
     try{
       http.Response response = await http.post(
         Uri.parse('${ApiConstants.baseUrl}/api/quiz/attribute-entries'),
         headers: {
           'Content-Type': 'application/json',
           'ApiKey': ApiConstants.apiKey,
+          'Language': language
         },
         body: jsonEncode(attributeEntry),
       );
@@ -85,13 +86,14 @@ class QuizController{
   }
 
   /// Method to send the form data to schedule an appointment
-  Future<String> putEntry(EntryRequestModel entry) async {
+  Future<String> putEntry(EntryRequestModel entry, String language) async {
     try{
       http.Response response = await http.put(
         Uri.parse('${ApiConstants.baseUrl}/api/quiz/entry'),
         headers: {
           'Content-Type': 'application/json',
           'ApiKey': ApiConstants.apiKey,
+          'Language': language
         },
         body: jsonEncode(entry),
       );
