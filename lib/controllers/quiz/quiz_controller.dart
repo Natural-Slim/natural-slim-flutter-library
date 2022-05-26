@@ -21,7 +21,10 @@ class QuizController{
         headers: {
           'Content-Type':'application/json',
           'ApiKey': ApiConstants.apiKey,
-          'Language': language
+          'Language': language,
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+          'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
         }
       );
 
@@ -45,7 +48,10 @@ class QuizController{
         headers: {
           'Content-Type':'application/json',
           'ApiKey': ApiConstants.apiKey,
-          'Language': language
+          'Language': language,
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+          'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
         }
       );
 
@@ -69,7 +75,10 @@ class QuizController{
         headers: {
           'Content-Type': 'application/json',
           'ApiKey': ApiConstants.apiKey,
-          'Language': language
+          'Language': language,
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+          'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
         },
         body: jsonEncode(attributeEntry),
       );
@@ -93,7 +102,10 @@ class QuizController{
         headers: {
           'Content-Type': 'application/json',
           'ApiKey': ApiConstants.apiKey,
-          'Language': language
+          'Language': language,
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+          'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
         },
         body: jsonEncode(entry),
       );

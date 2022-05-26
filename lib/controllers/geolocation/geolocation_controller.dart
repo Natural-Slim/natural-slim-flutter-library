@@ -11,7 +11,10 @@ class GeolocationController {
       http.Response response = await http.get(
         Uri.parse('https://geolocation-db.com/json'),
         headers: {
-          'Content-Type':'application/json'
+          'Content-Type':'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+          'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
         }
       );
 
