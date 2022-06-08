@@ -1,4 +1,4 @@
-import 'package:natural_slim_flutter_library/constants/api_constants.dart';
+import 'package:natural_slim_flutter_library/constants/app_constans.dart';
 import 'package:natural_slim_flutter_library/models/authentication/requests/login_request_model.dart';
 import 'package:natural_slim_flutter_library/utils/helpers/encryption_management_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,8 +24,8 @@ class UserLoginSharedPreferences {
       }
 
       // Credentials are saved in the app preferences
-      var savedEncryptedUsername = await prefs.setString(ApiConstants.preferencesUsername, encryptedUsername);
-      var savedEncryptedPassword = await prefs.setString(ApiConstants.preferencesPassword, encryptedPassword);
+      var savedEncryptedUsername = await prefs.setString(AppConstants.preferencesUsername, encryptedUsername);
+      var savedEncryptedPassword = await prefs.setString(AppConstants.preferencesPassword, encryptedPassword);
 
       if(!savedEncryptedUsername || !savedEncryptedPassword){
         return false;
@@ -47,7 +47,7 @@ class UserLoginSharedPreferences {
       SharedPreferences prefs = await SharedPreferences.getInstance();
 
       // Obtain the encrypted username
-      String? usernameEncrypted = prefs.getString(ApiConstants.preferencesUsername);
+      String? usernameEncrypted = prefs.getString(AppConstants.preferencesUsername);
 
       if(usernameEncrypted == null || usernameEncrypted == '') throw Exception();
 
@@ -65,7 +65,7 @@ class UserLoginSharedPreferences {
       SharedPreferences prefs = await SharedPreferences.getInstance();
 
       // Obtain the encrypted password
-      String? passwordEncrypted = prefs.getString(ApiConstants.preferencesPassword);
+      String? passwordEncrypted = prefs.getString(AppConstants.preferencesPassword);
 
       if(passwordEncrypted == null || passwordEncrypted == '') throw Exception();
 
@@ -84,7 +84,7 @@ class UserLoginSharedPreferences {
     try{
       // An object is created to access the app's preferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      return await prefs.remove(ApiConstants.preferencesUsername);
+      return await prefs.remove(AppConstants.preferencesUsername);
     } catch (e) {
       rethrow;
     }
@@ -95,7 +95,7 @@ class UserLoginSharedPreferences {
     try{
       // An object is created to access the app's preferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      return await prefs.remove(ApiConstants.preferencesPassword);
+      return await prefs.remove(AppConstants.preferencesPassword);
     } catch (e) {
       rethrow;
     }

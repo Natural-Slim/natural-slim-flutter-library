@@ -9,18 +9,18 @@ import 'package:natural_slim_flutter_library/utils/helpers/exceptions_helper.dar
 import 'package:natural_slim_flutter_library/utils/helpers/http_header_options_helper.dart';
 import 'package:natural_slim_flutter_library/utils/helpers/login_helper.dart';
 import 'package:natural_slim_flutter_library/utils/http_requests/http_requests.dart';
-import 'package:natural_slim_flutter_library/utils/shared_preferences/user_login_shared_preferences.dart';
-import 'package:natural_slim_flutter_library/utils/shared_preferences/user_token_shared_preferences.dart';
 
 class AuthenticationController{
   HttpRequests httpRequests = HttpRequests();
+  static ApiConstants apiConstants = ApiConstants();
+
   /// Method to consult the API if the username and password is correct to be able to enter the app
   Future<LoginResponseModel> postLogin(LoginRequestModel request) async {
     try{
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
       http.Response response = await httpRequests.post(
-        url: '${ApiConstants.baseUrl}/api/auth/login', 
+        url: '${apiConstants.baseUrl}/api/auth/login', 
         headers: {
           'Content-Type':'application/json',
           'x-Time-Zone': timeZone,

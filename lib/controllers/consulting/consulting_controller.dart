@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 
 import 'package:natural_slim_flutter_library/constants/api_constants.dart';
@@ -11,6 +9,7 @@ import 'package:natural_slim_flutter_library/utils/http_requests/http_requests.d
 /// Consulting Service Endpoint Controller
 class ConsultingController{
   HttpRequests httpRequests = HttpRequests();
+  static ApiConstants apiConstants = ApiConstants();
 
   /// Method to obtain all the necessary information to schedule an appointment (Dates and hours)
   Future<List<HoursLocationAvailableResponse>> getHoursLocationAvailable(int limitDays, int locationId) async {
@@ -19,7 +18,7 @@ class ConsultingController{
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
       
       http.Response response = await httpRequests.get(
-        url: '${ApiConstants.baseUrl}/api/consulting/hours-location-available?LimitDays=$limitDays&LocationId=$locationId',
+        url: '${apiConstants.baseUrl}/api/consulting/hours-location-available?LimitDays=$limitDays&LocationId=$locationId',
         headers: {
           'Content-Type': 'application/json',
           'x-Time-Zone': timeZone,

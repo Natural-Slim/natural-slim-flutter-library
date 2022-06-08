@@ -1,5 +1,5 @@
 import 'package:encrypt/encrypt.dart';
-import 'package:natural_slim_flutter_library/constants/api_constants.dart';
+import 'package:natural_slim_flutter_library/constants/app_constans.dart';
 
 /// Class to handle data encryption and decryption
 class EncryptionManagementHelper {
@@ -8,7 +8,7 @@ class EncryptionManagementHelper {
   static Encrypted encrypt(String dataToEncrypt) {
     try{
       // An encryption key object is created
-      Key key = Key.fromUtf8(ApiConstants.keyEncryptDecrypt);
+      Key key = Key.fromUtf8(AppConstants.keyEncryptDecrypt);
 
       // Initialize a 16-byte vector
       IV iv = IV.fromLength(16);
@@ -25,7 +25,7 @@ class EncryptionManagementHelper {
   static String decrypt(String dataToDecrypt){
     try{
       // An encryption key object is created
-      Key key = Key.fromUtf8(ApiConstants.keyEncryptDecrypt);
+      Key key = Key.fromUtf8(AppConstants.keyEncryptDecrypt);
 
       // Initialize a 16-byte vector
       IV iv = IV.fromLength(16);

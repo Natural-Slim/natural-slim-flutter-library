@@ -6,6 +6,7 @@ import 'package:http/io_client.dart';
 import 'package:natural_slim_flutter_library/constants/api_constants.dart';
 
 class HttpRequests{
+  static ApiConstants apiConstants = ApiConstants();
 
   /// Method to consume an endpoint GET in the production API or on localhost
   Future<http.Response> get({required String url, required Map<String, String> headers}) async {
@@ -15,7 +16,7 @@ class HttpRequests{
       HttpClient client = HttpClient();
 
       // only when necessary
-      if(ApiConstants.useLocalhost){
+      if(apiConstants.useLocalhost){
         if(kDebugMode || kReleaseMode){
           // This allows make queries an api running on localhost
           client.badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
@@ -43,7 +44,7 @@ class HttpRequests{
       HttpClient client = HttpClient();
 
       // only when necessary
-      if(ApiConstants.useLocalhost){
+      if(apiConstants.useLocalhost){
         if(kDebugMode || kReleaseMode){
           // This allows make queries an api running on localhost
           client.badCertificateCallback = ((X509Certificate cert, String host, int port) => true);
@@ -72,7 +73,7 @@ class HttpRequests{
       HttpClient client = HttpClient();
 
       // only when necessary
-      if(ApiConstants.useLocalhost){
+      if(apiConstants.useLocalhost){
         if(kDebugMode || kReleaseMode){
           // This allows make queries an api running on localhost
           client.badCertificateCallback = ((X509Certificate cert, String host, int port) => true);

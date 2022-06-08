@@ -1,4 +1,4 @@
-import 'package:natural_slim_flutter_library/constants/api_constants.dart';
+import 'package:natural_slim_flutter_library/constants/app_constans.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Class to handle login token in app preferences
@@ -12,7 +12,7 @@ class UserTokenSharedPreferences {
     try{
       // An object is created to access the app's preferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      return await prefs.setString(ApiConstants.preferencesKeyToken, token);
+      return await prefs.setString(AppConstants.preferencesKeyToken, token);
     } catch (e) {
       rethrow;
     }
@@ -23,7 +23,7 @@ class UserTokenSharedPreferences {
     try{
       // An object is created to access the app's preferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      return await prefs.setString(ApiConstants.preferencesTokenExpiration, tokenExpiration);
+      return await prefs.setString(AppConstants.preferencesTokenExpiration, tokenExpiration);
     } catch (e) {
       rethrow;
     }
@@ -37,7 +37,7 @@ class UserTokenSharedPreferences {
     try {
       // An object is created to access the app's preferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      return prefs.getString(ApiConstants.preferencesKeyToken);
+      return prefs.getString(AppConstants.preferencesKeyToken);
     } catch (e){
       rethrow;
     }
@@ -48,7 +48,7 @@ class UserTokenSharedPreferences {
     try{
       // An object is created to access the app's preferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      return prefs.getString(ApiConstants.preferencesTokenExpiration);
+      return prefs.getString(AppConstants.preferencesTokenExpiration);
     } catch (e) {
       rethrow;
     }
@@ -62,7 +62,7 @@ class UserTokenSharedPreferences {
     try{
       // An object is created to access the app's preferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      return await prefs.remove(ApiConstants.preferencesKeyToken);
+      return await prefs.remove(AppConstants.preferencesKeyToken);
     } catch (e) {
       rethrow;
     }
@@ -73,7 +73,7 @@ class UserTokenSharedPreferences {
     try{
       // An object is created to access the app's preferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      return await prefs.remove(ApiConstants.preferencesKeyToken);
+      return await prefs.remove(AppConstants.preferencesKeyToken);
     } catch (e) {
       rethrow;
     }

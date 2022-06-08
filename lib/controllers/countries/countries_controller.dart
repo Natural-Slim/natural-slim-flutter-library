@@ -8,15 +8,16 @@ import 'package:natural_slim_flutter_library/utils/http_requests/http_requests.d
 class CountriesController {
 
   HttpRequests httpRequests = HttpRequests();
+  static ApiConstants apiConstants = ApiConstants();
 
   /// Method for obtaining data from countries, regions and localities
   Future<List<CountryResponseModel>> getCountries() async {
     try{
       http.Response response = await http.get(
-        Uri.parse('${ApiConstants.baseUrl}/api/countries'),
+        Uri.parse('${apiConstants.baseUrl}/api/countries'),
         headers: {
           'Content-Type': 'application/json',
-          'ApiKey': ApiConstants.apiKey,
+          'ApiKey': apiConstants.apiKey,
         }
       );
 

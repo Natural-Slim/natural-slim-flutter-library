@@ -12,15 +12,16 @@ import 'package:natural_slim_flutter_library/utils/helpers/exceptions_helper.dar
 
 class QuizController{
   HttpRequests httpRequests = HttpRequests();
+  static ApiConstants apiConstants = ApiConstants();
 
   /// Method to get all adsources records
   Future<List<AdsourcesResponseModel>> getAdsources(String language) async{
     try{
       http.Response response = await http.get(
-        Uri.parse('${ApiConstants.baseUrl}/api/quiz/adsources'),
+        Uri.parse('${apiConstants.baseUrl}/api/quiz/adsources'),
         headers: {
           'Content-Type':'application/json',
-          'ApiKey': ApiConstants.apiKey,
+          'ApiKey': apiConstants.apiKey,
           'Language': language,
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
@@ -44,10 +45,10 @@ class QuizController{
   Future<List<AttributesResponseModel>> getAttributes(int gid, String language) async{
     try{
       http.Response response = await http.get(
-        Uri.parse('${ApiConstants.baseUrl}/api/quiz/attributes?Gid=$gid'),
+        Uri.parse('${apiConstants.baseUrl}/api/quiz/attributes?Gid=$gid'),
         headers: {
           'Content-Type':'application/json',
-          'ApiKey': ApiConstants.apiKey,
+          'ApiKey': apiConstants.apiKey,
           'Language': language,
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
@@ -71,10 +72,10 @@ class QuizController{
   Future<AttributeEntryResponseModel> postAttributesEntries(AttributeEntryRequestModel attributeEntry, String language) async {
     try{
       http.Response response = await http.post(
-        Uri.parse('${ApiConstants.baseUrl}/api/quiz/attribute-entries'),
+        Uri.parse('${apiConstants.baseUrl}/api/quiz/attribute-entries'),
         headers: {
           'Content-Type': 'application/json',
-          'ApiKey': ApiConstants.apiKey,
+          'ApiKey': apiConstants.apiKey,
           'Language': language,
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
@@ -98,10 +99,10 @@ class QuizController{
   Future<String> putEntry(EntryRequestModel entry, String language) async {
     try{
       http.Response response = await http.put(
-        Uri.parse('${ApiConstants.baseUrl}/api/quiz/entry'),
+        Uri.parse('${apiConstants.baseUrl}/api/quiz/entry'),
         headers: {
           'Content-Type': 'application/json',
-          'ApiKey': ApiConstants.apiKey,
+          'ApiKey': apiConstants.apiKey,
           'Language': language,
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',

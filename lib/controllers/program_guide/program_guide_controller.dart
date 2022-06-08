@@ -12,6 +12,7 @@ import 'package:natural_slim_flutter_library/utils/http_requests/http_requests.d
 
 class ProgramGuideController {
   HttpRequests httpRequests = HttpRequests();
+  static ApiConstants apiConstants = ApiConstants();
 
   /// Method to get the current status of the user program guide
   Future<StatusResponseModel> getStatus() async{
@@ -20,7 +21,7 @@ class ProgramGuideController {
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
       http.Response response = await httpRequests.get(
-        url: '${ApiConstants.baseUrl}/api/program-guide/status',
+        url: '${apiConstants.baseUrl}/api/program-guide/status',
         headers: {
           'Content-Type':'application/json',
           'x-Time-Zone': timeZone,
@@ -47,7 +48,7 @@ class ProgramGuideController {
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
       http.Response response = await httpRequests.get(
-        url: '${ApiConstants.baseUrl}/api/program-guide/steps?PerPage=$perPage&PageNumber=$pageNumber',
+        url: '${apiConstants.baseUrl}/api/program-guide/steps?PerPage=$perPage&PageNumber=$pageNumber',
         headers: {
           'Content-Type':'application/json',
           'x-Time-Zone': timeZone,
@@ -74,7 +75,7 @@ class ProgramGuideController {
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
       http.Response response = await httpRequests.get(
-        url: '${ApiConstants.baseUrl}/api/program-guide/user-program-step?ProgramStepId=$programStepId',
+        url: '${apiConstants.baseUrl}/api/program-guide/user-program-step?ProgramStepId=$programStepId',
         headers: {
           'Content-Type':'application/json',
           'accept':'text/plain',
@@ -101,7 +102,7 @@ class ProgramGuideController {
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
 
       http.Response response = await httpRequests.post(
-        url: '${ApiConstants.baseUrl}/api/program-guide/steps/answers', 
+        url: '${apiConstants.baseUrl}/api/program-guide/steps/answers', 
         headers: {
           'Content-Type':'application/json',
           'x-Time-Zone': timeZone,
@@ -126,7 +127,7 @@ class ProgramGuideController {
       UserProgramStepResponseModel userProgramStepResponse = await getUserProgramStep(programStepId);
 
       http.Response response = await httpRequests.put(
-        url: '${ApiConstants.baseUrl}/api/program-guide/user-program-step?ProgramStepId=$programStepId',
+        url: '${apiConstants.baseUrl}/api/program-guide/user-program-step?ProgramStepId=$programStepId',
         headers: {
           'Content-Type':'application/json',
           'accept':'text/plain',
