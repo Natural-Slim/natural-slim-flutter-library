@@ -1,11 +1,10 @@
 // To parse this JSON data, do
 //
-//     final entryRequestModel = entryRequestModelFromJson(jsonString);
+//     final attributeEntryRequestModel = attributeEntryRequestModelFromJson(jsonString);
 
 import 'dart:convert';
 
 class AttributeEntryRequestModel {
-
   AttributeEntryRequestModel({
     required this.age,
     required this.firstName,
@@ -22,27 +21,29 @@ class AttributeEntryRequestModel {
     required this.optInMarketing,
     required this.attributeId,
     required this.edate,
+    required this.property,
   });
 
-  String? age;
-  String? firstName;
-  String? lastName;
-  String? email;
-  String? phone;
-  String? ipcountryname;
-  String? iplocation;
-  String? ipclient;
-  String? region;
-  String? type;
-  String? appLang;
-  int? adSource;
-  int? optInMarketing;
-  List<int>? attributeId;
-  DateTime? edate;
-  
-  static AttributeEntryRequestModel entryRequestModelFromJson(String str) => AttributeEntryRequestModel.fromJson(json.decode(str));
+  String age;
+  String firstName;
+  String lastName;
+  String email;
+  String phone;
+  String ipcountryname;
+  String iplocation;
+  String ipclient;
+  String region;
+  String type;
+  String appLang;
+  int adSource;
+  int optInMarketing;
+  List<int> attributeId;
+  DateTime edate;
+  String property;
 
-  static String entryRequestModelToJson(AttributeEntryRequestModel data) => json.encode(data.toJson());
+  static AttributeEntryRequestModel attributeEntryRequestModelFromJson(String str) => AttributeEntryRequestModel.fromJson(json.decode(str));
+
+  static String attributeEntryRequestModelToJson(AttributeEntryRequestModel data) => json.encode(data.toJson());
 
   factory AttributeEntryRequestModel.fromJson(Map<String, dynamic> json) => AttributeEntryRequestModel(
     age: json["age"],
@@ -60,6 +61,7 @@ class AttributeEntryRequestModel {
     optInMarketing: json["optInMarketing"],
     attributeId: List<int>.from(json["attributeId"].map((x) => x)),
     edate: DateTime.parse(json["edate"]),
+    property: json["property"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -76,7 +78,8 @@ class AttributeEntryRequestModel {
     "appLang": appLang,
     "adSource": adSource,
     "optInMarketing": optInMarketing,
-    "attributeId": List<dynamic>.from(attributeId!.map((x) => x)),
-    "edate": edate!.toIso8601String(),
+    "attributeId": List<dynamic>.from(attributeId.map((x) => x)),
+    "edate": edate.toIso8601String(),
+    "property": property,
   };
 }
