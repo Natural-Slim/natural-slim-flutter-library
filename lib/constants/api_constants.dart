@@ -4,12 +4,12 @@ class ApiConstants{
   final String _apiKeyProduction = '1J8H-5HNPY-3VCTWE';
 
   final String _apiDevelopUrl = 'https://dev-naturalslim-api-idlpryysla-uc.a.run.app/';
-  final String _apiKeyDevelop = '';
+  final String _apiKeyDevelop = '1J8H-5HNPY-3VCTWE';
 
   final String _localhostUrl = "https://192.168.0.3:45455";
   
   // Add the remote url of the localhost of the computer that is running the backen project
-  final bool _useDevelop = false;
+  final bool _useDevelop = true;
   final bool useLocalhost = false;
   
   // Please use the base url that understands which url to use depending on the 
