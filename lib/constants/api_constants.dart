@@ -9,7 +9,7 @@ class ApiConstants{
   final String _localhostUrl = "https://192.168.0.3:45455";
   
   // Add the remote url of the localhost of the computer that is running the backen project
-  final bool _useDevelop = true;
+  final bool _useDevelop = false;
   final bool useLocalhost = false;
   
   // Please use the base url that understands which url to use depending on the 
