@@ -6,7 +6,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class UserSettingsSharedPreferences{
 
-  static Future<bool> saveValueSettings(String settings) async {
+  /// Method for saving user settings from shared preferences
+  static Future<bool> saveUserSettings(String settings) async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       
@@ -16,7 +17,8 @@ class UserSettingsSharedPreferences{
     }
   }
 
-  static Future<UserSettingsResponseModel?> getSavedUserSettings() async {
+  /// Method to get user settings from shared preferences
+  static Future<UserSettingsResponseModel?> getUserSettings() async {
     try{
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? settings = prefs.getString(AppConstants.preferencesSettings);
@@ -27,6 +29,17 @@ class UserSettingsSharedPreferences{
 
       return UserSettingsResponseModel.fromJson(jsonDecode(settings));
     } catch(e) {
+      rethrow;
+    }
+  }
+
+  /// Method to remove user settings from shared preferences
+  static Future<bool> deleteUserSettings() async {
+    try{
+      // An object is created to access the app's preferences
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return await prefs.remove(AppConstants.preferencesSettings);
+    } catch (e) {
       rethrow;
     }
   }
