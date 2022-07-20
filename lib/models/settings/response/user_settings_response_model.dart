@@ -9,11 +9,6 @@ import 'package:natural_slim_flutter_library/models/members_language_model.dart'
 class UserSettingsResponseModel {
   UserSettingsResponseModel({
     required this.darkMode,
-    required this.countryId,
-    required this.membersLanguageId,
-    required this.lengthMeasureUnitId,
-    required this.weightMeasureUnitId,
-    required this.capacityMeasureUnitId,
     required this.showNotifications,
     required this.eventNotifications,
     required this.waterGoalsNotifications,
@@ -21,19 +16,15 @@ class UserSettingsResponseModel {
     required this.excerciseGoalsNotifications,
     required this.consultingChatNotifications,
     required this.consultingAppointmentNotifications,
-    required this.lengthMeasureUnitDto,
-    required this.weightMeasureUnitDto,
-    required this.capacityMeasureUnitDto,
+    required this.lengthMeasureUnit,
+    required this.weightMeasureUnit,
+    required this.capacityMeasureUnit,
     required this.country,
+    required this.location,
     required this.membersLanguage,
   });
 
   bool darkMode;
-  int countryId;
-  int membersLanguageId;
-  int lengthMeasureUnitId;
-  int weightMeasureUnitId;
-  int capacityMeasureUnitId;
   bool showNotifications;
   bool eventNotifications;
   bool waterGoalsNotifications;
@@ -41,10 +32,11 @@ class UserSettingsResponseModel {
   bool excerciseGoalsNotifications;
   bool consultingChatNotifications;
   bool consultingAppointmentNotifications;
-  MeasureUnitModel lengthMeasureUnitDto;
-  MeasureUnitModel weightMeasureUnitDto;
-  MeasureUnitModel capacityMeasureUnitDto;
+  MeasureUnitModel lengthMeasureUnit;
+  MeasureUnitModel weightMeasureUnit;
+  MeasureUnitModel capacityMeasureUnit;
   CountryResponseModel country;
+  Location location;
   MembersLanguageModel membersLanguage; 
 
   // static UserSettingsResponseModel userSettingsResponseModelFromJson(String str) => UserSettingsResponseModel.fromJson(json.decode(str));
@@ -53,11 +45,6 @@ class UserSettingsResponseModel {
 
   factory UserSettingsResponseModel.fromJson(Map<String, dynamic> json) => UserSettingsResponseModel(
     darkMode: json["darkMode"],
-    countryId: json["countryId"],
-    membersLanguageId: json["membersLanguageId"],
-    lengthMeasureUnitId: json["lengthMeasureUnitId"],
-    weightMeasureUnitId: json["weightMeasureUnitId"],
-    capacityMeasureUnitId: json["capacityMeasureUnitId"],
     showNotifications: json["showNotifications"],
     eventNotifications: json["eventNotifications"],
     waterGoalsNotifications: json["waterGoalsNotifications"],
@@ -65,20 +52,16 @@ class UserSettingsResponseModel {
     excerciseGoalsNotifications: json["excerciseGoalsNotifications"],
     consultingChatNotifications: json["consultingChatNotifications"],
     consultingAppointmentNotifications: json["consultingAppointmentNotifications"],
-    lengthMeasureUnitDto: MeasureUnitModel.fromJson(json["lengthMeasureUnitDto"]),
-    weightMeasureUnitDto: MeasureUnitModel.fromJson(json["weightMeasureUnitDto"]),
-    capacityMeasureUnitDto: MeasureUnitModel.fromJson(json["capacityMeasureUnitDto"]),
+    lengthMeasureUnit: MeasureUnitModel.fromJson(json["lengthMeasureUnitDto"]),
+    weightMeasureUnit: MeasureUnitModel.fromJson(json["weightMeasureUnitDto"]),
+    capacityMeasureUnit: MeasureUnitModel.fromJson(json["capacityMeasureUnitDto"]),
     country: CountryResponseModel.fromJson(json["countryDto"]),
+    location: Location.fromJson(json["locationDto"]),
     membersLanguage: MembersLanguageModel.fromJson(json["membersLanguageDto"]),
   );
 
   Map<String, dynamic> toJson() => {
     "darkMode": darkMode,
-    "countryId": countryId,
-    "membersLanguageId": membersLanguageId,
-    "lengthMeasureUnitId": lengthMeasureUnitId,
-    "weightMeasureUnitId": weightMeasureUnitId,
-    "capacityMeasureUnitId": capacityMeasureUnitId,
     "showNotifications": showNotifications,
     "eventNotifications": eventNotifications,
     "waterGoalsNotifications": waterGoalsNotifications,
@@ -86,10 +69,11 @@ class UserSettingsResponseModel {
     "excerciseGoalsNotifications": excerciseGoalsNotifications,
     "consultingChatNotifications": consultingChatNotifications,
     "consultingAppointmentNotifications": consultingAppointmentNotifications,
-    "lengthMeasureUnitDto": lengthMeasureUnitDto.toJson(),
-    "weightMeasureUnitDto": weightMeasureUnitDto.toJson(),
-    "capacityMeasureUnitDto": capacityMeasureUnitDto.toJson(),
+    "lengthMeasureUnitDto": lengthMeasureUnit.toJson(),
+    "weightMeasureUnitDto": weightMeasureUnit.toJson(),
+    "capacityMeasureUnitDto": capacityMeasureUnit.toJson(),
     "countryDto": country.toJson(),
+    "locationDto": location.toJson(),
     "membersLanguageDto": membersLanguage.toJson(),
   };
 }
