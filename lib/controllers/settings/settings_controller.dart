@@ -13,13 +13,13 @@ class SettingsController{
   static ApiConstants apiConstants = ApiConstants();
 
   /// Method to get current data app settings
-  Future<DataAppSettingsResponseModel> getDataAppSettings() async{
+  Future<DataAppSettingsResponseModel> getDataSettings() async{
     try{
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
       http.Response response = await httpRequests.get(
-        url: '${apiConstants.baseUrl}/api/settings/data-app-settings',
+        url: '${apiConstants.baseUrl}/api/settings/data-settings',
         headers: {
           'Content-Type': 'application/json',
           'x-Time-Zone': timeZone,
