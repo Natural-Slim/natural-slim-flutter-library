@@ -1,5 +1,6 @@
 import 'package:natural_slim_flutter_library/models/authentication/requests/login_request_model.dart';
 import 'package:natural_slim_flutter_library/utils/shared_preferences/user_login_shared_preferences.dart';
+import 'package:natural_slim_flutter_library/utils/shared_preferences/user_settings_shared_preferences.dart';
 import 'package:natural_slim_flutter_library/utils/shared_preferences/user_token_shared_preferences.dart';
 
 class LoginHelper {
@@ -36,7 +37,8 @@ class LoginHelper {
     if(!await UserTokenSharedPreferences.deleteSavedToken() ||
       !await UserTokenSharedPreferences.deleteSavedTokenExpiration() ||
       !await UserLoginSharedPreferences.deleteSavedUsername() ||
-      !await UserLoginSharedPreferences.deleteSavedPassword())
+      !await UserLoginSharedPreferences.deleteSavedPassword() ||
+      !await UserSettingsSharedPreferences.deleteUserSettings())
     {
       return false;
     }

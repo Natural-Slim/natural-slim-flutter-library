@@ -10,16 +10,16 @@ class CountryResponseModel {
       required this.isoCode,
       required this.countryCode,
       required this.name,
-      required this.regions,
-      required this.locations,
+      this.regions,
+      this.locations,
     });
 
     int id;
     String isoCode;
     String countryCode;
     String name;
-    List<Region> regions;
-    List<Location> locations;
+    List<Region>? regions;
+    List<Location>? locations;
 
     static List<CountryResponseModel> countryRegionsResponseModelFromJson(String str) => List<CountryResponseModel>.from(json.decode(str).map((x) => CountryResponseModel.fromJson(x)));
 
@@ -30,8 +30,8 @@ class CountryResponseModel {
       isoCode: json["isoCode"],
       countryCode: json["countryCode"],
       name: json["name"],
-      regions: List<Region>.from(json["regions"].map((x) => Region.fromJson(x))),
-      locations: List<Location>.from(json["locations"].map((x) => Location.fromJson(x))),
+      regions: json["regions"] == null ? null : List<Region>.from(json["regions"].map((x) => Region.fromJson(x))),
+      locations: json["locations"] == null ? null : List<Location>.from(json["locations"].map((x) => Location.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
@@ -39,8 +39,8 @@ class CountryResponseModel {
       "isoCode": isoCode,
       "countryCode": countryCode,
       "name": name,
-      "regions": List<dynamic>.from(regions.map((x) => x.toJson())),
-      "locations": List<dynamic>.from(locations.map((x) => x.toJson())),
+      "regions": regions == null ? null : List<dynamic>.from(regions!.map((x) => x.toJson())),
+      "locations": regions == null ? null : List<dynamic>.from(locations!.map((x) => x.toJson())),
     };
 }
 
