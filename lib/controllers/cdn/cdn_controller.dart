@@ -7,7 +7,7 @@ import 'package:natural_slim_flutter_library/utils/helpers/exceptions_helper.dar
 import 'package:natural_slim_flutter_library/utils/helpers/http_header_options_helper.dart';
 import 'package:natural_slim_flutter_library/utils/http_requests/http_requests.dart';
 
-class GoogleCloudController {
+class CDNController {
   
   HttpRequests httpRequests = HttpRequests();
   static ApiConstants apiConstants = ApiConstants();
