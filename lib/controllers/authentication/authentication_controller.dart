@@ -43,4 +43,29 @@ class AuthenticationController{
     }
   }
 
+  /// Method to send password reset email
+  Future<bool> postResetPasswordToken(String email) async {
+    try{
+      String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
+
+      http.Response response = await httpRequests.post(
+        url: '${apiConstants.baseUrl}/api/auth/reset-password-token', 
+        headers: {
+          'Content-Type':'application/json',
+          'x-Time-Zone': timeZone,
+        },
+        body: jsonEncode({"email": email})
+      );
+
+      if(response.statusCode != 200){
+        ExceptionsHelper.validateApiException(response);
+      }
+
+      return true;
+        
+    } catch (e){
+      rethrow;
+    }
+  }
+
 }
