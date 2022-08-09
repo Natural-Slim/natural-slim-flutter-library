@@ -4,6 +4,8 @@ class AppConstants {
     static String preferencesPassword = 'password';
     static String preferencesTokenExpiration = 'tokenExpiration';
     static String preferencesStateLogin = 'stateLogin';
+    static String preferencesSettings = 'settings';
+    static String preferencesRegistry = 'valuesRegistry';
 
     static String keyEncryptDecrypt = 'NSA@NaturalSl¡m';
 }
