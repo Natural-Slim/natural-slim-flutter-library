@@ -4,7 +4,9 @@ import 'package:http/http.dart' as http;
 
 import 'package:natural_slim_flutter_library/constants/api_constants.dart';
 import 'package:natural_slim_flutter_library/models/authentication/requests/login_request_model.dart';
+import 'package:natural_slim_flutter_library/models/authentication/requests/user_profile_information_request_model.dart';
 import 'package:natural_slim_flutter_library/models/authentication/responses/login_response_model.dart';
+import 'package:natural_slim_flutter_library/models/authentication/responses/user_profile_information_response_model.dart';
 import 'package:natural_slim_flutter_library/utils/helpers/exceptions_helper.dart';
 import 'package:natural_slim_flutter_library/utils/helpers/http_header_options_helper.dart';
 import 'package:natural_slim_flutter_library/utils/helpers/login_helper.dart';
@@ -23,6 +25,7 @@ class AuthenticationController{
         url: '${apiConstants.baseUrl}/api/auth/login', 
         headers: {
           'Content-Type':'application/json',
+          'Accept': 'application/json',
           'x-Time-Zone': timeZone,
         },
         body: jsonEncode(request)
@@ -62,6 +65,63 @@ class AuthenticationController{
       }
 
       return true;
+        
+    } catch (e){
+      rethrow;
+    }
+  }
+
+  /// Method to consult the API if the username and password is correct to be able to enter the app
+  Future<UserProfileInformationResponseModel> getUserProfileInformation() async {
+    try{
+      String? token = await HttpHeaderOptionsHelper.getValidatedToken();
+      String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
+
+      http.Response response = await httpRequests.get(
+        url: '${apiConstants.baseUrl}/api/auth/user', 
+        headers: {
+          'Content-Type':'application/json',
+          'x-Time-Zone': timeZone,
+          'Authorization':'Bearer $token'
+        },
+      );
+
+      if(response.statusCode != 200){
+        ExceptionsHelper.validateApiException(response);
+      }
+
+      UserProfileInformationResponseModel parsedResponse = UserProfileInformationResponseModel.fromJson(jsonDecode(response.body));
+
+      return parsedResponse;
+        
+    } catch (e){
+      rethrow;
+    }
+  }
+
+  /// Method to consult the API if the username and password is correct to be able to enter the app
+  Future<UserProfileInformationResponseModel> putUserProfileInformation(UserProfileInformationRequestModel userInformation) async {
+    try{
+      String? token = await HttpHeaderOptionsHelper.getValidatedToken();
+      String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
+
+      http.Response response = await httpRequests.put(
+        url: '${apiConstants.baseUrl}/api/auth/user',
+        body: jsonEncode(userInformation),
+        headers: {
+          'Content-Type':'application/json',
+          'x-Time-Zone': timeZone,
+          'Authorization':'Bearer $token'
+        },
+      );
+
+      if(response.statusCode != 200){
+        ExceptionsHelper.validateApiException(response);
+      }
+
+      UserProfileInformationResponseModel parsedResponse = UserProfileInformationResponseModel.fromJson(jsonDecode(response.body));
+
+      return parsedResponse;
         
     } catch (e){
       rethrow;
