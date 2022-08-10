@@ -15,7 +15,7 @@ class AuthenticationController{
   static ApiConstants apiConstants = ApiConstants();
 
   /// Method to consult the API if the username and password is correct to be able to enter the app
-  Future<LoginResponseModel> postLogin(LoginRequestModel request) async {
+  Future<LoginResponseModel> postLogin(LoginRequestModel request, [String language = 'es']) async {
     try{
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
@@ -24,6 +24,7 @@ class AuthenticationController{
         headers: {
           'Content-Type':'application/json',
           'x-Time-Zone': timeZone,
+          'Language': language,
         },
         body: jsonEncode(request)
       );
@@ -44,7 +45,7 @@ class AuthenticationController{
   }
 
   /// Method to send password reset email
-  Future<bool> postResetPasswordToken(String email) async {
+  Future<bool> postResetPasswordToken(String email, [String language = 'es']) async {
     try{
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
@@ -53,6 +54,7 @@ class AuthenticationController{
         headers: {
           'Content-Type':'application/json',
           'x-Time-Zone': timeZone,
+          'Language': language,
         },
         body: jsonEncode({"email": email})
       );
