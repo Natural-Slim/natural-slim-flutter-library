@@ -52,9 +52,12 @@ class HttpHeaderOptionsHelper{
     DateTime parsedTokenExpiration = DateTime.parse(tokenExpiration);
 
     // Get the current date and time and convert it to a DateTime object with UTC0
-    DateTime currentDate = DateTime.now();
-    DateTime parsedUtcCurrentDate = DateTime.utc(currentDate.year, currentDate.month, currentDate.day, currentDate.hour, currentDate.minute);
+    DateTime currentDateUtc0 = DateTime.now().toUtc();
+
+    // The current time in UTC-0 is added or subtracted from the device's time 
+    // zone to calculate the current time and compare it to the token's expiration.
+    DateTime currentDate = currentDateUtc0.add(Duration(hours: int.parse(getTimeZoneOffset())));
     
-    return parsedUtcCurrentDate.isBefore(parsedTokenExpiration) ? true : false;
+    return currentDate.isBefore(parsedTokenExpiration) ? true : false;
   }
 }
