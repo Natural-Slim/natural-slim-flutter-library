@@ -14,7 +14,7 @@ class SettingsController{
   static ApiConstants apiConstants = ApiConstants();
 
   /// Method to get current data app settings
-  Future<DataAppSettingsResponseModel> getDataSettings() async{
+  Future<DataAppSettingsResponseModel> getDataSettings([String? language]) async{
     try{
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
@@ -24,7 +24,8 @@ class SettingsController{
         headers: {
           'Content-Type': 'application/json',
           'x-Time-Zone': timeZone,
-          'Authorization': 'Bearer $token'
+          'Authorization': 'Bearer $token',
+          if(language != null) 'Language': language
         }
       );
 
@@ -83,7 +84,7 @@ class SettingsController{
         body: jsonEncode(userSettingsRequest)
       );
 
-      if(response.statusCode != 200) {
+      if(response.statusCode != 201) {
         ExceptionsHelper.validateApiException(response);
       }
 
