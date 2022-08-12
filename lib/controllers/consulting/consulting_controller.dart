@@ -12,13 +12,13 @@ class ConsultingController{
   static ApiConstants apiConstants = ApiConstants();
 
   /// Method to obtain all the necessary information to schedule an appointment (Dates and hours)
-  Future<List<HoursLocationAvailableResponse>> getHoursLocationAvailable(int limitDays, int locationId) async {
+  Future<List<HoursLocationAvailableResponse>> getHoursLocationAvailable(int limitDays) async {
     try{
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
       
       http.Response response = await httpRequests.get(
-        url: '${apiConstants.baseUrl}/api/consulting/hours-location-available?LimitDays=$limitDays&LocationId=$locationId',
+        url: '${apiConstants.baseUrl}/api/consulting/hours-location-available?LimitDays=$limitDays',
         headers: {
           'Content-Type': 'application/json',
           'x-Time-Zone': timeZone,
