@@ -33,5 +33,16 @@ class RegistrySharedPreferences{
       rethrow;
     }
   }
+
+  /// Method to remove saved registry
+  static Future<bool> deleteSavedRegistry() async {
+    try{
+      // An object is created to access the app's preferences
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return await prefs.remove(AppConstants.preferencesRegistry);
+    } catch (e) {
+      rethrow;
+    }
+  }
   
 }

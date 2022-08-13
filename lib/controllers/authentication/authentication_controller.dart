@@ -130,4 +130,31 @@ class AuthenticationController{
     }
   }
 
+  /// Method to log out of the API
+  Future<bool> postLogout() async {
+    try{
+      String? token = await HttpHeaderOptionsHelper.getValidatedToken();
+      String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
+
+      http.Response response = await httpRequests.post(
+        url: '${apiConstants.baseUrl}/api/auth/logout', 
+        headers: {
+          'Content-Type':'application/json',
+          'x-Time-Zone': timeZone,
+          'Authorization':'Bearer $token'
+        },
+      );
+
+      if(response.statusCode != 200){
+        ExceptionsHelper.validateApiException(response);
+      }
+
+      return true;
+        
+    } catch (e){
+      rethrow;
+    }
+  }
+
+
 }
