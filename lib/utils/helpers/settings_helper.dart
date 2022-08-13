@@ -12,13 +12,17 @@ class SettingsHelper {
   /// run the endpoint to download the configurations and cache 
   /// the information.
   Future<UserSettingsResponseModel> getUserSettings() async {
-    UserSettingsResponseModel? settings = await UserSettingsSharedPreferences.getUserSettings();
+    try{
+      UserSettingsResponseModel? settings = await UserSettingsSharedPreferences.getUserSettings();
     
-    if(settings == null){
-      settings = await SettingsController().getUserSettings(); // Get the settings from the API
-      await UserSettingsSharedPreferences.saveUserSettings(jsonEncode(settings)); // Save settings in shared preferences
-    }
+      if(settings == null){
+        settings = await SettingsController().getUserSettings(); // Get the settings from the API
+        await UserSettingsSharedPreferences.saveUserSettings(jsonEncode(settings)); // Save settings in shared preferences
+      }
 
-    return settings;
+      return settings;
+    } catch(e) {
+      rethrow;
+    }
   }
 }
