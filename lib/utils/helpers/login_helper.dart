@@ -36,11 +36,11 @@ class LoginHelper {
   static Future<bool> logoutClearCache() async {
 
     bool isSavedTokenDeleted = await UserTokenSharedPreferences.deleteSavedToken();
-    bool isSavedTokenExpirationDeleted = !await UserTokenSharedPreferences.deleteSavedTokenExpiration();
-    bool isSavedUsernameDeleted = !await UserLoginSharedPreferences.deleteSavedUsername();
-    bool isSavedPasswordDeleted = !await UserLoginSharedPreferences.deleteSavedPassword();
-    bool isSavedUserSettingsDeleted = !await UserSettingsSharedPreferences.deleteUserSettings();
-    bool isSavedRegistryDeleted = !await RegistrySharedPreferences.deleteSavedRegistry();
+    bool isSavedTokenExpirationDeleted = await UserTokenSharedPreferences.deleteSavedTokenExpiration();
+    bool isSavedUsernameDeleted = await UserLoginSharedPreferences.deleteSavedUsername();
+    bool isSavedPasswordDeleted = await UserLoginSharedPreferences.deleteSavedPassword();
+    bool isSavedUserSettingsDeleted = await UserSettingsSharedPreferences.deleteUserSettings();
+    bool isSavedRegistryDeleted = await RegistrySharedPreferences.deleteSavedRegistry();
     
     if(!isSavedTokenDeleted || !isSavedTokenExpirationDeleted || !isSavedUsernameDeleted || 
       !isSavedPasswordDeleted || !isSavedUserSettingsDeleted || !isSavedRegistryDeleted)
