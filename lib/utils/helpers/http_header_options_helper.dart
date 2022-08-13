@@ -52,7 +52,7 @@ class HttpHeaderOptionsHelper{
     DateTime parsedTokenExpiration = DateTime.parse(tokenExpiration);
 
     // Get the current date and time and convert it to a DateTime object with UTC0
-    DateTime currentDateUtc0 = DateTime.now().toUtc();
+    DateTime currentDateUtc0 = DateTime.now().toUtc().add(const Duration(seconds: 20));
     
     return currentDateUtc0.isBefore(parsedTokenExpiration) ? true : false;
   }
