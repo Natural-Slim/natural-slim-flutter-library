@@ -39,7 +39,7 @@ class ApiException implements Exception {
   }
 
   /// Error code
-  int get code => _code!;
+  int? get code => _code;
   
   /// Error message
   String? get message => _message;
