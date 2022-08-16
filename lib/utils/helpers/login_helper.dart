@@ -11,7 +11,7 @@ class LoginHelper {
 
     if(!await UserLoginSharedPreferences.saveLoginCredentials(loginCredentials)) return false;
 
-    if(!await UserTokenSharedPreferences.saveValueToken(token) || !await UserTokenSharedPreferences.saveValueTokenExpiration(tokenExpiration.toString())) {
+    if(!await UserTokenSharedPreferences.saveValueToken(token) || !await UserTokenSharedPreferences.saveValueTokenExpiration(tokenExpiration.toIso8601String())) {
       return false;
     }
 

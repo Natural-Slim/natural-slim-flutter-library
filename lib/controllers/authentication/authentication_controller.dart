@@ -38,7 +38,9 @@ class AuthenticationController{
 
       LoginResponseModel parsedResponse = LoginResponseModel.fromJson(jsonDecode(response.body));
 
-      if(!await LoginHelper.login(request, parsedResponse.token, parsedResponse.tokenExpiration)) throw Exception();
+      DateTime tokenExpiration = DateTime.now().add(Duration(minutes: parsedResponse.tokenExpiration));
+
+      if(!await LoginHelper.login(request, parsedResponse.token, tokenExpiration)) throw Exception();
 
       return parsedResponse;
         

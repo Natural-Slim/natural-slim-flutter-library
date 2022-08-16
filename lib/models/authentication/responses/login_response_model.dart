@@ -18,7 +18,7 @@ class LoginResponseModel {
     String token;
     String memberId;
     String? memberGuid;
-    DateTime tokenExpiration;
+    int tokenExpiration;
     bool hasLogged;
 
     factory LoginResponseModel.fromJson(Map<String, dynamic> json) => LoginResponseModel(
@@ -27,7 +27,7 @@ class LoginResponseModel {
         token: json["token"],
         memberId: json["memberId"],
         memberGuid: json["memberGuid"],
-        tokenExpiration: DateTime.parse(json["tokenExpiration"]),
+        tokenExpiration: json["tokenExpiration"],
         hasLogged: json["hasLogged"],
     );
 
@@ -37,7 +37,7 @@ class LoginResponseModel {
         "token": token,
         "memberId": memberId,
         "memberGuid": memberGuid,
-        "tokenExpiration": tokenExpiration.toIso8601String(),
+        "tokenExpiration": tokenExpiration,
         "hasLogged": hasLogged,
     };
 }
