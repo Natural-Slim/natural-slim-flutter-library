@@ -45,15 +45,26 @@ class HttpHeaderOptionsHelper{
 
     // The expiration date of the token saved in the preferences is obtained
     String? tokenExpiration = await UserTokenSharedPreferences.getSavedTokenExpiration();
+    String? tokenRequestDateTime = await UserTokenSharedPreferences.getSavedTokenRequestDateTime();
 
     if(tokenExpiration == null || tokenExpiration == '') return false;
+    if(tokenRequestDateTime == null || tokenRequestDateTime == '') return false;
 
     // Convert the expiration date to a DateTime object
     DateTime parsedTokenExpiration = DateTime.parse(tokenExpiration);
+    DateTime parsedTokenRequestDateTime = DateTime.parse(tokenRequestDateTime);
 
-    // Get the current date and time and convert it to a DateTime object with UTC0
-    DateTime currentDateUtc0 = DateTime.now().add(const Duration(seconds: 20));
+    // Get the current date and time
+    DateTime currentDate = DateTime.now();
+    DateTime currentDateMoreSeconds = currentDate.add(const Duration(seconds: 20));
+
+    bool forwardDateComparison = currentDateMoreSeconds.isBefore(parsedTokenExpiration);
+    bool backwardDateComparison = currentDate.isBefore(parsedTokenRequestDateTime);
+
+    if(forwardDateComparison && !backwardDateComparison){
+      return true;
+    }
     
-    return currentDateUtc0.isBefore(parsedTokenExpiration) ? true : false;
+    return false;
   }
 }

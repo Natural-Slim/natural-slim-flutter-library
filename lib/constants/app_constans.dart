@@ -3,6 +3,7 @@ class AppConstants {
     static String preferencesUsername = 'username';
     static String preferencesPassword = 'password';
     static String preferencesTokenExpiration = 'tokenExpiration';
+    static String preferencesTokenRequestDateTime = 'tokenRequestDate';
     static String preferencesStateLogin = 'stateLogin';
     static String preferencesSettings = 'settings';
     static String preferencesRegistry = 'valuesRegistry';

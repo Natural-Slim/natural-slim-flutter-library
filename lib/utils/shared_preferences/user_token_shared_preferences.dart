@@ -29,6 +29,17 @@ class UserTokenSharedPreferences {
     }
   }
 
+  /// Method to save token expiration date and time
+  static Future<bool> saveValueTokenRequestDateTime(String tokenRequestDateTime) async{
+    try{
+      // An object is created to access the app's preferences
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return await prefs.setString(AppConstants.preferencesTokenRequestDateTime, tokenRequestDateTime);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   /* =============================================================== */
   /* ============================= GET ============================= */
 
@@ -53,6 +64,17 @@ class UserTokenSharedPreferences {
       rethrow;
     }
   }
+  
+  /// Method to get token request date
+  static Future<String?> getSavedTokenRequestDateTime() async {
+    try{
+      // An object is created to access the app's preferences
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return prefs.getString(AppConstants.preferencesTokenRequestDateTime);
+    } catch (e) {
+      rethrow;
+    }
+  }
 
   /* ================================================================== */
   /* ============================= DELETE ============================= */
@@ -68,12 +90,23 @@ class UserTokenSharedPreferences {
     }
   }
 
-  /// Method to remove saved token
+  /// Method to remove saved token expiration
   static Future<bool> deleteSavedTokenExpiration() async {
     try{
       // An object is created to access the app's preferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      return await prefs.remove(AppConstants.preferencesKeyToken);
+      return await prefs.remove(AppConstants.preferencesTokenExpiration);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  /// Method to remove saved token request date
+  static Future<bool> deleteSavedTokenRequestDateTime() async {
+    try{
+      // An object is created to access the app's preferences
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return await prefs.remove(AppConstants.preferencesTokenRequestDateTime);
     } catch (e) {
       rethrow;
     }

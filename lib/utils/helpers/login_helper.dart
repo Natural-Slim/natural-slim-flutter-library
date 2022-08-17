@@ -6,12 +6,19 @@ import 'package:natural_slim_flutter_library/utils/shared_preferences/user_token
 
 class LoginHelper {
 
-  /// Method to login locally
-  static Future<bool> login(LoginRequestModel loginCredentials, String token, DateTime tokenExpiration) async {
+  /// Method to cache everything related to the login
+  static Future<bool> login(LoginRequestModel loginCredentials, String token, DateTime tokenExpiration, DateTime tokenRequestDateTime) async {
+    bool isLoginCredentialsSaved = await UserLoginSharedPreferences.saveLoginCredentials(loginCredentials);
 
-    if(!await UserLoginSharedPreferences.saveLoginCredentials(loginCredentials)) return false;
+    if(!isLoginCredentialsSaved) {
+      return false;
+    }
 
-    if(!await UserTokenSharedPreferences.saveValueToken(token) || !await UserTokenSharedPreferences.saveValueTokenExpiration(tokenExpiration.toIso8601String())) {
+    bool isTokenSaved = await UserTokenSharedPreferences.saveValueToken(token);
+    bool isTokenExpirationSaved = await UserTokenSharedPreferences.saveValueTokenExpiration(tokenExpiration.toIso8601String());
+    bool isTokenRequestDateTimeSaved = await UserTokenSharedPreferences.saveValueTokenRequestDateTime(tokenRequestDateTime.toIso8601String());
+
+    if(!isTokenSaved || !isTokenExpirationSaved || !isTokenRequestDateTimeSaved) {
       return false;
     }
 
