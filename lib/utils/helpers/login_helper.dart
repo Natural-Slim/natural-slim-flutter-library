@@ -25,16 +25,24 @@ class LoginHelper {
     return true;
   }
 
-  /// Method to know if the login is valid
-  static Future<bool> isLoginValid() async {
+  /// Verify that the necessary data exists in the shared preferences.
+  /// If at least one does not exist, return false.
+  static Future<bool> dataExistsInSharedPreferences() async {
 
     String? token = await UserTokenSharedPreferences.getSavedToken();
-    // String username = await UserLoginSharedPreferences.getUsername();
-    // String pass = await UserLoginSharedPreferences.getPassword();
+    String? username = await UserLoginSharedPreferences.getUsername();
+    String? pass = await UserLoginSharedPreferences.getPassword();
+    String? tokenExpiration = await UserTokenSharedPreferences.getSavedTokenExpiration();
+    String? tokenRequestDateTime = await UserTokenSharedPreferences.getSavedTokenRequestDateTime();
 
-    if(token == null || token == '' 
-    // || username == '' || pass == ''
-    ) return false;
+    if((token == null || token == '') || 
+      (username == null || username == '') || 
+      (pass == null || pass == '') || 
+      (tokenExpiration == null || tokenExpiration == '') || 
+      (tokenRequestDateTime == null || tokenRequestDateTime == '')) 
+    {
+      return false;
+    }
 
     return true;
   }

@@ -3,7 +3,7 @@ class ApiConstants{
   final String _apiProductionUrl = 'https://naturalslim-api-idlpryysla-uc.a.run.app';
   final String _apiKeyProduction = '1J8H-5HNPY-3VCTWE';
 
-  final String _apiDevelopUrl = 'https://dev-naturalslim-api-idlpryysla-uc.a.run.app/';
+  final String _apiDevelopUrl = 'https://dev-naturalslim-api-idlpryysla-uc.a.run.app';
   final String _apiKeyDevelop = '1J8H-5HNPY-3VCTWE';
 
   final String _localhostUrl = "https://192.168.0.3:45455";

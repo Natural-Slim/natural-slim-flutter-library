@@ -20,11 +20,11 @@ class HttpHeaderOptionsHelper{
     }
 
     // The credentials saved in the app preferences are obtained
-    String username = await UserLoginSharedPreferences.getUsername();
-    String password = await UserLoginSharedPreferences.getPassword();
+    String? username = await UserLoginSharedPreferences.getUsername();
+    String? password = await UserLoginSharedPreferences.getPassword();
 
     // A new login is created with the credentials from the preferences. And therefore, a new token.
-    LoginResponseModel updatedLogin = await AuthenticationController().postLogin(LoginRequestModel(username: username, password: password));
+    LoginResponseModel updatedLogin = await AuthenticationController().postLogin(LoginRequestModel(username: username!, password: password!));
 
     return updatedLogin.token;
   }
