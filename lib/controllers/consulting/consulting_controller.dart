@@ -30,7 +30,7 @@ class ConsultingController{
         ExceptionsHelper.validateApiException(response);
       }
 
-      List<HoursLocationAvailableResponse> parsedResponse = hoursLocationAvailableResponseFromJson(response.body);
+      List<HoursLocationAvailableResponse> parsedResponse = HoursLocationAvailableResponse.hoursLocationAvailableResponseFromJson(response.body);
       return parsedResponse;
 
     } catch (e) {
