@@ -21,13 +21,13 @@ class SuccesStoryResponseModel {
       story: json["story"],
       userProgramStepId: json["userProgramStepId"],
       programStepId: json["programStepId"],
-      photos: List<String>.from(json["photos"].map((x) => x)),
+      photos: json["photos"] != null ? List<String>.from(json["photos"].map((x) => x)) : null,
   );
 
   Map<String, dynamic> toJson() => {
       "story": story,
       "userProgramStepId": userProgramStepId,
       "programStepId": programStepId,
-      "photos": List<dynamic>.from(photos!.map((x) => x)),
+      "photos": photos != null ? List<dynamic>.from(photos!.map((x) => x)) : null,
   };
 }
