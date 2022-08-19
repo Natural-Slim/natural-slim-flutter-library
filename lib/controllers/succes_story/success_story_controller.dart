@@ -15,7 +15,7 @@ class SuccessStoryController {
   HttpRequests httpRequests = HttpRequests();
   static ApiConstants apiConstants = ApiConstants();
 
-    /// Method to consult the API if the username and password is correct to be able to enter the app
+    /// Method used to send information to the api with the success story request 
   Future<SuccesStoryResponseModel?> postSuccessStory( SuccesStoryRequestModel succesStory) async {
     try{
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
@@ -31,6 +31,7 @@ class SuccessStoryController {
         body: jsonEncode(succesStory)
       );
 
+      // We use the code 201 because we are creating a record
       if(response.statusCode != 201){ 
         ExceptionsHelper.validateApiException(response);
       }
