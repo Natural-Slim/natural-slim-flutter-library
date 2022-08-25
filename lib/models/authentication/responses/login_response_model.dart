@@ -1,43 +1,35 @@
-// To parse this JSON data, do
-//
-//     final loginResponse = loginResponseFromJson(jsonString);
-
 class LoginResponseModel {
-    LoginResponseModel({
-      required this.username,
-      required this.roles,
-      required this.token,
-      required this.memberId,
-      this.memberGuid,
-      required this.tokenExpiration,
-      required this.hasLogged,
-    });
+  LoginResponseModel({
+    required this.username,
+    required this.authToken,
+    required this.authTokenExpirationInMin,
+    required this.refreshToken,
+    required this.refreshTokenExpirationInDays,
+    required this.hasLogged,
+  });
 
-    String username;
-    List<String> roles;
-    String token;
-    String memberId;
-    String? memberGuid;
-    int tokenExpiration;
-    bool hasLogged;
+  String username;
+  String authToken;
+  int authTokenExpirationInMin;
+  String refreshToken;
+  int refreshTokenExpirationInDays;
+  bool hasLogged;
 
-    factory LoginResponseModel.fromJson(Map<String, dynamic> json) => LoginResponseModel(
-        username: json["username"],
-        roles: List<String>.from(json["roles"].map((x) => x)),
-        token: json["token"],
-        memberId: json["memberId"],
-        memberGuid: json["memberGuid"],
-        tokenExpiration: json["tokenExpiration"],
-        hasLogged: json["hasLogged"],
-    );
+  factory LoginResponseModel.fromJson(Map<String, dynamic> json) => LoginResponseModel(
+    username: json["username"],
+    authToken: json["authToken"],
+    authTokenExpirationInMin: json["authTokenExpirationInMin"],
+    refreshToken: json["refreshToken"],
+    refreshTokenExpirationInDays: json["refreshTokenExpirationInDays"],
+    hasLogged: json["hasLogged"],
+  );
 
-    Map<String, dynamic> toJson() => {
-        "username": username,
-        "roles": List<dynamic>.from(roles.map((x) => x)),
-        "token": token,
-        "memberId": memberId,
-        "memberGuid": memberGuid,
-        "tokenExpiration": tokenExpiration,
-        "hasLogged": hasLogged,
-    };
+  Map<String, dynamic> toJson() => {
+    "username": username,
+    "authToken": authToken,
+    "authTokenExpirationInMin": authTokenExpirationInMin,
+    "refreshToken": refreshToken,
+    "refreshTokenExpirationInDays": refreshTokenExpirationInDays,
+    "hasLogged": hasLogged,
+  };
 }

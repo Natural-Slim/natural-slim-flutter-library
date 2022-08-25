@@ -2,15 +2,15 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import 'package:natural_slim_flutter_library/constants/api_constants.dart';
-import 'package:natural_slim_flutter_library/models/authentication/requests/login_request_model.dart';
-import 'package:natural_slim_flutter_library/models/authentication/requests/user_profile_information_request_model.dart';
-import 'package:natural_slim_flutter_library/models/authentication/responses/login_response_model.dart';
-import 'package:natural_slim_flutter_library/models/authentication/responses/user_profile_information_response_model.dart';
-import 'package:natural_slim_flutter_library/utils/helpers/exceptions_helper.dart';
-import 'package:natural_slim_flutter_library/utils/helpers/http_header_options_helper.dart';
-import 'package:natural_slim_flutter_library/utils/helpers/login_helper.dart';
-import 'package:natural_slim_flutter_library/utils/http_requests/http_requests.dart';
+import '../../constants/api_constants.dart';
+import '../../models/authentication/requests/login_request_model.dart';
+import '../../models/authentication/requests/refresh_token_request_model.dart';
+import '../../models/authentication/requests/user_profile_information_request_model.dart';
+import '../../models/authentication/responses/login_response_model.dart';
+import '../../models/authentication/responses/user_profile_information_response_model.dart';
+import '../../utils/helpers/exceptions_helper.dart';
+import '../../utils/helpers/http_header_options_helper.dart';
+import '../../utils/http_requests/http_requests.dart';
 
 class AuthenticationController{
   HttpRequests httpRequests = HttpRequests();
@@ -37,11 +37,6 @@ class AuthenticationController{
       }
 
       LoginResponseModel parsedResponse = LoginResponseModel.fromJson(jsonDecode(response.body));
-
-      DateTime currentDate = DateTime.now();
-      DateTime tokenExpiration = currentDate.add(Duration(minutes: parsedResponse.tokenExpiration));
-
-      if(!await LoginHelper.login(request, parsedResponse.token, tokenExpiration, currentDate)) throw Exception();
 
       return parsedResponse;
         
@@ -76,7 +71,7 @@ class AuthenticationController{
     }
   }
 
-  /// Method to consult the API if the username and password is correct to be able to enter the app
+  /// Method to get the user's profile information
   Future<UserProfileInformationResponseModel> getUserProfileInformation() async {
     try{
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
@@ -104,7 +99,7 @@ class AuthenticationController{
     }
   }
 
-  /// Method to consult the API if the username and password is correct to be able to enter the app
+  /// Method for updating user profile information
   Future<UserProfileInformationResponseModel> putUserProfileInformation(UserProfileInformationRequestModel userInformation) async {
     try{
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
@@ -125,6 +120,35 @@ class AuthenticationController{
       }
 
       UserProfileInformationResponseModel parsedResponse = UserProfileInformationResponseModel.fromJson(jsonDecode(response.body));
+
+      return parsedResponse;
+        
+    } catch (e){
+      rethrow;
+    }
+  }
+
+  /// Method to get a new authentication and refresh token
+  Future<LoginResponseModel> postRefreshToken(RefreshTokenRequestModel refreshToken) async {
+    try{
+      String? token = await HttpHeaderOptionsHelper.getValidatedToken();
+      String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
+
+      http.Response response = await httpRequests.put(
+        url: '${apiConstants.baseUrl}/api/auth/refresh-token',
+        body: jsonEncode(refreshToken),
+        headers: {
+          'Content-Type':'application/json',
+          'x-Time-Zone': timeZone,
+          'Authorization':'Bearer $token'
+        },
+      );
+
+      if(response.statusCode != 200){
+        ExceptionsHelper.validateApiException(response);
+      }
+
+      LoginResponseModel parsedResponse = LoginResponseModel.fromJson(jsonDecode(response.body));
 
       return parsedResponse;
         
