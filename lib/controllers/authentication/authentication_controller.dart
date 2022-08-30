@@ -129,18 +129,17 @@ class AuthenticationController{
   }
 
   /// Method to get a new authentication and refresh token
-  Future<LoginResponseModel> postRefreshToken(RefreshTokenRequestModel refreshToken) async {
+  Future<LoginResponseModel> postRefreshToken(RefreshTokenRequestModel requestToken) async {
     try{
-      String? token = await HttpHeaderOptionsHelper.getValidatedToken();
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
-      http.Response response = await httpRequests.put(
+      http.Response response = await httpRequests.post(
         url: '${apiConstants.baseUrl}/api/auth/refresh-token',
-        body: jsonEncode(refreshToken),
+        body: jsonEncode(requestToken),
         headers: {
           'Content-Type':'application/json',
           'x-Time-Zone': timeZone,
-          'Authorization':'Bearer $token'
+          'Authorization':'Bearer ${requestToken.authToken}]'
         },
       );
 

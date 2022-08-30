@@ -1,8 +1,10 @@
 class AppConstants {
-    static String preferencesKeyToken = 'token';
+    static String preferencesAuthToken = 'authToken';
+    static String preferencesRefreshToken = 'refreshToken';
     static String preferencesUsername = 'username';
     static String preferencesPassword = 'password';
-    static String preferencesTokenExpiration = 'tokenExpiration';
+    static String preferencesAuthTokenExpiration = 'authTokenExpiration';
+    static String preferencesRefreshTokenExpiration = 'refreshTokenExpiration';
     static String preferencesTokenRequestDateTime = 'tokenRequestDate';
     static String preferencesStateLogin = 'stateLogin';
     static String preferencesSettings = 'settings';
