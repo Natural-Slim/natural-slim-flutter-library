@@ -6,14 +6,14 @@ class UserProductsResponseModel {
   UserProductsResponseModel({
     required this.id,
     required this.inUse,
-    required this.description,
+    this.description,
     required this.product,
     required this.userProductDosages,
   });
 
   int id;
   bool inUse;
-  String description;
+  String? description;
   ProductsResponseModel product;
   List<UserProductDosage> userProductDosages;
 

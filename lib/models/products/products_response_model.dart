@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../measure_unit_model.dart';
+import 'package:natural_slim_flutter_library/models/measure_unit_model.dart';
 
 class ProductsResponseModel {
   ProductsResponseModel({
@@ -34,6 +34,6 @@ class ProductsResponseModel {
     "name": name,
     "description": description,
     "photo": photo,
-    "measureUnit": measureUnit == null ? null : measureUnit!.toJson(),
+    "measureUnit": measureUnit,
   };
 }
