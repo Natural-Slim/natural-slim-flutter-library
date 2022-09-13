@@ -1,6 +1,7 @@
 import 'dart:convert';
-import 'package:natural_slim_flutter_library/models/products/products_response_model.dart';
-import 'package:natural_slim_flutter_library/models/products/user_product_dosage.dart';
+
+import '../user_product_dosage.dart';
+import 'products_response_model.dart';
 
 class UserProductsResponseModel {
   UserProductsResponseModel({

@@ -1,8 +1,8 @@
 import 'package:http/http.dart' as http;
 
 import '../../constants/api_constants.dart';
-import '../../models/products/products_response_model.dart';
-import '../../models/products/user_products_response_model.dart';
+import '../../models/products/responses/products_response_model.dart';
+import '../../models/products/responses/user_products_response_model.dart';
 import '../../utils/helpers/exceptions_helper.dart';
 import '../../utils/helpers/http_header_options_helper.dart';
 import '../../utils/http_requests/http_requests.dart';
