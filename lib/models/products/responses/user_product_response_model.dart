@@ -3,8 +3,8 @@ import 'dart:convert';
 import '../user_product_dosage.dart';
 import 'products_response_model.dart';
 
-class UserProductsResponseModel {
-  UserProductsResponseModel({
+class UserProductResponseModel {
+  UserProductResponseModel({
     required this.id,
     required this.inUse,
     this.description,
@@ -18,11 +18,11 @@ class UserProductsResponseModel {
   ProductsResponseModel product;
   List<UserProductDosage> userProductDosages;
 
-  static List<UserProductsResponseModel> userProductsResponseModelFromJson(String str) => List<UserProductsResponseModel>.from(json.decode(str).map((x) => UserProductsResponseModel.fromJson(x)));
+  static List<UserProductResponseModel> userProductsResponseModelFromJson(String str) => List<UserProductResponseModel>.from(json.decode(str).map((x) => UserProductResponseModel.fromJson(x)));
 
-  static String userProductsResponseModelToJson(List<UserProductsResponseModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+  static String userProductsResponseModelToJson(List<UserProductResponseModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-  factory UserProductsResponseModel.fromJson(Map<String, dynamic> json) => UserProductsResponseModel(
+  factory UserProductResponseModel.fromJson(Map<String, dynamic> json) => UserProductResponseModel(
     id: json["id"],
     inUse: json["inUse"],
     description: json["description"],
