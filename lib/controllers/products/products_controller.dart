@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
+import 'package:natural_slim_flutter_library/models/products/requests/user_product_request_model.dart';
 
 import '../../constants/api_constants.dart';
 import '../../models/products/responses/products_response_model.dart';
@@ -11,7 +14,7 @@ class ProductsController {
   final HttpRequests _httpRequests = HttpRequests();
   static final ApiConstants _apiConstants = ApiConstants();
 
-  /// Method to get the current status of the user program guide
+  /// Method to obtain the complete catalog of products
   Future<List<ProductsResponseModel>> getProducts() async{
     try{
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
@@ -38,7 +41,7 @@ class ProductsController {
     }
   }
 
-  /// Method to get the current status of the user program guide
+  /// Method to obtain the products that the user has related to his account.
   Future<List<UserProductsResponseModel>> getUserProducts() async{
     try{
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
@@ -61,6 +64,35 @@ class ProductsController {
       return parsedResponse;
 
     } catch (e) {
+      rethrow;
+    }
+  }
+
+  /// Method to add a product to the user's account. 
+  /// This creates a relationship between the product and the user.
+  Future<UserProductsResponseModel> postUserProduct(UserProductRequestModel request) async {
+    try{
+      String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
+      String? token = await HttpHeaderOptionsHelper.getValidatedToken();
+
+      http.Response response = await _httpRequests.post(
+        url: '${_apiConstants.baseUrl}/api/products/user-product', 
+        headers: {
+          'Content-Type':'application/json',
+          'x-Time-Zone': timeZone,
+          'Authorization':'Bearer $token'
+        },
+        body: jsonEncode(request)
+      );
+
+      if(response.statusCode != 201){
+        ExceptionsHelper.validateApiException(response);
+      }
+      
+      UserProductsResponseModel parsedResponse = UserProductsResponseModel.fromJson(jsonDecode(response.body));
+      return parsedResponse;
+
+    } catch (e){
       rethrow;
     }
   }

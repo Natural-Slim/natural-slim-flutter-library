@@ -1,7 +1,9 @@
+import '../../utils/enums/dosage_enum.dart';
+
 class UserProductDosage {
   UserProductDosage({
     required this.value,
-    required this.dosage,
+    this.dosage,
     required this.userProductId,
   });
 
@@ -20,51 +22,4 @@ class UserProductDosage {
     "dosage": dosage!.name,
     "userProductId": userProductId,
   };
-}
-
-enum Dosage {
-  breakfast,
-  lunch,
-  dinner,
-  bedTime,
-}
-
-extension DosageExtension on Dosage {
-  static Dosage? getValue(String value) {
-    switch (value){
-      case 'Breakfast':
-        return Dosage.breakfast;
-      
-      case 'Lunch':
-        return Dosage.lunch;
-      
-      case 'Dinner':
-        return Dosage.dinner;
-      
-      case 'BedTime':
-        return Dosage.bedTime;
-      
-      default:
-        return null;
-    }
-  }
-
-  String? get name{
-    switch (this){
-      case Dosage.breakfast:
-        return 'Breakfast';
-      
-      case Dosage.lunch:
-        return 'Lunch';
-      
-      case Dosage.dinner:
-        return 'Dinner';
-      
-      case Dosage.bedTime:
-        return 'BedTime';
-      
-      default:
-        return '';
-    }
-  }
 }

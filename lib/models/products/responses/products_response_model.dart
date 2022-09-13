@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:natural_slim_flutter_library/models/measure_unit_model.dart';
+import 'package:natural_slim_flutter_library/models/products/responses/product_available_dosage_model.dart';
 
 class ProductsResponseModel {
   ProductsResponseModel({
@@ -9,6 +10,7 @@ class ProductsResponseModel {
     required this.description,
     required this.photo,
     this.measureUnit,
+    required this.productAvailableDosages,
   });
 
   int id;
@@ -16,6 +18,7 @@ class ProductsResponseModel {
   String description;
   String photo;
   MeasureUnitModel? measureUnit;
+  List<ProductAvailableDosageModel> productAvailableDosages;
 
   static List<ProductsResponseModel> productsDataResponseModelFromJson(String str) => List<ProductsResponseModel>.from(json.decode(str).map((x) => ProductsResponseModel.fromJson(x)));
 
@@ -27,6 +30,7 @@ class ProductsResponseModel {
     description: json["description"],
     photo: json["photo"],
     measureUnit: json["measureUnit"] == null ? null : MeasureUnitModel.fromJson(json["measureUnit"]),
+    productAvailableDosages: ProductAvailableDosageModel.productAvailableDosageFromJson(jsonEncode(json["productAvailableDosages"])),
   );
 
   Map<String, dynamic> toJson() => {
@@ -35,5 +39,6 @@ class ProductsResponseModel {
     "description": description,
     "photo": photo,
     "measureUnit": measureUnit,
+    "productAvailableDosages": productAvailableDosages,
   };
 }
