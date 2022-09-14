@@ -1,4 +1,4 @@
-import '../../utils/enums/dosage_enum.dart';
+import '../../../utils/enums/dosage_enum.dart';
 
 class UserProductDosage {
   UserProductDosage({
