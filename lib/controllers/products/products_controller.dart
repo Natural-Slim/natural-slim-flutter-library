@@ -5,7 +5,7 @@ import 'package:natural_slim_flutter_library/models/products/requests/user_produ
 
 import '../../constants/api_constants.dart';
 import '../../models/products/responses/products_response_model.dart';
-import '../../models/products/responses/user_products_response_model.dart';
+import '../../models/products/responses/user_product_response_model.dart';
 import '../../utils/helpers/exceptions_helper.dart';
 import '../../utils/helpers/http_header_options_helper.dart';
 import '../../utils/http_requests/http_requests.dart';
@@ -42,7 +42,7 @@ class ProductsController {
   }
 
   /// Method to obtain the products that the user has related to his account.
-  Future<List<UserProductsResponseModel>> getUserProducts() async{
+  Future<List<UserProductResponseModel>> getUserProducts() async{
     try{
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
@@ -60,7 +60,34 @@ class ProductsController {
         ExceptionsHelper.validateApiException(response);
       }
 
-      List<UserProductsResponseModel> parsedResponse = UserProductsResponseModel.userProductsResponseModelFromJson(response.body);
+      List<UserProductResponseModel> parsedResponse = UserProductResponseModel.userProductsResponseModelFromJson(response.body);
+      return parsedResponse;
+
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  /// Method to obtain a UserProduct based on its ID
+  Future<UserProductResponseModel> getUserProduct(int productId) async{
+    try{
+      String? token = await HttpHeaderOptionsHelper.getValidatedToken();
+      String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
+
+      http.Response response = await _httpRequests.get(
+        url: '${_apiConstants.baseUrl}/api/products/user-product?ProductId=$productId',
+        headers: {
+          'Content-Type':'application/json',
+          'x-Time-Zone': timeZone,
+          'Authorization':'Bearer $token'
+        }
+      );
+
+      if(response.statusCode != 200) {
+        ExceptionsHelper.validateApiException(response);
+      }
+
+      UserProductResponseModel parsedResponse = UserProductResponseModel.fromJson(jsonDecode(response.body));
       return parsedResponse;
 
     } catch (e) {
@@ -70,7 +97,7 @@ class ProductsController {
 
   /// Method to add a product to the user's account. 
   /// This creates a relationship between the product and the user.
-  Future<UserProductsResponseModel> postUserProduct(UserProductRequestModel request) async {
+  Future<UserProductResponseModel> postUserProduct(UserProductRequestModel request) async {
     try{
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
@@ -89,7 +116,35 @@ class ProductsController {
         ExceptionsHelper.validateApiException(response);
       }
       
-      UserProductsResponseModel parsedResponse = UserProductsResponseModel.fromJson(jsonDecode(response.body));
+      UserProductResponseModel parsedResponse = UserProductResponseModel.fromJson(jsonDecode(response.body));
+      return parsedResponse;
+
+    } catch (e){
+      rethrow;
+    }
+  }
+
+  /// Method for updating a user's product
+  Future<UserProductResponseModel> putUserProduct(UserProductRequestModel request) async {
+    try{
+      String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
+      String? token = await HttpHeaderOptionsHelper.getValidatedToken();
+
+      http.Response response = await _httpRequests.put(
+        url: '${_apiConstants.baseUrl}/api/products/user-product', 
+        headers: {
+          'Content-Type':'application/json',
+          'x-Time-Zone': timeZone,
+          'Authorization':'Bearer $token'
+        },
+        body: jsonEncode(request)
+      );
+
+      if(response.statusCode != 200){
+        ExceptionsHelper.validateApiException(response);
+      }
+      
+      UserProductResponseModel parsedResponse = UserProductResponseModel.fromJson(jsonDecode(response.body));
       return parsedResponse;
 
     } catch (e){

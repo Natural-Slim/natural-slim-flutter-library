@@ -10,7 +10,7 @@ class DosageModel {
     required this.dosage,
   });
 
-  int value;
+  double value;
   String dosage;
 
   static List<DosageModel> dosageModelFromJson(String str) => List<DosageModel>.from(json.decode(str).map((x) => DosageModel.fromJson(x)));
