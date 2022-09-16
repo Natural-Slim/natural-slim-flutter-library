@@ -25,7 +25,7 @@ class UserProductResponseModel {
   factory UserProductResponseModel.fromJson(Map<String, dynamic> json) => UserProductResponseModel(
     id: json["id"],
     inUse: json["inUse"],
-    comments: json["description"],
+    comments: json["comments"],
     product: ProductsResponseModel.fromJson(json["product"]),
     userProductDosages: List<UserProductDosage>.from(json["userProductDosages"].map((x) => UserProductDosage.fromJson(x))),
   );
@@ -33,7 +33,7 @@ class UserProductResponseModel {
   Map<String, dynamic> toJson() => {
     "id": id,
     "inUse": inUse,
-    "description": comments,
+    "comments": comments,
     "product": product.toJson(),
     "userProductDosages": List<dynamic>.from(userProductDosages.map((x) => x.toJson())),
   };
