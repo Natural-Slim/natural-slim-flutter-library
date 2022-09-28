@@ -2,7 +2,6 @@ import '../../models/authentication/requests/login_request_model.dart';
 import '../../models/authentication/responses/login_response_model.dart';
 import '../shared_preferences/registry_shared_preferences.dart';
 import '../shared_preferences/user_token_shared_preferences.dart';
-import '../shared_preferences/user_login_shared_preferences.dart';
 import '../shared_preferences/user_settings_shared_preferences.dart';
 
 class LoginHelper {
@@ -15,14 +14,6 @@ class LoginHelper {
       DateTime currentDate = DateTime.now();
       DateTime authTokenExpiration = currentDate.add(Duration(minutes: responseLogin.authTokenExpirationInMin));
       DateTime refreshTokenExpiration = currentDate.add(Duration(days: responseLogin.refreshTokenExpirationInDays));
-
-      if(loginCredentials != null){
-        bool isLoginCredentialsSaved = await UserLoginSharedPreferences.saveLoginCredentials(loginCredentials);
-
-        if(!isLoginCredentialsSaved){
-          return false;
-        }
-      }
 
       bool isAuthTokenSaved = await UserTokenSharedPreferences.saveValueAuthToken(responseLogin.authToken);
       bool isAuthTokenExpirationSaved = await UserTokenSharedPreferences.saveValueAuthTokenExpiration(authTokenExpiration.toIso8601String());
@@ -46,17 +37,15 @@ class LoginHelper {
   static Future<bool> dataExistsInSharedPreferences() async {
     try{
 
-      String? username = await UserLoginSharedPreferences.getUsername();
-      String? pass = await UserLoginSharedPreferences.getPassword();
+      // String? username = await UserLoginSharedPreferences.getUsername();
+      // String? pass = await UserLoginSharedPreferences.getPassword();
       String? authToken = await UserTokenSharedPreferences.getSavedAuthToken();
       String? authTokenExpiration = await UserTokenSharedPreferences.getSavedAuthTokenExpiration();
       String? refreshToken = await UserTokenSharedPreferences.getSavedRefreshToken();
       String? refreshTokenExpiration = await UserTokenSharedPreferences.getSavedRefreshTokenExpiration();
       String? tokenRequestDateTime = await UserTokenSharedPreferences.getSavedTokenRequestDateTime();
 
-      if((username == null || username == '') || 
-        (pass == null || pass == '') || 
-        (authToken == null || authToken == '') || 
+      if((authToken == null || authToken == '') || 
         (authTokenExpiration == null || authTokenExpiration == '') || 
         (refreshToken == null || refreshToken == '') ||
         (refreshTokenExpiration == null || refreshTokenExpiration == '') ||
@@ -78,13 +67,11 @@ class LoginHelper {
       
       bool isSavedTokenDeleted = await UserTokenSharedPreferences.deleteSavedAuthToken();
       bool isSavedTokenExpirationDeleted = await UserTokenSharedPreferences.deleteSavedAuthTokenExpiration();
-      bool isSavedUsernameDeleted = await UserLoginSharedPreferences.deleteSavedUsername();
-      bool isSavedPasswordDeleted = await UserLoginSharedPreferences.deleteSavedPassword();
       bool isSavedUserSettingsDeleted = await UserSettingsSharedPreferences.deleteUserSettings();
       bool isSavedRegistryDeleted = await RegistrySharedPreferences.deleteSavedRegistry();
       
-      if(!isSavedTokenDeleted || !isSavedTokenExpirationDeleted || !isSavedUsernameDeleted || 
-        !isSavedPasswordDeleted || !isSavedUserSettingsDeleted || !isSavedRegistryDeleted)
+      if(!isSavedTokenDeleted || !isSavedTokenExpirationDeleted || 
+         !isSavedUserSettingsDeleted || !isSavedRegistryDeleted)
       {
         return false;
       }
