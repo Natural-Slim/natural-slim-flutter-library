@@ -7,7 +7,7 @@ import '../shared_preferences/user_settings_shared_preferences.dart';
 class LoginHelper {
 
   /// Method to cache everything related to the login
-  static Future<bool> saveAuthenticationData(LoginResponseModel responseLogin, [LoginRequestModel? loginCredentials]) async {
+  static Future<bool> saveAuthenticationData(LoginResponseModel responseLogin,) async {
     try{
 
       // The expiration times of the tokens and the time of the request are calculated
