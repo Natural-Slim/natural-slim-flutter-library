@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:natural_slim_flutter_library/models/authentication/requests/user_password_request_model.dart';
 
 import '../../constants/api_constants.dart';
 import '../../models/authentication/requests/login_request_model.dart';
@@ -182,5 +183,33 @@ class AuthenticationController{
     }
   }
 
+  /// Update the password of an authenticated user
+  Future<bool> putUserPassword(UserPasswordRequestModel userPassword) async {
+    try{
+      String? token = await HttpHeaderOptionsHelper.getValidatedToken();
+      String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
+
+      http.Response response = await httpRequests.put(
+        url: '${apiConstants.baseUrl}/api/auth/user-password',
+        body: jsonEncode(userPassword),
+        headers: {
+          'Content-Type':'application/json',
+          'x-Time-Zone': timeZone,
+          'Authorization':'Bearer $token'
+        },
+      );
+
+      if(response.statusCode != 200){
+        ExceptionsHelper.validateApiException(response);
+      }
+
+      bool updatePasswordState = response.body == 'true';
+
+      return updatePasswordState;
+        
+    } catch (e){
+      rethrow;
+    }
+  }
 
 }
