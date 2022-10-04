@@ -5,7 +5,7 @@ class WaterRecord {
     required this.hour,
   });
 
-  int amount;
+  double amount;
   String? comments;
   String hour;
 

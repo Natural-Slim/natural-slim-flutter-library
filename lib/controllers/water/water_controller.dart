@@ -20,7 +20,7 @@ class WaterController {
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
       http.Response response = await httpRequests.get(
-        url: '${apiConstants.baseUrl}/api/success-story?StartDate=$startDate&EndDate=$endDate&PerPage=$perPage&PageNumber=$pageNumber', 
+        url: '${apiConstants.baseUrl}/api/water/user-waters?StartDate=$startDate&EndDate=$endDate&PerPage=$perPage&PageNumber=$pageNumber',
         headers: {
           'Content-Type':'application/json',
           'x-Time-Zone': timeZone,
