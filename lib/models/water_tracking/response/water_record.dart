@@ -10,7 +10,7 @@ class WaterRecord {
   String hour;
 
   factory WaterRecord.fromJson(Map<String, dynamic> json) => WaterRecord(
-    amount: json["amount"],
+    amount: json["amount"].toDouble(),
     comments: json["comments"],
     hour: json["hour"],
   );
