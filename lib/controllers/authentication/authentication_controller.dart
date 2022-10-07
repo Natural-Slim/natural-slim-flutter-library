@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:natural_slim_flutter_library/models/authentication/requests/user_password_request_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../constants/api_constants.dart';
 import '../../models/authentication/requests/login_request_model.dart';

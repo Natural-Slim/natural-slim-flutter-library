@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:natural_slim_flutter_library/models/success_story/response/success_story_records_response_model.dart';
 import 'package:natural_slim_flutter_library/models/success_story/response/sucess_story_response_model.dart';
 
 import '../../constants/api_constants.dart';
@@ -36,6 +37,34 @@ class SuccessStoryController {
       }
 
       SuccessStoryResponseModel parsedResponse = SuccessStoryResponseModel.fromJson(jsonDecode(response.body));
+
+      return parsedResponse;
+        
+    } catch (e){
+      rethrow;
+    }
+  }
+
+  Future<SuccessStoryRecordsResponseModel> getAllSuccessStory(int perPage, int pageNumber) async {
+    try{
+      String? token = await HttpHeaderOptionsHelper.getValidatedToken();
+      String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
+
+      http.Response response = await httpRequests.get(
+        url: '${apiConstants.baseUrl}/api/success-stories?PerPage=$perPage&PageNumber=$pageNumber', 
+        headers: {
+          'Content-Type':'application/json',
+          'x-Time-Zone': timeZone,
+          'Authorization':'Bearer $token'
+        },
+      );
+
+      // We use the code 201 because we are creating a record
+      if(response.statusCode != 200){ 
+        ExceptionsHelper.validateApiException(response);
+      }
+
+      SuccessStoryRecordsResponseModel parsedResponse = SuccessStoryRecordsResponseModel.fromJson(jsonDecode(response.body));
 
       return parsedResponse;
         
