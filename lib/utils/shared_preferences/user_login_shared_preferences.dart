@@ -41,7 +41,7 @@ class UserLoginSharedPreferences {
   /* ============================= GET ============================= */
 
   /// Method to get username from app preferences
-  static Future<String> getUsername() async {
+  static Future<String?> getUsername() async {
     try{
       // An object is created to access the app's preferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -49,7 +49,7 @@ class UserLoginSharedPreferences {
       // Obtain the encrypted username
       String? usernameEncrypted = prefs.getString(AppConstants.preferencesUsername);
 
-      if(usernameEncrypted == null || usernameEncrypted == '') throw Exception();
+      if(usernameEncrypted == null || usernameEncrypted == '') return null;
 
       // The username is decrypted and returned already decrypted
       return EncryptionManagementHelper.decrypt(usernameEncrypted);
@@ -59,7 +59,7 @@ class UserLoginSharedPreferences {
   }
 
   /// Method to obtain the password from the app preferences
-  static Future<String> getPassword() async {
+  static Future<String?> getPassword() async {
     try{
       // An object is created to access the app's preferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -67,7 +67,7 @@ class UserLoginSharedPreferences {
       // Obtain the encrypted password
       String? passwordEncrypted = prefs.getString(AppConstants.preferencesPassword);
 
-      if(passwordEncrypted == null || passwordEncrypted == '') throw Exception();
+      if(passwordEncrypted == null || passwordEncrypted == '') return null;
 
       // The password is decrypted and returned already decrypted
       return EncryptionManagementHelper.decrypt(passwordEncrypted);

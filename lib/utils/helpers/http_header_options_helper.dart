@@ -20,11 +20,11 @@ class HttpHeaderOptionsHelper{
     }
 
     // The credentials saved in the app preferences are obtained
-    String username = await UserLoginSharedPreferences.getUsername();
-    String password = await UserLoginSharedPreferences.getPassword();
+    String? username = await UserLoginSharedPreferences.getUsername();
+    String? password = await UserLoginSharedPreferences.getPassword();
 
     // A new login is created with the credentials from the preferences. And therefore, a new token.
-    LoginResponseModel updatedLogin = await AuthenticationController().postLogin(LoginRequestModel(username: username, password: password));
+    LoginResponseModel updatedLogin = await AuthenticationController().postLogin(LoginRequestModel(username: username!, password: password!));
 
     return updatedLogin.token;
   }
@@ -45,16 +45,26 @@ class HttpHeaderOptionsHelper{
 
     // The expiration date of the token saved in the preferences is obtained
     String? tokenExpiration = await UserTokenSharedPreferences.getSavedTokenExpiration();
+    String? tokenRequestDateTime = await UserTokenSharedPreferences.getSavedTokenRequestDateTime();
 
     if(tokenExpiration == null || tokenExpiration == '') return false;
+    if(tokenRequestDateTime == null || tokenRequestDateTime == '') return false;
 
     // Convert the expiration date to a DateTime object
     DateTime parsedTokenExpiration = DateTime.parse(tokenExpiration);
+    DateTime parsedTokenRequestDateTime = DateTime.parse(tokenRequestDateTime);
 
-    // Get the current date and time and convert it to a DateTime object with UTC0
+    // Get the current date and time
     DateTime currentDate = DateTime.now();
-    DateTime parsedUtcCurrentDate = DateTime.utc(currentDate.year, currentDate.month, currentDate.day, currentDate.hour, currentDate.minute);
+    DateTime currentDateMoreSeconds = currentDate.add(const Duration(seconds: 20));
+
+    bool forwardDateComparison = currentDateMoreSeconds.isBefore(parsedTokenExpiration);
+    bool backwardDateComparison = currentDate.isBefore(parsedTokenRequestDateTime);
+
+    if(forwardDateComparison && !backwardDateComparison){
+      return true;
+    }
     
-    return parsedUtcCurrentDate.isBefore(parsedTokenExpiration) ? true : false;
+    return false;
   }
 }

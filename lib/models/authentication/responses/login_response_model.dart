@@ -2,12 +2,6 @@
 //
 //     final loginResponse = loginResponseFromJson(jsonString);
 
-import 'dart:convert';
-
-LoginResponseModel loginResponseFromJson(String str) => LoginResponseModel.fromJson(json.decode(str));
-
-String loginResponseToJson(LoginResponseModel data) => json.encode(data.toJson());
-
 class LoginResponseModel {
     LoginResponseModel({
       required this.username,
@@ -16,6 +10,7 @@ class LoginResponseModel {
       required this.memberId,
       this.memberGuid,
       required this.tokenExpiration,
+      required this.hasLogged,
     });
 
     String username;
@@ -23,7 +18,8 @@ class LoginResponseModel {
     String token;
     String memberId;
     String? memberGuid;
-    DateTime tokenExpiration;
+    int tokenExpiration;
+    bool hasLogged;
 
     factory LoginResponseModel.fromJson(Map<String, dynamic> json) => LoginResponseModel(
         username: json["username"],
@@ -31,7 +27,8 @@ class LoginResponseModel {
         token: json["token"],
         memberId: json["memberId"],
         memberGuid: json["memberGuid"],
-        tokenExpiration: DateTime.parse(json["tokenExpiration"]),
+        tokenExpiration: json["tokenExpiration"],
+        hasLogged: json["hasLogged"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -40,6 +37,7 @@ class LoginResponseModel {
         "token": token,
         "memberId": memberId,
         "memberGuid": memberGuid,
-        "tokenExpiration": tokenExpiration.toIso8601String(),
+        "tokenExpiration": tokenExpiration,
+        "hasLogged": hasLogged,
     };
 }

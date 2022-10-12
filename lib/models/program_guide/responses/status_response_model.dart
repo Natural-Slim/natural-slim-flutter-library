@@ -15,7 +15,7 @@ class StatusResponseModel {
       required this.completedSteps,
       required this.remainingSteps,
       required this.programStart,
-      required this.programEnd,
+      this.programEnd,
     });
 
     int totalSteps;
@@ -23,7 +23,7 @@ class StatusResponseModel {
     int completedSteps;
     int remainingSteps;
     DateTime programStart;
-    DateTime programEnd;
+    DateTime? programEnd;
 
     factory StatusResponseModel.fromJson(Map<String, dynamic> json) => StatusResponseModel(
         totalSteps: json["totalSteps"],
@@ -31,7 +31,7 @@ class StatusResponseModel {
         completedSteps: json["completedSteps"],
         remainingSteps: json["remainingSteps"],
         programStart: DateTime.parse(json["programStart"]),
-        programEnd: DateTime.parse(json["programEnd"]),
+        programEnd: json["programEnd"] == null ? null : DateTime.parse(json["programEnd"]),
     );
 
     Map<String, dynamic> toJson() => {
@@ -40,6 +40,6 @@ class StatusResponseModel {
         "completedSteps": completedSteps,
         "remainingSteps": remainingSteps,
         "programStart": programStart.toIso8601String(),
-        "programEnd": programEnd.toIso8601String(),
+        "programEnd": programEnd == null ? null : programEnd!.toIso8601String(),
     };
 }

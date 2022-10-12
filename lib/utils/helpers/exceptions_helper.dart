@@ -39,12 +39,12 @@ class ApiException implements Exception {
   }
 
   /// Error code
-  int get code => _code!;
+  int? get code => _code;
   
   /// Error message
-  String get message => _message!;
+  String? get message => _message;
   
   /// Error title
-  String get title => _title!;
+  String? get title => _title;
 
 }
