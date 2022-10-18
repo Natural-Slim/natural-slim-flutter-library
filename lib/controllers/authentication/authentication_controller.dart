@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'package:natural_slim_flutter_library/constants/api_constants.dart';
+import 'package:natural_slim_flutter_library/models/authentication/requests/create_user_profile_model.dart';
 import 'package:natural_slim_flutter_library/models/authentication/requests/login_request_model.dart';
 import 'package:natural_slim_flutter_library/models/authentication/requests/user_profile_information_request_model.dart';
 import 'package:natural_slim_flutter_library/models/authentication/responses/login_response_model.dart';
@@ -98,6 +99,33 @@ class AuthenticationController{
       UserProfileInformationResponseModel parsedResponse = UserProfileInformationResponseModel.fromJson(jsonDecode(response.body));
 
       return parsedResponse;
+        
+    } catch (e){
+      rethrow;
+    }
+  }
+
+  /// Method to log out of the API
+  Future<bool> postUser(String language, CreateUserRequestModel request) async {
+    try{
+      String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
+
+      http.Response response = await httpRequests.post(
+        url: '${apiConstants.baseUrl}/api/auth/user', 
+        headers: {
+          'Content-Type':'application/json',
+          'x-Time-Zone': timeZone,
+          'ApiKey': apiConstants.apiKey,
+          'Language': language,
+        },
+        body: jsonEncode(request),
+      );
+
+      if(response.statusCode != 201){
+        ExceptionsHelper.validateApiException(response);
+      }
+
+      return true;
         
     } catch (e){
       rethrow;
