@@ -3,9 +3,10 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'package:natural_slim_flutter_library/constants/api_constants.dart';
-import 'package:natural_slim_flutter_library/models/authentication/requests/create_user_profile_model.dart';
+import 'package:natural_slim_flutter_library/models/authentication/requests/create_user_request_model.dart';
 import 'package:natural_slim_flutter_library/models/authentication/requests/login_request_model.dart';
 import 'package:natural_slim_flutter_library/models/authentication/requests/user_profile_information_request_model.dart';
+import 'package:natural_slim_flutter_library/models/authentication/responses/create_user_response_model.dart';
 import 'package:natural_slim_flutter_library/models/authentication/responses/login_response_model.dart';
 import 'package:natural_slim_flutter_library/models/authentication/responses/user_profile_information_response_model.dart';
 import 'package:natural_slim_flutter_library/utils/helpers/exceptions_helper.dart';
@@ -105,8 +106,8 @@ class AuthenticationController{
     }
   }
 
-  /// Method to log out of the API
-  Future<bool> postUser(String language, CreateUserRequestModel request) async {
+  /// Post a new user
+  Future<CreateUserResponseModel> postUser(String language, CreateUserRequestModel request) async {
     try{
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
@@ -125,7 +126,9 @@ class AuthenticationController{
         ExceptionsHelper.validateApiException(response);
       }
 
-      return true;
+      CreateUserResponseModel parsedResponse = CreateUserResponseModel.fromJson(jsonDecode(response.body));
+
+      return parsedResponse;
         
     } catch (e){
       rethrow;
