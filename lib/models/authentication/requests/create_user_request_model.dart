@@ -4,6 +4,7 @@ class CreateUserRequestModel {
     required this.userName,
     required this.password,
     required this.email,
+    required this.areaCode,
     required this.phoneNumber,
     required this.firstName,
     required this.lastName,
@@ -13,6 +14,7 @@ class CreateUserRequestModel {
   String userName;
   String password;
   String email;
+  String areaCode;
   String phoneNumber;
   String firstName;
   String lastName;
@@ -22,6 +24,7 @@ class CreateUserRequestModel {
     userName: json["userName"],
     password: json["password"],
     email: json["email"],
+    areaCode: json["areaCode"],
     phoneNumber: json["phoneNumber"],
     firstName: json["firstName"],
     lastName: json["lastName"],
@@ -32,6 +35,7 @@ class CreateUserRequestModel {
     "userName": userName,
     "password": password,
     "email": email,
+    "areaCode": areaCode,
     "phoneNumber": phoneNumber,
     "firstName": firstName,
     "lastName": lastName,
