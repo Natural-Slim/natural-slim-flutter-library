@@ -4,9 +4,11 @@ import 'package:http/http.dart' as http;
 import 'package:natural_slim_flutter_library/models/authentication/requests/user_password_request_model.dart';
 
 import '../../constants/api_constants.dart';
+import '../../models/authentication/requests/create_user_request_model.dart';
 import '../../models/authentication/requests/login_request_model.dart';
 import '../../models/authentication/requests/refresh_token_request_model.dart';
 import '../../models/authentication/requests/user_profile_information_request_model.dart';
+import '../../models/authentication/responses/create_user_response_model.dart';
 import '../../models/authentication/responses/login_response_model.dart';
 import '../../models/authentication/responses/user_profile_information_response_model.dart';
 import '../../utils/helpers/exceptions_helper.dart';
@@ -100,7 +102,36 @@ class AuthenticationController{
     }
   }
 
-  /// Method for updating user profile information
+  /// Post a new user
+  Future<CreateUserResponseModel> postUser(String language, CreateUserRequestModel request) async {
+    try{
+      String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
+
+      http.Response response = await httpRequests.post(
+        url: '${apiConstants.baseUrl}/api/auth/user', 
+        headers: {
+          'Content-Type':'application/json',
+          'x-Time-Zone': timeZone,
+          'ApiKey': apiConstants.apiKey,
+          'Language': language,
+        },
+        body: jsonEncode(request),
+      );
+
+      if(response.statusCode != 201){
+        ExceptionsHelper.validateApiException(response);
+      }
+
+      CreateUserResponseModel parsedResponse = CreateUserResponseModel.fromJson(jsonDecode(response.body));
+
+      return parsedResponse;
+        
+    } catch (e){
+      rethrow;
+    }
+  }
+
+  /// Method to consult the API if the username and password is correct to be able to enter the app
   Future<UserProfileInformationResponseModel> putUserProfileInformation(UserProfileInformationRequestModel userInformation) async {
     try{
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
