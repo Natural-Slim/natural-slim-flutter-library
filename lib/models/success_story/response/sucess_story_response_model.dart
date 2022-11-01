@@ -1,5 +1,6 @@
 class SuccessStoryResponseModel {
   SuccessStoryResponseModel({
+    required this.id,
     required this.story,
     this.userProgramStepId,
     this.programStepId,
@@ -7,6 +8,7 @@ class SuccessStoryResponseModel {
     required this.registered
   });
 
+  int id;
   String story;
   int? userProgramStepId;
   int? programStepId;
@@ -14,6 +16,7 @@ class SuccessStoryResponseModel {
   DateTime registered;
 
   factory SuccessStoryResponseModel.fromJson(Map<String, dynamic> json) => SuccessStoryResponseModel(
+    id: json["id"],
     story: json["story"],
     userProgramStepId: json["userProgramStepId"],
     programStepId: json["programStepId"],
@@ -22,6 +25,7 @@ class SuccessStoryResponseModel {
   );
 
   Map<String, dynamic> toJson() => {
+    "id": id,
     "story": story,
     "userProgramStepId": userProgramStepId,
     "programStepId": programStepId,
