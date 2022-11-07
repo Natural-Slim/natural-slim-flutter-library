@@ -1,8 +1,10 @@
-import 'package:natural_slim_flutter_library/controllers/authentication/authentication_controller.dart';
-import 'package:natural_slim_flutter_library/models/authentication/requests/login_request_model.dart';
-import 'package:natural_slim_flutter_library/models/authentication/responses/login_response_model.dart';
-import 'package:natural_slim_flutter_library/utils/shared_preferences/user_login_shared_preferences.dart';
-import 'package:natural_slim_flutter_library/utils/shared_preferences/user_token_shared_preferences.dart';
+import 'package:natural_slim_flutter_library/utils/helpers/login_helper.dart';
+
+import '../../controllers/authentication/authentication_controller.dart';
+import '../../models/authentication/requests/refresh_token_request_model.dart';
+import '../../models/authentication/responses/login_response_model.dart';
+import '../../utils/helpers/token_helper.dart';
+import '../../utils/shared_preferences/user_token_shared_preferences.dart';
 
 /// Helper class for endpoint headers
 class HttpHeaderOptionsHelper{
@@ -12,21 +14,37 @@ class HttpHeaderOptionsHelper{
   /// reaches its expiration time, it will be automatically renewed 
   /// and the new token will be returned.
   static Future<String?> getValidatedToken() async{
-    bool isTokenValid = await _isTokenValid();
+    try{
+      bool isTokenValid = await TokenHelper.isAuthTokenValid();
 
-    // In case the token is still valid, only the same token is returned
-    if(isTokenValid){
-      return await UserTokenSharedPreferences.getSavedToken();
+      // In case the token is still valid, only the same token is returned
+      if(isTokenValid){
+        String? token = await UserTokenSharedPreferences.getSavedAuthToken();
+
+        return token;
+      }
+
+      String? authToken = await UserTokenSharedPreferences.getSavedAuthToken();
+      String? refreshToken = await UserTokenSharedPreferences.getSavedRefreshToken();
+
+      RefreshTokenRequestModel requestToken = RefreshTokenRequestModel(
+        authToken: authToken!, 
+        refreshToken: refreshToken!
+      );
+
+      // A new login is created with the credentials from the preferences. And therefore, a new token.
+      LoginResponseModel updatedLogin = await AuthenticationController().postRefreshToken(requestToken);
+
+      bool isAuthenticationDataSaved = await LoginHelper.saveAuthenticationData(updatedLogin);
+
+      if(!isAuthenticationDataSaved){
+        throw Exception();
+      }
+
+      return updatedLogin.authToken;
+    } catch(e) {
+      rethrow;
     }
-
-    // The credentials saved in the app preferences are obtained
-    String? username = await UserLoginSharedPreferences.getUsername();
-    String? password = await UserLoginSharedPreferences.getPassword();
-
-    // A new login is created with the credentials from the preferences. And therefore, a new token.
-    LoginResponseModel updatedLogin = await AuthenticationController().postLogin(LoginRequestModel(username: username!, password: password!));
-
-    return updatedLogin.token;
   }
 
   /// Method to get the current time zone offset.
@@ -34,37 +52,5 @@ class HttpHeaderOptionsHelper{
     String timeZoneOffset = DateTime.now().timeZoneOffset.inHours.toString();
 
     return timeZoneOffset;
-  }
-
-  /* ===================================================================================== */
-  /* ============================== Private methods ====================================== */
-  /* ===================================================================================== */
-
-  /// Private method to check if token saved in preferences is valid or not
-  static Future<bool> _isTokenValid() async {
-
-    // The expiration date of the token saved in the preferences is obtained
-    String? tokenExpiration = await UserTokenSharedPreferences.getSavedTokenExpiration();
-    String? tokenRequestDateTime = await UserTokenSharedPreferences.getSavedTokenRequestDateTime();
-
-    if(tokenExpiration == null || tokenExpiration == '') return false;
-    if(tokenRequestDateTime == null || tokenRequestDateTime == '') return false;
-
-    // Convert the expiration date to a DateTime object
-    DateTime parsedTokenExpiration = DateTime.parse(tokenExpiration);
-    DateTime parsedTokenRequestDateTime = DateTime.parse(tokenRequestDateTime);
-
-    // Get the current date and time
-    DateTime currentDate = DateTime.now();
-    DateTime currentDateMoreSeconds = currentDate.add(const Duration(seconds: 20));
-
-    bool forwardDateComparison = currentDateMoreSeconds.isBefore(parsedTokenExpiration);
-    bool backwardDateComparison = currentDate.isBefore(parsedTokenRequestDateTime);
-
-    if(forwardDateComparison && !backwardDateComparison){
-      return true;
-    }
-    
-    return false;
   }
 }

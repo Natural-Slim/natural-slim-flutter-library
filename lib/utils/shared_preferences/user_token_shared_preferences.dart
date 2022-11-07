@@ -7,29 +7,51 @@ class UserTokenSharedPreferences {
   /* =============================================================== */
   /* ============================= SET ============================= */
 
-  /// Method to save token
-  static Future<bool> saveValueToken(String token) async {
+  /// Method to save auth token
+  static Future<bool> saveValueAuthToken(String authToken) async {
     try{
       // An object is created to access the app's preferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      return await prefs.setString(AppConstants.preferencesKeyToken, token);
+      return await prefs.setString(AppConstants.preferencesAuthToken, authToken);
     } catch (e) {
       rethrow;
     }
   }
 
-  /// Method to save token expiration date and time
-  static Future<bool> saveValueTokenExpiration(String tokenExpiration) async{
+  /// Method to save refresh token
+  static Future<bool> saveValueRefreshToken(String refreshToken) async {
     try{
       // An object is created to access the app's preferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      return await prefs.setString(AppConstants.preferencesTokenExpiration, tokenExpiration);
+      return await prefs.setString(AppConstants.preferencesRefreshToken, refreshToken);
     } catch (e) {
       rethrow;
     }
   }
 
-  /// Method to save token expiration date and time
+  /// Method to save auth token expiration date and time
+  static Future<bool> saveValueAuthTokenExpiration(String authTokenExpiration) async{
+    try{
+      // An object is created to access the app's preferences
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return await prefs.setString(AppConstants.preferencesAuthTokenExpiration, authTokenExpiration);
+    } catch (e) {
+      rethrow;
+    }
+  }
+  
+  /// Method to save refresh token expiration date and time
+  static Future<bool> saveValueRefreshTokenExpiration(String refreshTokenExpiration) async{
+    try{
+      // An object is created to access the app's preferences
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return await prefs.setString(AppConstants.preferencesRefreshTokenExpiration, refreshTokenExpiration);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  /// Method to save the date and time of the request for new tokens
   static Future<bool> saveValueTokenRequestDateTime(String tokenRequestDateTime) async{
     try{
       // An object is created to access the app's preferences
@@ -43,23 +65,45 @@ class UserTokenSharedPreferences {
   /* =============================================================== */
   /* ============================= GET ============================= */
 
-  /// Method to return saved token
-  static Future<String?> getSavedToken() async {
+  /// Method to return saved auth token
+  static Future<String?> getSavedAuthToken() async {
     try {
       // An object is created to access the app's preferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      return prefs.getString(AppConstants.preferencesKeyToken);
+      return prefs.getString(AppConstants.preferencesAuthToken);
     } catch (e){
       rethrow;
     }
   }
 
-  /// Method to get token expiration date and time
-  static Future<String?> getSavedTokenExpiration() async {
+  /// Method to get auth token expiration date and time
+  static Future<String?> getSavedAuthTokenExpiration() async {
     try{
       // An object is created to access the app's preferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      return prefs.getString(AppConstants.preferencesTokenExpiration);
+      return prefs.getString(AppConstants.preferencesAuthTokenExpiration);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  /// Method to return saved refresh token
+  static Future<String?> getSavedRefreshToken() async {
+    try {
+      // An object is created to access the app's preferences
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return prefs.getString(AppConstants.preferencesRefreshToken);
+    } catch (e){
+      rethrow;
+    }
+  }
+
+  /// Method to get refresh token expiration date and time
+  static Future<String?> getSavedRefreshTokenExpiration() async {
+    try{
+      // An object is created to access the app's preferences
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return prefs.getString(AppConstants.preferencesRefreshTokenExpiration);
     } catch (e) {
       rethrow;
     }
@@ -79,30 +123,52 @@ class UserTokenSharedPreferences {
   /* ================================================================== */
   /* ============================= DELETE ============================= */
 
-  /// Method to remove saved token
-  static Future<bool> deleteSavedToken() async {
+  /// Method to remove saved auth token
+  static Future<bool> deleteSavedAuthToken() async {
     try{
       // An object is created to access the app's preferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      return await prefs.remove(AppConstants.preferencesKeyToken);
+      return await prefs.remove(AppConstants.preferencesAuthToken);
     } catch (e) {
       rethrow;
     }
   }
 
-  /// Method to remove saved token expiration
-  static Future<bool> deleteSavedTokenExpiration() async {
+  /// Method to remove saved auth token expiration
+  static Future<bool> deleteSavedAuthTokenExpiration() async {
     try{
       // An object is created to access the app's preferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      return await prefs.remove(AppConstants.preferencesTokenExpiration);
+      return await prefs.remove(AppConstants.preferencesAuthTokenExpiration);
+    } catch (e) {
+      rethrow;
+    }
+  }
+  
+  /// Method to remove saved refresh token
+  static Future<bool> deleteSavedRefreshToken() async {
+    try{
+      // An object is created to access the app's preferences
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return await prefs.remove(AppConstants.preferencesRefreshToken);
     } catch (e) {
       rethrow;
     }
   }
 
-  /// Method to remove saved token request date
-  static Future<bool> deleteSavedTokenRequestDateTime() async {
+  /// Method to remove saved refresh token expiration
+  static Future<bool> deleteSavedRefreshTokenExpiration() async {
+    try{
+      // An object is created to access the app's preferences
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      return await prefs.remove(AppConstants.preferencesRefreshTokenExpiration);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  /// Method to remove saved auth token request date
+  static Future<bool> deleteSavedAuthTokenRequestDateTime() async {
     try{
       // An object is created to access the app's preferences
       SharedPreferences prefs = await SharedPreferences.getInstance();

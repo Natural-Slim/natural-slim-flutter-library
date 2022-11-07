@@ -11,7 +11,7 @@ import 'package:natural_slim_flutter_library/models/authentication/responses/log
 import 'package:natural_slim_flutter_library/models/authentication/responses/user_profile_information_response_model.dart';
 import 'package:natural_slim_flutter_library/utils/helpers/exceptions_helper.dart';
 import 'package:natural_slim_flutter_library/utils/helpers/http_header_options_helper.dart';
-import 'package:natural_slim_flutter_library/utils/helpers/login_helper.dart';
+import '../../models/authentication/requests/refresh_token_request_model.dart';
 import 'package:natural_slim_flutter_library/utils/http_requests/http_requests.dart';
 
 class AuthenticationController{
@@ -39,11 +39,6 @@ class AuthenticationController{
       }
 
       LoginResponseModel parsedResponse = LoginResponseModel.fromJson(jsonDecode(response.body));
-
-      DateTime currentDate = DateTime.now();
-      DateTime tokenExpiration = currentDate.add(Duration(minutes: parsedResponse.tokenExpiration));
-
-      if(!await LoginHelper.login(request, parsedResponse.token, tokenExpiration, currentDate)) throw Exception();
 
       return parsedResponse;
         
@@ -78,7 +73,7 @@ class AuthenticationController{
     }
   }
 
-  /// Method to consult the API if the username and password is correct to be able to enter the app
+  /// Method to get the user's profile information
   Future<UserProfileInformationResponseModel> getUserProfileInformation() async {
     try{
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
@@ -156,6 +151,34 @@ class AuthenticationController{
       }
 
       UserProfileInformationResponseModel parsedResponse = UserProfileInformationResponseModel.fromJson(jsonDecode(response.body));
+
+      return parsedResponse;
+        
+    } catch (e){
+      rethrow;
+    }
+  }
+
+  /// Method to get a new authentication and refresh token
+  Future<LoginResponseModel> postRefreshToken(RefreshTokenRequestModel requestToken) async {
+    try{
+      String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
+
+      http.Response response = await httpRequests.post(
+        url: '${apiConstants.baseUrl}/api/auth/refresh-token',
+        body: jsonEncode(requestToken),
+        headers: {
+          'Content-Type':'application/json',
+          'x-Time-Zone': timeZone,
+          'Authorization':'Bearer ${requestToken.authToken}]'
+        },
+      );
+
+      if(response.statusCode != 200){
+        ExceptionsHelper.validateApiException(response);
+      }
+
+      LoginResponseModel parsedResponse = LoginResponseModel.fromJson(jsonDecode(response.body));
 
       return parsedResponse;
         
