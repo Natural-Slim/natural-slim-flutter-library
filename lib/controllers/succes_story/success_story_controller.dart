@@ -15,8 +15,37 @@ class SuccessStoryController {
   HttpRequests httpRequests = HttpRequests();
   static ApiConstants apiConstants = ApiConstants();
 
-    /// Method used to send information to the api with the success story request 
-  Future<SuccesStoryResponseModel?> postSuccessStory( SuccesStoryRequestModel succesStory) async {
+  /// Get success story by step id
+  Future<SuccessStoryResponseModel> getSuccessStoryByStepId(int stepId) async {
+    try{
+      String? token = await HttpHeaderOptionsHelper.getValidatedToken();
+      String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
+
+      http.Response response = await httpRequests.get(
+        url: '${apiConstants.baseUrl}/api/success-story?StepId=$stepId', 
+        headers: {
+          'Content-Type':'application/json',
+          'x-Time-Zone': timeZone,
+          'Authorization':'Bearer $token'
+        },
+      );
+
+      // We use the code 201 because we are creating a record
+      if(response.statusCode != 200){ 
+        ExceptionsHelper.validateApiException(response);
+      }
+
+      SuccessStoryResponseModel parsedResponse = SuccessStoryResponseModel.fromJson(jsonDecode(response.body));
+
+      return parsedResponse;
+        
+    } catch (e){
+      rethrow;
+    }
+  }
+
+  /// Method used to send information to the api with the success story request 
+  Future<SuccessStoryResponseModel> postSuccessStory( SuccesStoryRequestModel succesStory) async {
     try{
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
@@ -36,7 +65,7 @@ class SuccessStoryController {
         ExceptionsHelper.validateApiException(response);
       }
 
-      SuccesStoryResponseModel parsedResponse = SuccesStoryResponseModel.fromJson(jsonDecode(response.body));
+      SuccessStoryResponseModel parsedResponse = SuccessStoryResponseModel.fromJson(jsonDecode(response.body));
 
       return parsedResponse;
         
