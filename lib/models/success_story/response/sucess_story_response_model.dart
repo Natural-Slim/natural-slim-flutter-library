@@ -15,6 +15,14 @@ class SuccessStoryResponseModel {
   List<String>? photos;
   DateTime registered;
 
+  static SuccessStoryResponseModel empty(){
+    return SuccessStoryResponseModel(
+      id: 0, 
+      story: '', 
+      registered: DateTime.now()
+    );
+  }
+
   factory SuccessStoryResponseModel.fromJson(Map<String, dynamic> json) => SuccessStoryResponseModel(
     id: json["id"],
     story: json["story"],

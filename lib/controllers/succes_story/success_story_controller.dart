@@ -45,13 +45,13 @@ class SuccessStoryController {
     }
   }
 
-  Future<SuccessStoryRecordsResponseModel> getAllSuccessStory(int perPage, int pageNumber) async {
+  Future<SuccessStoryRecordsResponseModel> getAllSuccessStory(int perPage, int pageNumber, String? searchParameter) async {
     try{
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
       http.Response response = await httpRequests.get(
-        url: '${apiConstants.baseUrl}/api/success-stories?PerPage=$perPage&PageNumber=$pageNumber', 
+        url: '${apiConstants.baseUrl}/api/success-stories?SearchString=$searchParameter&PerPage=$perPage&PageNumber=$pageNumber', 
         headers: {
           'Content-Type':'application/json',
           'x-Time-Zone': timeZone,
