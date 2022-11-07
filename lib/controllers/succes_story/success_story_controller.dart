@@ -16,7 +16,7 @@ class SuccessStoryController {
   static ApiConstants apiConstants = ApiConstants();
 
   /// Get success story by step id
-  Future<SuccessStoryResponseModel> getSuccessStory(int stepId) async {
+  Future<SuccessStoryResponseModel> getSuccessStoryByStepId(int stepId) async {
     try{
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
