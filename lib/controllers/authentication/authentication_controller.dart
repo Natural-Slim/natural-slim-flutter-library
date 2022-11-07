@@ -172,7 +172,7 @@ class AuthenticationController{
         headers: {
           'Content-Type':'application/json',
           'x-Time-Zone': timeZone,
-          'Authorization':'Bearer ${requestToken.authToken}]'
+          'Authorization':'Bearer ${requestToken.authToken}'
         },
       );
 
