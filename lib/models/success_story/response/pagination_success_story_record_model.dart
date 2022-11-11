@@ -1,6 +1,6 @@
-class PagingInfo {
+class PaginationSuccessStoryRecordModel {
   
-  PagingInfo({
+  PaginationSuccessStoryRecordModel({
       required this.perPage,
       required this.currentPage,
       required this.totalRecords,
@@ -12,7 +12,7 @@ class PagingInfo {
   int totalRecords;
   int totalPages;
 
-  factory PagingInfo.fromJson(Map<String, dynamic> json) => PagingInfo(
+  factory PaginationSuccessStoryRecordModel.fromJson(Map<String, dynamic> json) => PaginationSuccessStoryRecordModel(
       perPage: json["perPage"],
       currentPage: json["currentPage"],
       totalRecords: json["totalRecords"],
