@@ -13,9 +13,9 @@ class SuccessStoryRecordsResponseModel {
   List<SuccessStoryResponseModel> records;
   PagingInfo pagingInfo;
 
-  SuccessStoryRecordsResponseModel allSuccessStoryResponseModelFromJson(String str) => SuccessStoryRecordsResponseModel.fromJson(json.decode(str));
+  static SuccessStoryRecordsResponseModel allSuccessStoryResponseModelFromJson(String str) => SuccessStoryRecordsResponseModel.fromJson(json.decode(str));
 
-  String allSuccessStoryResponseModelToJson(SuccessStoryRecordsResponseModel data) => json.encode(data.toJson());
+  static String allSuccessStoryResponseModelToJson(SuccessStoryRecordsResponseModel data) => json.encode(data.toJson());
   
   factory SuccessStoryRecordsResponseModel.fromJson(Map<String, dynamic> json) => SuccessStoryRecordsResponseModel(
       records: List<SuccessStoryResponseModel>.from(json["records"].map((x) => SuccessStoryResponseModel.fromJson(x))),

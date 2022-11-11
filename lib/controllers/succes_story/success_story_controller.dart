@@ -45,6 +45,9 @@ class SuccessStoryController {
     }
   }
 
+  /// Method in charge of sending the request to the endpoint and receiving the `SuccessStoryRecordsResponseModel` model
+  /// manipulated by pagination. Receives as a parameter the number of values per page by default is 10, the page number to display
+  /// and the search parameter
   Future<SuccessStoryRecordsResponseModel> getAllSuccessStory(int perPage, int pageNumber, String? searchParameter) async {
     try{
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
