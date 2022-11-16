@@ -16,13 +16,13 @@ class WaterController {
   static ApiConstants apiConstants = ApiConstants();
 
   /// 
-  Future<WaterRecordResponseModel> getUserWaters({required DateTime startDate, required DateTime endDate, int perPage = 10, required int pageNumber}) async {
+  Future<WaterRecordResponseModel> getUserWaters({required DateTime startDate, required DateTime endDate, int perPage = 10, required int pageNumber, required String searchParameter}) async {
     try{
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
       http.Response response = await httpRequests.get(
-        url: '${apiConstants.baseUrl}/api/water/user-waters?StartDate=$startDate&EndDate=$endDate&PerPage=$perPage&PageNumber=$pageNumber',
+        url: '${apiConstants.baseUrl}/api/water/user-waters?StartDate=$startDate&EndDate=$endDate&SearchString=$searchParameter&PerPage=$perPage&PageNumber=$pageNumber',
         headers: {
           'Content-Type':'application/json',
           'x-Time-Zone': timeZone,
