@@ -15,6 +15,7 @@ import '../../models/authentication/responses/user_profile_information_response_
 import '../../utils/helpers/exceptions_helper.dart';
 import '../../utils/helpers/http_header_options_helper.dart';
 import '../../utils/http_requests/http_requests.dart';
+import 'package:my_logger/logger.dart';
 
 class AuthenticationController{
   HttpRequests httpRequests = HttpRequests();
@@ -165,8 +166,7 @@ class AuthenticationController{
   Future<LoginResponseModel> postRefreshToken(RefreshTokenRequestModel requestToken) async {
     try{
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
-
-      debugPrint('Request token: ${jsonEncode(requestToken.refreshToken)}');
+      MyLogger.info("'Request token: ${jsonEncode(requestToken.refreshToken)} ${DateTime.now()}");
 
       http.Response response = await httpRequests.post(
         url: '${apiConstants.baseUrl}/api/auth/refresh-token',
@@ -183,8 +183,7 @@ class AuthenticationController{
       }
 
       LoginResponseModel parsedResponse = LoginResponseModel.fromJson(jsonDecode(response.body));
-
-      debugPrint('Response token: ${jsonEncode(parsedResponse.refreshToken)}');
+      MyLogger.info('Response token: ${jsonEncode(parsedResponse.refreshToken)} ${DateTime.now()}');
 
       return parsedResponse;
         
