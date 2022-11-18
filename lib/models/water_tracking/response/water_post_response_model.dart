@@ -1,7 +1,7 @@
 import '../../measure_unit_model.dart';
 
-class WaterPostResponseModel {
-  WaterPostResponseModel({
+class RecordedWaterResponseModel {
+  RecordedWaterResponseModel({
       required this.id,
       required this.amount,
       this.comment,
@@ -15,9 +15,9 @@ class WaterPostResponseModel {
   MeasureUnitModel measureUnit;
   DateTime registered;
 
-  factory WaterPostResponseModel.fromJson(Map<String, dynamic> json) => WaterPostResponseModel(
+  factory RecordedWaterResponseModel.fromJson(Map<String, dynamic> json) => RecordedWaterResponseModel(
       id: json["id"],
-      amount: json["amount"],
+      amount: json["amount"].toDouble(),
       comment: json["comment"],
       measureUnit: MeasureUnitModel.fromJson(json["measureUnit"]),
       registered: DateTime.parse(json["registered"]),

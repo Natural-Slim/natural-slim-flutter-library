@@ -15,7 +15,9 @@ class WaterController {
   HttpRequests httpRequests = HttpRequests();
   static ApiConstants apiConstants = ApiConstants();
 
-  /// 
+  /// Method used to obtain the records by start and end date.
+  /// It is also defined by receive for meters such as `perPage` which is defined to 10 records per page,
+  /// `pageNumber` which is used to work the pagination of the data and `searchParameter` to search for a certain word in the records.
   Future<WaterRecordResponseModel> getUserWaters({required DateTime startDate, required DateTime endDate, int perPage = 10, required int pageNumber, required String searchParameter}) async {
     try{
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
@@ -44,8 +46,8 @@ class WaterController {
     }
   }
 
-  /// 
-  Future<WaterPostResponseModel> postUserWaterRecord({required WaterPostRequestModel requestModel, String language = 'es'}) async {
+  /// Method used to record a new trace of water
+  Future<RecordedWaterResponseModel> postUserWaterRecord({required RecordedWaterRequestModel requestModel, String language = 'es'}) async {
     try{
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
@@ -66,7 +68,7 @@ class WaterController {
         ExceptionsHelper.validateApiException(response);
       }
 
-      WaterPostResponseModel parsedResponse = WaterPostResponseModel.fromJson(jsonDecode(response.body));
+      RecordedWaterResponseModel parsedResponse = RecordedWaterResponseModel.fromJson(jsonDecode(response.body));
 
       return parsedResponse;
         
