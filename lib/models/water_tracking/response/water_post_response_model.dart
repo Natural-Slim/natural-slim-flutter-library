@@ -17,7 +17,7 @@ class WaterPostResponseModel {
 
   factory WaterPostResponseModel.fromJson(Map<String, dynamic> json) => WaterPostResponseModel(
       id: json["id"],
-      amount: json["amount"],
+      amount: json["amount"].toDouble(),
       comment: json["comment"],
       measureUnit: MeasureUnitModel.fromJson(json["measureUnit"]),
       registered: DateTime.parse(json["registered"]),
