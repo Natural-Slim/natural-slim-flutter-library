@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:natural_slim_flutter_library/models/water_tracking/request/water_post_request_model.dart';
+import 'package:natural_slim_flutter_library/models/water_tracking/request/recorded_water_request_model.dart';
 import 'package:natural_slim_flutter_library/models/water_tracking/response/water_record_response_model.dart';
 
 import '../../constants/api_constants.dart';
-import '../../models/water_tracking/response/water_post_response_model.dart';
+import '../../models/water_tracking/response/recorded_water_response_model.dart';
 import '../../utils/helpers/exceptions_helper.dart';
 import '../../utils/helpers/http_header_options_helper.dart';
 import '../../utils/http_requests/http_requests.dart';
