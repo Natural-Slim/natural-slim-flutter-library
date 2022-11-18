@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:natural_slim_flutter_library/models/measure_unit_model.dart';
 
 class MeasureDataModel {
@@ -10,10 +8,6 @@ class MeasureDataModel {
 
     double limit;
     List<MeasureUnitModel> measureUnits;
-
-    static MeasureDataModel measureDataModelFromJson(String str) => MeasureDataModel.fromJson(json.decode(str));
-
-    static String measureDataModelToJson(MeasureDataModel data) => json.encode(data.toJson());
     
     factory MeasureDataModel.fromJson(Map<String, dynamic> json) => MeasureDataModel(
         limit: double.parse(json["limit"].toString()),

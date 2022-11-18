@@ -1,6 +1,6 @@
 
-class WaterPostRequestModel {
-  WaterPostRequestModel({
+class RecordedWaterRequestModel {
+  RecordedWaterRequestModel({
       required this.amount,
       required this.measureUnitId,
       this.comment,
@@ -12,7 +12,7 @@ class WaterPostRequestModel {
   String? comment;
   DateTime registered;
 
-  factory WaterPostRequestModel.fromJson(Map<String, dynamic> json) => WaterPostRequestModel(
+  factory RecordedWaterRequestModel.fromJson(Map<String, dynamic> json) => RecordedWaterRequestModel(
       amount: json["amount"],
       measureUnitId: json["measureUnitId"],
       comment: json["comment"],

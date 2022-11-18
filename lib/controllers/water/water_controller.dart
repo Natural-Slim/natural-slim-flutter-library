@@ -47,7 +47,7 @@ class WaterController {
   }
 
   /// Method used to record a new trace of water
-  Future<WaterPostResponseModel> postUserWaterRecord({required WaterPostRequestModel requestModel, String language = 'es'}) async {
+  Future<RecordedWaterResponseModel> postUserWaterRecord({required RecordedWaterRequestModel requestModel, String language = 'es'}) async {
     try{
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
@@ -68,7 +68,7 @@ class WaterController {
         ExceptionsHelper.validateApiException(response);
       }
 
-      WaterPostResponseModel parsedResponse = WaterPostResponseModel.fromJson(jsonDecode(response.body));
+      RecordedWaterResponseModel parsedResponse = RecordedWaterResponseModel.fromJson(jsonDecode(response.body));
 
       return parsedResponse;
         
