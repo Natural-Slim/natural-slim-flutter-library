@@ -3,19 +3,18 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:natural_slim_flutter_library/models/authentication/requests/user_password_request_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:natural_slim_flutter_library/constants/api_constants.dart';
-import 'package:natural_slim_flutter_library/models/authentication/requests/create_user_request_model.dart';
-import 'package:natural_slim_flutter_library/models/authentication/requests/login_request_model.dart';
-import 'package:natural_slim_flutter_library/models/authentication/requests/user_profile_information_request_model.dart';
-import 'package:natural_slim_flutter_library/models/authentication/responses/create_user_response_model.dart';
-import 'package:natural_slim_flutter_library/models/authentication/responses/login_response_model.dart';
-import 'package:natural_slim_flutter_library/models/authentication/responses/user_profile_information_response_model.dart';
-import 'package:natural_slim_flutter_library/utils/helpers/exceptions_helper.dart';
-import 'package:natural_slim_flutter_library/utils/helpers/http_header_options_helper.dart';
+import '../../constants/api_constants.dart';
+import '../../models/authentication/requests/create_user_request_model.dart';
+import '../../models/authentication/requests/login_request_model.dart';
 import '../../models/authentication/requests/refresh_token_request_model.dart';
-import 'package:natural_slim_flutter_library/utils/http_requests/http_requests.dart';
+import '../../models/authentication/requests/user_profile_information_request_model.dart';
+import '../../models/authentication/responses/create_user_response_model.dart';
+import '../../models/authentication/responses/login_response_model.dart';
+import '../../models/authentication/responses/user_profile_information_response_model.dart';
+import '../../utils/helpers/exceptions_helper.dart';
+import '../../utils/helpers/http_header_options_helper.dart';
+import '../../utils/http_requests/http_requests.dart';
 
 class AuthenticationController{
   HttpRequests httpRequests = HttpRequests();
