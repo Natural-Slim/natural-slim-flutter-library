@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:natural_slim_flutter_library/models/authentication/requests/user_password_request_model.dart';
 
@@ -166,8 +165,6 @@ class AuthenticationController{
     try{
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
-      debugPrint('Request token: ${jsonEncode(requestToken.refreshToken)}');
-
       http.Response response = await httpRequests.post(
         url: '${apiConstants.baseUrl}/api/auth/refresh-token',
         body: jsonEncode(requestToken),
@@ -183,8 +180,6 @@ class AuthenticationController{
       }
 
       LoginResponseModel parsedResponse = LoginResponseModel.fromJson(jsonDecode(response.body));
-
-      debugPrint('Response token: ${jsonEncode(parsedResponse.refreshToken)}');
 
       return parsedResponse;
         
