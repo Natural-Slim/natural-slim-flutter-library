@@ -23,7 +23,7 @@ class GlucoseController {
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
       http.Response response = await httpRequests.post(
-        url: '${apiConstants.baseUrl}/api/user-glucoses',
+        url: '${apiConstants.baseUrl}/api/glucose/user-glucose',
         body: jsonEncode(requestModel),
         headers: {
           'Content-Type':'application/json',
@@ -53,7 +53,7 @@ class GlucoseController {
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
       http.Response response = await httpRequests.get(
-        url: '${apiConstants.baseUrl}/api/user-glucoses?StartDate=$startDate&EndDate=$endDate&SearchString=$searchParameter&PerPage=$perPage&PageNumber=$pageNumber',
+        url: '${apiConstants.baseUrl}/api/glucose/user-glucoses?StartDate=$startDate&EndDate=$endDate&SearchString=$searchParameter&PerPage=$perPage&PageNumber=$pageNumber',
         headers: {
           'Content-Type':'application/json',
           'x-Time-Zone': timeZone,
@@ -74,5 +74,4 @@ class GlucoseController {
       rethrow;
     }
   }
-  
 }
