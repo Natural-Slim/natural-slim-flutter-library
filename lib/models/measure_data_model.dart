@@ -16,6 +16,6 @@ class MeasureDataModel {
 
     Map<String, dynamic> toJson() => {
         "limit": limit,
-        "measureUnits": List<MeasureUnitModel>.from(measureUnits.map((x) => x.toJson())),
+        "measureUnits": List<dynamic>.from(measureUnits.map((x) => x.toJson())),
     };
 }

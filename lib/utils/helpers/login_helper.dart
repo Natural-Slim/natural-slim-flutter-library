@@ -1,8 +1,5 @@
-import '../../models/authentication/requests/login_request_model.dart';
 import '../../models/authentication/responses/login_response_model.dart';
-import '../shared_preferences/registry_shared_preferences.dart';
 import '../shared_preferences/user_token_shared_preferences.dart';
-import '../shared_preferences/user_settings_shared_preferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginHelper {
