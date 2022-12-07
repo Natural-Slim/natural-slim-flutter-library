@@ -40,7 +40,7 @@ class CountryResponseModel {
       "countryCode": countryCode,
       "name": name,
       "regions": regions == null ? null : List<dynamic>.from(regions!.map((x) => x.toJson())),
-      "locations": regions == null ? null : List<dynamic>.from(locations!.map((x) => x.toJson())),
+      "locations": locations == null ? null : List<dynamic>.from(locations!.map((x) => x.toJson())),
     };
 }
 

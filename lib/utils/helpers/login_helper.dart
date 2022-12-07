@@ -1,8 +1,6 @@
-import '../../models/authentication/requests/login_request_model.dart';
 import '../../models/authentication/responses/login_response_model.dart';
-import '../shared_preferences/registry_shared_preferences.dart';
 import '../shared_preferences/user_token_shared_preferences.dart';
-import '../shared_preferences/user_settings_shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginHelper {
 
@@ -65,18 +63,10 @@ class LoginHelper {
   static Future<bool> logoutClearCache() async {
     try{
       
-      bool isSavedTokenDeleted = await UserTokenSharedPreferences.deleteSavedAuthToken();
-      bool isSavedTokenExpirationDeleted = await UserTokenSharedPreferences.deleteSavedAuthTokenExpiration();
-      bool isSavedUserSettingsDeleted = await UserSettingsSharedPreferences.deleteUserSettings();
-      bool isSavedRegistryDeleted = await RegistrySharedPreferences.deleteSavedRegistry();
-      
-      if(!isSavedTokenDeleted || !isSavedTokenExpirationDeleted || 
-         !isSavedUserSettingsDeleted || !isSavedRegistryDeleted)
-      {
-        return false;
-      }
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      bool isClearedCache = await prefs.clear();
 
-      return true;
+      return isClearedCache;
 
     } catch(e) {
       rethrow;
