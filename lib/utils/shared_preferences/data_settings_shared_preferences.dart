@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class DataAppSettingsSharedPreferences{
 
   /// Method for saving app data settings from shared preferences
-  static Future<bool> saveDataAppSettings(String dataAppSettings) async {
+  static Future<bool> saveSettingsCatalog(String dataAppSettings) async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       
@@ -18,7 +18,7 @@ class DataAppSettingsSharedPreferences{
   }
 
   /// Method to get app data settings from shared preferences
-  static Future<DataAppSettingsResponseModel?> getDataAppSettings() async {
+  static Future<SettingsCatalogResponseModel?> getSettingsCatalog() async {
     try{
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? dataAppSettings = prefs.getString(AppConstants.preferencesDataAppSettings);
@@ -27,14 +27,14 @@ class DataAppSettingsSharedPreferences{
         return null;
       }
 
-      return DataAppSettingsResponseModel.fromJson(jsonDecode(dataAppSettings));
+      return SettingsCatalogResponseModel.fromJson(jsonDecode(dataAppSettings));
     } catch(e) {
       rethrow;
     }
   }
 
   /// Method to remove app data settings from shared preferences
-  static Future<bool> deleteDataAppSettings() async {
+  static Future<bool> deleteSettingsCatalog() async {
     try{
       // An object is created to access the app's preferences
       SharedPreferences prefs = await SharedPreferences.getInstance();
