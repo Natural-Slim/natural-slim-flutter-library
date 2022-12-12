@@ -29,13 +29,13 @@ class SettingsHelper {
     }
   }
 
-  Future<DataAppSettingsResponseModel> getDataAppSettings() async {
+  Future<SettingsCatalogResponseModel> getSettingsCatalog() async {
     try{
-      DataAppSettingsResponseModel? dataAppsettings = await DataAppSettingsSharedPreferences.getDataAppSettings();
+      SettingsCatalogResponseModel? dataAppsettings = await DataAppSettingsSharedPreferences.getSettingsCatalog();
     
       if(dataAppsettings == null){
-        dataAppsettings = await SettingsController().getDataSettings(); // Get the settings from the API
-        await DataAppSettingsSharedPreferences.saveDataAppSettings(jsonEncode(dataAppsettings)); // Save settings in shared preferences
+        dataAppsettings = await SettingsController().getSettingsCatalog(); // Get the settings from the API
+        await DataAppSettingsSharedPreferences.saveSettingsCatalog(jsonEncode(dataAppsettings)); // Save settings in shared preferences
       }
 
       return dataAppsettings;

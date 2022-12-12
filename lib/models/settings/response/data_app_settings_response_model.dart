@@ -6,8 +6,8 @@ import 'package:natural_slim_flutter_library/models/members_language_model.dart'
 
 
 
-class DataAppSettingsResponseModel {
-  DataAppSettingsResponseModel({
+class SettingsCatalogResponseModel {
+  SettingsCatalogResponseModel({
     required this.countries,
     required this.languages,
     required this.lengthMeasureData,
@@ -21,11 +21,11 @@ class DataAppSettingsResponseModel {
   MeasureDataModel weightMeasureData;
   MeasureDataModel capacityMeasureData;
 
-  static DataAppSettingsResponseModel dataAppSettingsResponseModelFromJson(String str) => DataAppSettingsResponseModel.fromJson(json.decode(str));
+  static SettingsCatalogResponseModel dataAppSettingsResponseModelFromJson(String str) => SettingsCatalogResponseModel.fromJson(json.decode(str));
 
-  static String dataAppSettingsResponseModelToJson(DataAppSettingsResponseModel data) => json.encode(data.toJson());
+  static String dataAppSettingsResponseModelToJson(SettingsCatalogResponseModel data) => json.encode(data.toJson());
 
-  factory DataAppSettingsResponseModel.fromJson(Map<String, dynamic> json) => DataAppSettingsResponseModel(
+  factory SettingsCatalogResponseModel.fromJson(Map<String, dynamic> json) => SettingsCatalogResponseModel(
     countries: List<CountryResponseModel>.from(json["countries"].map((x) => CountryResponseModel.fromJson(x))),
     languages: List<MembersLanguageModel>.from(json["languages"].map((x) => MembersLanguageModel.fromJson(x))),
     lengthMeasureData: MeasureDataModel.fromJson(json["lengthMeasureUnit"]),
