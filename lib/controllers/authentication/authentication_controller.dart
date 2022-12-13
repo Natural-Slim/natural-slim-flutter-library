@@ -14,7 +14,6 @@ import '../../models/authentication/responses/user_profile_information_response_
 import '../../utils/helpers/exceptions_helper.dart';
 import '../../utils/helpers/http_header_options_helper.dart';
 import '../../utils/http_requests/http_requests.dart';
-import 'package:my_logger/logger.dart';
 
 class AuthenticationController{
   HttpRequests httpRequests = HttpRequests();

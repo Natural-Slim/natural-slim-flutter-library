@@ -14,7 +14,7 @@ class SettingsController{
   static ApiConstants apiConstants = ApiConstants();
 
   /// Method to get current data app settings
-  Future<DataAppSettingsResponseModel> getDataSettings([String? language]) async{
+  Future<SettingsCatalogResponseModel> getSettingsCatalog([String? language]) async{
     try{
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
@@ -33,7 +33,7 @@ class SettingsController{
         ExceptionsHelper.validateApiException(response);
       }
 
-      DataAppSettingsResponseModel parsedResponse = DataAppSettingsResponseModel.fromJson(jsonDecode(response.body));
+      SettingsCatalogResponseModel parsedResponse = SettingsCatalogResponseModel.fromJson(jsonDecode(response.body));
       return parsedResponse;
 
     } catch (e) {

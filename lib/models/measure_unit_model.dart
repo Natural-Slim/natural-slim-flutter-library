@@ -19,7 +19,7 @@ class MeasureUnitModel {
     id: json["id"],
     unit: json["unit"],
     abbreviation: json["abbreviation"],
-    conversionFactor : double.parse(json["conversionFactor"].toString()),
+    conversionFactor : json["conversionFactor"] == null ? null : double.parse(json["conversionFactor"].toString()),
     measureUnitType: json["measureUnitType"] == null ? null : MeasureUnitType.fromJson(json["measureUnitType"]),
   );
 
