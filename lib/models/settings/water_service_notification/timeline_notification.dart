@@ -1,5 +1,5 @@
-class Timeline {
-    Timeline({
+class TimelineNotification {
+    TimelineNotification({
         required this.id,
         this.day,
         required this.time,
@@ -13,7 +13,7 @@ class Timeline {
     String title;
     String message;
 
-    factory Timeline.fromJson(Map<String, dynamic> json) => Timeline(
+    factory TimelineNotification.fromJson(Map<String, dynamic> json) => TimelineNotification(
         id: json["id"],
         day: json["day"],
         time: json["time"],

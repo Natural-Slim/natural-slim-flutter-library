@@ -17,6 +17,8 @@ class UserSettingsRequestModel {
     required this.eventNotifications,
     required this.waterGoalsNotifications,
     required this.mealGoalsNotifications,
+    required this.sizeGoalsNotifications,
+    required this.glucoseGoalsNotifications,
     required this.excerciseGoalsNotifications,
     required this.consultingChatNotifications,
     required this.consultingAppointmentNotifications,
@@ -33,6 +35,8 @@ class UserSettingsRequestModel {
   bool eventNotifications;
   bool waterGoalsNotifications;
   bool mealGoalsNotifications;
+  bool sizeGoalsNotifications;
+  bool glucoseGoalsNotifications;
   bool excerciseGoalsNotifications;
   bool consultingChatNotifications;
   bool consultingAppointmentNotifications;
@@ -53,6 +57,8 @@ class UserSettingsRequestModel {
     eventNotifications: json["eventNotifications"],
     waterGoalsNotifications: json["waterGoalsNotifications"],
     mealGoalsNotifications: json["mealGoalsNotifications"],
+    sizeGoalsNotifications: json["sizeGoalsNotifications"],
+    glucoseGoalsNotifications: json["glucoseGoalsNotifications"],
     excerciseGoalsNotifications: json["excerciseGoalsNotifications"],
     consultingChatNotifications: json["consultingChatNotifications"],
     consultingAppointmentNotifications: json["consultingAppointmentNotifications"],
@@ -70,6 +76,8 @@ class UserSettingsRequestModel {
     "eventNotifications": eventNotifications,
     "waterGoalsNotifications": waterGoalsNotifications,
     "mealGoalsNotifications": mealGoalsNotifications,
+    "sizeGoalsNotifications": sizeGoalsNotifications,
+    "glucoseGoalsNotifications": glucoseGoalsNotifications,
     "excerciseGoalsNotifications": excerciseGoalsNotifications,
     "consultingChatNotifications": consultingChatNotifications,
     "consultingAppointmentNotifications": consultingAppointmentNotifications,

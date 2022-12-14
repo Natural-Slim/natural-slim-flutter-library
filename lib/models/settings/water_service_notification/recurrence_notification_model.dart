@@ -1,7 +1,7 @@
-import 'water_timeline_notification.dart';
+import 'timeline_notification.dart';
 
-class Recurrence {
-    Recurrence({
+class RecurrenceNotification {
+    RecurrenceNotification({
         required this.frequency,
         required this.count,
         required this.timeline,
@@ -9,12 +9,12 @@ class Recurrence {
 
     String frequency;
     int count;
-    List<Timeline> timeline;
+    List<TimelineNotification> timeline;
 
-    factory Recurrence.fromJson(Map<String, dynamic> json) => Recurrence(
+    factory RecurrenceNotification.fromJson(Map<String, dynamic> json) => RecurrenceNotification(
         frequency: json["frequency"],
         count: json["count"],
-        timeline: List<Timeline>.from(json["timeline"].map((x) => Timeline.fromJson(x))),
+        timeline: List<TimelineNotification>.from(json["timeline"].map((x) => TimelineNotification.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
