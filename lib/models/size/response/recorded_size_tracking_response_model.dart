@@ -18,14 +18,14 @@ class RecordedSizeTrackingResponseModel {
         this.comment,
     });
 
-    int chest;
-    int leftArm;
-    int rightArm;
-    int abdomen;
-    int waist;
-    int hips;
-    int leftThigh;
-    int rightThigh;
+    double chest;
+    double leftArm;
+    double rightArm;
+    double abdomen;
+    double waist;
+    double hips;
+    double leftThigh;
+    double rightThigh;
     DateTime registered;
     String? comment;
     String userId;

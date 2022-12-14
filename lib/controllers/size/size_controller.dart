@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:natural_slim_flutter_library/models/size/response/recorded_size_tracking_response_model.dart';
+import 'package:natural_slim_flutter_library/models/size/response/size_tracking_response_model.dart';
 import 'package:natural_slim_flutter_library/models/water_tracking/response/water_record_response_model.dart';
 
 import '../../constants/api_constants.dart';
@@ -18,7 +19,7 @@ class SizeController {
   /// Method used to obtain the records by start and end date.
   /// It is also defined by receive for meters such as `perPage` which is defined to 10 records per page,
   /// `pageNumber` which is used to work the pagination of the data and `searchParameter` to search for a certain word in the records.
-  Future<WaterRecordResponseModel> getUserSizeRecords({required DateTime startDate, required DateTime endDate, int perPage = 10, required int pageNumber, required String searchParameter}) async {
+  Future<SizeTrackingResponseModel> getUserSizeRecords({required DateTime startDate, required DateTime endDate, int perPage = 10, required int pageNumber, required String searchParameter}) async {
     try{
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
@@ -37,7 +38,7 @@ class SizeController {
         ExceptionsHelper.validateApiException(response);
       }
 
-      WaterRecordResponseModel parsedResponse = WaterRecordResponseModel.fromJson(jsonDecode(response.body));
+      SizeTrackingResponseModel parsedResponse = SizeTrackingResponseModel.fromJson(jsonDecode(response.body));
 
       return parsedResponse;
         
