@@ -36,14 +36,14 @@ class RecordedSizeTrackingResponseModel {
     static String recordedSizeTrackingResponseModelToJson(RecordedSizeTrackingResponseModel data) => json.encode(data.toJson());
 
     factory RecordedSizeTrackingResponseModel.fromJson(Map<String, dynamic> json) => RecordedSizeTrackingResponseModel(
-        chest: json["chest"],
-        leftArm: json["leftArm"],
-        rightArm: json["rightArm"],
-        abdomen: json["abdomen"],
-        waist: json["waist"],
-        hips: json["hips"],
-        leftThigh: json["leftThigh"],
-        rightThigh: json["rightThigh"],
+        chest: json["chest"].toDouble(),
+        leftArm: json["leftArm"].toDouble(),
+        rightArm: json["rightArm"].toDouble(),
+        abdomen: json["abdomen"].toDouble(),
+        waist: json["waist"].toDouble(),
+        hips: json["hips"].toDouble(),
+        leftThigh: json["leftThigh"].toDouble(),
+        rightThigh: json["rightThigh"].toDouble(),
         registered: DateTime.parse(json["registered"]),
         comment: json["comment"],
         userId: json["userId"],
