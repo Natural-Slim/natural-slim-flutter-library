@@ -164,7 +164,6 @@ class AuthenticationController{
   Future<LoginResponseModel> postRefreshToken(RefreshTokenRequestModel requestToken) async {
     try{
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
-      MyLogger.info("'Request token: ${jsonEncode(requestToken.refreshToken)} ${DateTime.now()}");
 
       http.Response response = await httpRequests.post(
         url: '${apiConstants.baseUrl}/api/auth/refresh-token',
@@ -181,7 +180,6 @@ class AuthenticationController{
       }
 
       LoginResponseModel parsedResponse = LoginResponseModel.fromJson(jsonDecode(response.body));
-      MyLogger.info('Response token: ${jsonEncode(parsedResponse.refreshToken)} ${DateTime.now()}');
 
       return parsedResponse;
         
