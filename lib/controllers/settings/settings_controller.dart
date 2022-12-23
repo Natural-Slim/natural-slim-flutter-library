@@ -20,7 +20,7 @@ class SettingsController{
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
       http.Response response = await httpRequests.get(
-        url: '${apiConstants.baseUrl}/api/settings/data-settings',
+        url: '${apiConstants.baseUrl}/api/settings/settings-catalog',
         headers: {
           'Content-Type': 'application/json',
           'x-Time-Zone': timeZone,
