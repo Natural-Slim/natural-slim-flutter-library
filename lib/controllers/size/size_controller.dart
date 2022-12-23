@@ -25,7 +25,7 @@ class SizeController {
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
       http.Response response = await httpRequests.get(
-        url: '${apiConstants.baseUrl}/api/size/user-sizes?StartDate=$startDate&EndDate=$endDate&SearchString=$searchParameter&PerPage=$perPage&PageNumber=$pageNumber',
+        url: '${apiConstants.baseUrl}/api/size/user-sizes?StartDate=$startDate&EndDate=$endDate&SearchParameter=$searchParameter&PerPage=$perPage&PageNumber=$pageNumber',
         headers: {
           'Content-Type':'application/json',
           'x-Time-Zone': timeZone,
