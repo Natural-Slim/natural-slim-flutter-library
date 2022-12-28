@@ -8,7 +8,15 @@ class ExceptionsHelper{
   /// This method only covers the most common exceptions.
   /// Any other exception that is not covered will return an exception with a default message.
   static Exception validateApiException(http.Response response) {
-    var responseJson = json.decode(response.body.toString());
+    
+    dynamic responseJson;
+
+    if(response.body.isNotEmpty){
+      responseJson = json.decode(response.body.toString());
+    }else{
+      throw ApiException('An error has occured. Please try again later or contact support.','',response.statusCode);
+    }
+    
     switch (response.statusCode) {
       case 400:
         throw ApiException(responseJson['detail'], responseJson['title'], responseJson['status']);
