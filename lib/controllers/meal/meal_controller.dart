@@ -1,13 +1,12 @@
 import 'dart:convert';
 
-import 'package:natural_slim_flutter_library/models/meal/ingredient/response/meal_ingrediente_response_model.dart';
 import 'package:natural_slim_flutter_library/models/meal/request/meal_request_model.dart';
 import 'package:natural_slim_flutter_library/models/meal/response/meal_tracking_response_model.dart';
 import 'package:http/http.dart' as http;
 
 import '../../constants/api_constants.dart';
+import '../../models/meal/ingredient/response/meal_ingredient_type_model.dart';
 import '../../models/meal/ingredient/response/paginated_meal_ingredient_date_record_model.dart';
-import '../../models/meal/response/meal_model.dart';
 import '../../models/meal/response/meal_type_model.dart';
 import '../../utils/helpers/exceptions_helper.dart';
 import '../../utils/helpers/http_header_options_helper.dart';
@@ -108,13 +107,41 @@ class MealController {
     }
   }
 
-  Future<PaginatedMealIngredientDateRecordsModel> getMealIngredients({int perPage = 10, required int pageNumber}) async {
+  Future<MealTrackingResponseModel> getMeals({int perPage = 10, required int pageNumber}) async {
     try{
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
       http.Response response = await httpRequests.get(
-        url: '${apiConstants.baseUrl}/api/meal/ingredient?PerPage=$perPage&PageNumber=$pageNumber',
+        url: '${apiConstants.baseUrl}/api/meal?PerPage=$perPage&PageNumber=$pageNumber',
+        headers: {
+          'Content-Type':'application/json',
+          'x-Time-Zone': timeZone,
+          'Authorization':'Bearer $token'
+        },
+      );
+
+      // We use the code 200 because we are creating a record
+      if(response.statusCode != 200){ 
+        ExceptionsHelper.validateApiException(response);
+      }
+
+      MealTrackingResponseModel parsedResponse = MealTrackingResponseModel.fromJson(jsonDecode(response.body));
+
+      return parsedResponse;
+        
+    } catch (e){
+      rethrow;
+    }
+  }
+
+  Future<PaginatedMealIngredientDateRecordsModel> getMealIngredients({int perPage = 30, required int pageNumber, required  int ingredientTypeId}) async {
+    try{
+      String? token = await HttpHeaderOptionsHelper.getValidatedToken();
+      String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
+
+      http.Response response = await httpRequests.get(
+        url: '${apiConstants.baseUrl}/api/meal/ingredient?ingredientTypeId=$ingredientTypeId&PerPage=$perPage&PageNumber=$pageNumber',
         headers: {
           'Content-Type':'application/json',
           'x-Time-Zone': timeZone,
@@ -136,13 +163,13 @@ class MealController {
     }
   }
 
-    Future<MealTrackingResponseModel> getMeals({int perPage = 10, required int pageNumber}) async {
+    Future<List<MealIngredientTypeModel>> getMealIngredientTypes() async {
     try{
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
       http.Response response = await httpRequests.get(
-        url: '${apiConstants.baseUrl}/api/meal?PerPage=$perPage&PageNumber=$pageNumber',
+        url: '${apiConstants.baseUrl}/api/meal/ingredient-types',
         headers: {
           'Content-Type':'application/json',
           'x-Time-Zone': timeZone,
@@ -155,7 +182,7 @@ class MealController {
         ExceptionsHelper.validateApiException(response);
       }
 
-      MealTrackingResponseModel parsedResponse = MealTrackingResponseModel.fromJson(jsonDecode(response.body));
+      List<MealIngredientTypeModel> parsedResponse = List<MealIngredientTypeModel>.from(jsonDecode(response.body).map((x) => MealIngredientTypeModel.fromJson(x)));
 
       return parsedResponse;
         

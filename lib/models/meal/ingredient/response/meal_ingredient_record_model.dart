@@ -1,49 +1,64 @@
+import 'package:natural_slim_flutter_library/models/measure_unit_model.dart';
+
 import 'meal_ingredient_type_model.dart';
 
 class MealIngredientRecordModel {
   MealIngredientRecordModel({
-    required this.name,
+    required this.id,
+    this.name,
     this.commentary,
     required this.amount,
-    required this.amountUnit,
+    required this.amountMeasureUnitId,
     required this.carbohydratesAmount,
-    required this.carbohydratesUnit,
+    this.carbohydratesMeasureUnit,
     required this.caloriesAmount,
-    required this.caloriesUnit,
+    this.caloriesMeasureUnit,
+    required this.ingredientTypeId,
+    required this.amountMeasureUnit,
     required this.ingredientType,
+
   });
 
-  String name;
+  int id;
+  String? name;
   String? commentary;
   int amount;
-  String amountUnit;
-  int carbohydratesAmount;
-  String carbohydratesUnit;
-  int caloriesAmount;
-  String caloriesUnit;
+  int amountMeasureUnitId;
+  double carbohydratesAmount;
+  String? carbohydratesMeasureUnit;
+  double caloriesAmount;
+  String? caloriesMeasureUnit;
+  int ingredientTypeId;
+  MeasureUnitModel amountMeasureUnit;
   MealIngredientTypeModel ingredientType;
 
   factory MealIngredientRecordModel.fromJson(Map<String, dynamic> json) => MealIngredientRecordModel(
+    id: json["id"],
     name: json["name"],
     commentary: json["commentary"],
     amount: json["amount"],
-    amountUnit: json["amountUnit"],
-    carbohydratesAmount: json["carbohydratesAmount"],
-    carbohydratesUnit: json["carbohydratesUnit"],
-    caloriesAmount: json["caloriesAmount"],
-    caloriesUnit: json["caloriesUnit"],
+    amountMeasureUnitId: json["amountMeasureUnitId"],
+    carbohydratesAmount: double.parse(json["carbohydratesAmount"].toString()),
+    carbohydratesMeasureUnit: json["carbohydratesMeasureUnit"],
+    caloriesAmount: double.parse(json["caloriesAmount"].toString()),
+    caloriesMeasureUnit: json["caloriesMeasureUnit"],
+    ingredientTypeId: json["ingredientTypeId"],
+    amountMeasureUnit: MeasureUnitModel.fromJson(json["amountMeasureUnit"]),
     ingredientType: MealIngredientTypeModel.fromJson(json["ingredientType"]),
   );
 
   Map<String, dynamic> toJson() => {
+    "id": id,
     "name": name,
     "commentary": commentary,
     "amount": amount,
-    "amountUnit": amountUnit,
+    "amountMeasureUnitId": amountMeasureUnitId,
     "carbohydratesAmount": carbohydratesAmount,
-    "carbohydratesUnit": carbohydratesUnit,
+    "carbohydratesMeasureUnit": carbohydratesMeasureUnit,
     "caloriesAmount": caloriesAmount,
-    "caloriesUnit": caloriesUnit,
+    "caloriesMeasureUnit": caloriesMeasureUnit,
+    "ingredientTypeId": ingredientTypeId,
+    "amountMeasureUnit": amountMeasureUnit,
     "ingredientType": ingredientType.toJson(),
   };
 }
