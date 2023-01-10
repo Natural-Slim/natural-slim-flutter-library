@@ -82,7 +82,6 @@ class SuccessStoryController {
       String? token = await HttpHeaderOptionsHelper.getValidatedToken();
       String timeZone = HttpHeaderOptionsHelper.getTimeZoneOffset();
 
-      var data = jsonEncode(succesStory);
       http.Response response = await httpRequests.post(
         url: '${apiConstants.baseUrl}/api/success-story', 
         headers: {
@@ -90,7 +89,7 @@ class SuccessStoryController {
           'x-Time-Zone': timeZone,
           'Authorization':'Bearer $token'
         },
-        body: data
+        body: jsonEncode(succesStory)
       );
 
       // We use the code 201 because we are creating a record

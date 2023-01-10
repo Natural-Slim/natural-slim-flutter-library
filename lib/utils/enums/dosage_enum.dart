@@ -7,17 +7,18 @@ enum Dosage {
 
 extension DosageExtension on Dosage {
   static Dosage? getValue(String value) {
-    switch (value){
-      case 'Breakfast':
+    
+    switch (value.toLowerCase()){
+      case 'breakfast':
         return Dosage.breakfast;
       
-      case 'Lunch':
+      case 'lunch':
         return Dosage.lunch;
       
-      case 'Dinner':
+      case 'dinner':
         return Dosage.dinner;
       
-      case 'Bedtime':
+      case 'bedtime':
         return Dosage.bedtime;
       
       default:
